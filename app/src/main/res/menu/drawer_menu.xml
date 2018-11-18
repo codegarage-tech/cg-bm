@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <group android:checkableBehavior="single"
+        android:id="@+id/group_before_login">
+        <item
+            android:id="@+id/nav_home"
+            android:title="@string/menu_home"
+            android:icon="@drawable/homeicon">
+
+        </item>
+
+    </group>
+
+    <group android:checkableBehavior="single"
+        android:id="@+id/group_after_login" android:visible="false">
+        <item
+            android:id="@+id/nav_home_buyer"
+            android:icon="@drawable/ic_home"
+            android:checked="true"
+            android:title="@string/menu_home" />
+        <item
+            android:id="@+id/nav_property_buyer"
+            android:title="@string/menu_property"
+            android:icon="@drawable/support">
+
+        </item>
+
+        <item
+            android:id="@+id/nav_profile_buyer"
+            android:icon="@drawable/ic_account"
+            android:title="@string/menu_profile" />
+
+    </group>
+
+    <group android:checkableBehavior="single"
+        android:id="@+id/group_after_seller_login" android:visible="false">
+        <item
+            android:id="@+id/nav_home_seller"
+            android:icon="@drawable/ic_home"
+            android:checked="true"
+            android:title="@string/menu_home" />
+
+        <item
+            android:id="@+id/nav_profile_seller"
+            android:icon="@drawable/ic_account"
+            android:title="@string/menu_profile" />
+
+    </group>
+
+</menu>

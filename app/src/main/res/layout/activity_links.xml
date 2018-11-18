@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_login"
+    tools:context=".DashBoardMenu.Login"
+    android:orientation="vertical"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+    <LinearLayout
+        android:padding="5dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:background="@color/dark_blue">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/colorWhite"
+            android:textSize="30sp"
+            android:text="@string/textTitle"/>
+
+
+        <LinearLayout
+            android:layout_marginTop="10dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_gravity="center">
+            <Button
+                android:layout_margin="10dp"
+                android:textColor="@color/colorWhite"
+                android:background="@drawable/buttonstylepink"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/learnmore"/>
+            <Button
+                android:layout_margin="10dp"
+                android:textColor="@color/colorWhite"
+                android:background="@drawable/buttonstyle2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/jointheclube"/>
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_marginTop="20dp"
+            android:gravity="center_horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/seller_search"
+                style="@style/TextAppearance.AppCompat.Light.SearchResult.Title"
+                android:textSize="30sp"
+                android:textStyle="italic"/>
+
+            <Spinner
+                android:padding="10dp"
+                android:id="@+id/purchasetype"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content" />
+
+            <Spinner
+                android:padding="10dp"
+                android:id="@+id/buy_propertytype"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content" />
+
+            <Spinner
+                android:padding="10dp"
+                android:id="@+id/buy_state"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content" />
+            <EditText
+                android:drawablePadding="10dp"
+                android:inputType="text"
+                android:layout_width="350dp"
+                android:layout_height="wrap_content"
+                android:hint="@string/country"/>
+            <Spinner
+                android:padding="10dp"
+                android:id="@+id/buy_city"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content" />
+
+            <EditText
+                android:drawablePadding="10dp"
+                android:inputType="text"
+                android:layout_width="350dp"
+                android:layout_height="wrap_content"
+                android:hint="@string/Zipcode"/>
+            <Spinner
+                android:padding="10dp"
+                android:id="@+id/buy_bedrooms"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content" />
+
+            <Spinner
+                android:padding="10dp"
+                android:id="@+id/buy_bathroom"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content" />
+
+            <Spinner
+                android:padding="10dp"
+                android:id="@+id/buy_basement"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content" />
+
+            <Spinner
+                android:padding="10dp"
+                android:id="@+id/buy_garage"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content" />
+
+            <Spinner
+                android:padding="10dp"
+                android:id="@+id/buy_style"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content" />
+
+
+            <Spinner
+                android:padding="10dp"
+                android:id="@+id/buy_exterior"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content" />
+
+            <Button
+                android:layout_marginTop="20dp"
+                android:layout_width="350dp"
+                android:layout_height="wrap_content"
+                android:text="@string/search"
+                android:textColor="@color/colorWhite"
+                android:background="@drawable/buttonstylepink"
+                android:layout_marginBottom="80dp"/>
+
+
+        </LinearLayout>
+
+    </ScrollView>
+
+</LinearLayout>

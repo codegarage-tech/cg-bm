@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<View
+    android:layout_width="fill_parent"
+    android:layout_alignParentBottom="true"
+    android:layout_height="0.6dp"
+    android:layout_marginLeft="@dimen/dp_5"
+    android:layout_marginStart="@dimen/dp_5"
+    android:layout_marginRight="@dimen/dp_5"
+    android:layout_marginEnd="@dimen/dp_5"
+    android:alpha="0.5"
+    android:background="@color/colorDivider"
+    xmlns:android="http://schemas.android.com/apk/res/android" />

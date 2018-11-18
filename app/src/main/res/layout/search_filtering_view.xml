@@ -1,0 +1,216 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/colorWhite"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="left"
+            android:layout_marginTop="@dimen/dp_5"
+            android:text="@string/state"
+            android:textSize="@dimen/sp_15" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dp_5"
+            android:background="@drawable/edit_text_background">
+
+            <Spinner
+                android:id="@+id/sp_select_state"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_gravity="center"
+                android:popupBackground="@drawable/spinner_bg"
+                android:spinnerMode="dropdown" />
+        </LinearLayout>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="left"
+            android:layout_marginTop="@dimen/dp_5"
+            android:text="@string/buyer_property_type"
+            android:textSize="@dimen/sp_15" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dp_5"
+            android:background="@drawable/edit_text_background">
+
+            <Spinner
+                android:id="@+id/sp_select_property_type"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_gravity="center"
+                android:popupBackground="@drawable/spinner_bg"
+                android:spinnerMode="dropdown" />
+
+        </LinearLayout>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="left"
+            android:layout_marginTop="@dimen/dp_5"
+            android:text="@string/buyer_purchase_type"
+            android:textSize="@dimen/sp_15" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dp_5"
+            android:background="@drawable/edit_text_background">
+
+            <Spinner
+                android:id="@+id/sp_select_purchase_type"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_gravity="center"
+                android:popupBackground="@drawable/spinner_bg"
+                android:spinnerMode="dropdown" />
+
+        </LinearLayout>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="left"
+            android:layout_marginTop="@dimen/dp_5"
+            android:text="@string/buyer_bedroom_type"
+            android:textSize="@dimen/sp_15" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dp_5"
+            android:background="@drawable/edit_text_background">
+
+            <Spinner
+                android:id="@+id/sp_select_bedrooms"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_gravity="center"
+                android:popupBackground="@drawable/spinner_bg"
+                android:spinnerMode="dropdown" />
+
+        </LinearLayout>
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="left"
+            android:layout_marginTop="@dimen/dp_5"
+            android:text="@string/buyer_bathroom_type"
+            android:textSize="@dimen/sp_15" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dp_5"
+            android:background="@drawable/edit_text_background">
+
+            <Spinner
+                android:id="@+id/sp_select_bathrooms"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_gravity="center"
+                android:popupBackground="@drawable/spinner_bg"
+                android:spinnerMode="dropdown" />
+
+        </LinearLayout>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="left"
+            android:layout_marginTop="@dimen/dp_5"
+            android:text="@string/buyer_style_type"
+            android:textSize="@dimen/sp_15" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dp_5"
+            android:background="@drawable/edit_text_background">
+
+            <Spinner
+                android:id="@+id/sp_select_style"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_gravity="center"
+                android:popupBackground="@drawable/spinner_bg"
+                android:spinnerMode="dropdown" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/dp_7"
+                android:layout_marginTop="16dp"
+                android:text="Price Range: "
+                android:textSize="15sp" />
+
+            <TextView
+                android:id="@+id/txt_price_value"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="$0 - $1000"
+                android:textSize="15sp" />
+        </LinearLayout>
+
+        <SeekBar
+            android:id="@+id/seekBar_price"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:max="1000"
+            android:progressBackgroundTint="@color/colorPrimary"
+            android:theme="@style/MySeekBarTheme"
+            android:layout_alignParentLeft="true"
+            android:layout_marginTop="@dimen/dp_5"
+            />
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="left"
+            android:layout_marginTop="@dimen/dp_5"
+            android:text="@string/buyer_exterior_type"
+            android:textSize="@dimen/sp_15" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dp_5"
+            android:background="@drawable/edit_text_background">
+
+            <Spinner
+                android:id="@+id/sp_select_exterior"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_gravity="center"
+                android:popupBackground="@drawable/spinner_bg"
+                android:spinnerMode="dropdown" />
+
+        </LinearLayout>
+    </LinearLayout>
+
+</LinearLayout>

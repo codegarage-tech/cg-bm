@@ -1,0 +1,70 @@
+<resources>
+
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+    </style>
+
+    <style name="AppTheme.NoActionBar" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="android:windowTranslucentStatus">false</item>
+        <item name="android:windowDrawsSystemBarBackgrounds">true</item>
+
+        <item name="android:statusBarColor">@color/colorPrimaryDark</item>
+        <item name="android:navigationBarColor">@color/colorPrimaryDark</item>
+
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+
+    <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+
+    <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+
+    <style name="AppTheme.Permission" parent="Theme.AppCompat.Light.DarkActionBar">
+        <item name="android:statusBarColor">@color/colorPrimaryDark</item>
+
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+    </style>
+
+    <style name="toolbar_base">
+        <item name="android:layout_height">?attr/actionBarSize</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:minHeight">?attr/actionBarSize</item>
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:background">@drawable/toolbar_bg</item>
+    </style>
+
+    <style name="MySeekBarTheme" parent="Widget.AppCompat.SeekBar" >
+        <item name="colorAccent">@color/colorPrimary</item>
+    </style>
+    <style name="SplashScreen" parent="Theme.AppCompat.Light.NoActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/dark_blue</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+    </style>
+
+    <style name="DashBoardTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/dark_blue</item>
+        <item name="colorPrimaryDark">@color/dark_blue</item>
+        <item name="colorAccent">@color/colorAccent</item>
+    </style>
+    <style name="Navigation_Theme" parent="Theme.AppCompat.Light.DarkActionBar">
+        <item name="windowActionBar">true</item>
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/dark_blue</item>
+        <item name="colorPrimaryDark">@color/dark_blue</item>
+        <item name="colorAccent">@color/colorAccent</item>
+    </style>
+
+</resources>

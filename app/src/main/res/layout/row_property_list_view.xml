@@ -1,0 +1,481 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="@dimen/dp_3"
+    app:cardCornerRadius="@dimen/card_radius"
+    app:cardElevation="3dp"
+    app:cardUseCompatPadding="false"
+    app:layout_collapseMode="parallax">
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/dp_7"
+
+        android:background="@color/colorWhite"
+        android:orientation="vertical">
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/colorWhite"
+            android:orientation="horizontal"
+            android:weightSum="1">
+
+            <LinearLayout
+                android:layout_width="0dip"
+                android:layout_height="wrap_content"
+                android:layout_weight=".5"
+                android:background="@color/colorWhite"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/row_txt_property_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Michel Clarkel"
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="@dimen/text_size"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/row_txt_property_address"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/dp_5"
+                    android:text="3100 Feni, Minnesota, usa"
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="@dimen/text_size" />
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/row_txt_property_amount"
+                android:layout_width="0dip"
+                android:layout_height="match_parent"
+                android:layout_marginBottom="@dimen/dp_5"
+                android:layout_marginTop="@dimen/dp_5"
+                android:layout_weight=".5"
+                android:gravity="right"
+                android:text="$461 - $1000"
+                android:textColor="@color/colorPrimary"
+                android:textSize="25dip"
+                android:textStyle="bold" />
+        </LinearLayout>
+
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/blue_grey_100"
+            android:layout_marginTop="@dimen/dp_7"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/dp_5"
+            android:layout_marginTop="@dimen/dp_5"
+            android:layout_weight="4.2"
+            android:orientation="horizontal">
+
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="2"
+                android:text="@string/buyer_exterior_type"
+                android:textColor="@color/color_grey_800" />
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight=".2"
+                android:text=":"
+                android:textColor="@color/color_grey_500" />
+
+            <TextView
+                android:id="@+id/row_txt_property_exterior"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="2"
+                android:text=""
+                android:textColor="@color/color_grey_600"
+                android:textSize="@dimen/sp_15"
+               />
+
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/dp_5"
+            android:layout_marginTop="@dimen/dp_5"
+            android:layout_weight="4.2"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="2"
+                android:text="@string/buyer_preapproved_type"
+                android:textColor="@color/color_grey_800" />
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight=".2"
+                android:text=":"
+                android:textColor="@color/color_grey_500" />
+
+            <TextView
+                android:id="@+id/row_txt_property_preapproved"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="2"
+                android:text=""
+                android:textColor="@color/color_grey_600"
+                android:textSize="@dimen/sp_15"
+
+                />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/dp_5"
+            android:layout_marginTop="@dimen/dp_5"
+            android:layout_weight="4.2"
+            android:orientation="horizontal">
+
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="2"
+                android:text="@string/buyer_property_type"
+                android:textColor="@color/color_grey_800" />
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight=".2"
+                android:text=":"
+                android:textColor="@color/color_grey_500" />
+
+            <TextView
+                android:id="@+id/row_txt_property_type"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="2"
+                android:text=""
+                android:textColor="@color/color_grey_600"
+                android:textSize="@dimen/sp_15" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/lin_lay_khotiyan_mamla_no"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/dp_5"
+            android:layout_marginTop="@dimen/dp_5"
+            android:layout_weight="4.2"
+            android:orientation="horizontal">
+
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="2"
+                android:text="@string/buyer_purchase_type"
+                android:textColor="@color/color_grey_800" />
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight=".2"
+                android:text=":"
+                android:textColor="@color/color_grey_500" />
+
+            <TextView
+                android:id="@+id/row_txt_purchage_type"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="2"
+                android:text="mortage"
+                android:textColor="@color/color_grey_600" />
+
+
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/dp_5"
+            android:layout_marginTop="@dimen/dp_5"
+            android:layout_weight="4.2"
+            android:orientation="horizontal">
+
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="2"
+                android:text="@string/buyer_basement_type"
+                android:textColor="@color/color_grey_800" />
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_weight=".2"
+                android:text=":"
+                android:textColor="@color/color_grey_500" />
+
+            <TextView
+                android:id="@+id/row_txt_property_basement"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="2"
+                android:text="0"
+                android:textColor="@color/color_grey_600" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/dp_5"
+            android:layout_marginTop="@dimen/dp_5"
+            android:layout_weight="4.2"
+            android:orientation="horizontal">
+
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="2"
+                android:text="@string/buyer_credit_type"
+                android:textColor="@color/color_grey_800" />
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_weight=".2"
+                android:text=":"
+                android:textColor="@color/color_grey_500" />
+
+            <TextView
+                android:id="@+id/row_txt_property_credit_scores"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="2"
+                android:text="122"
+                android:textColor="@color/color_grey_600" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/dp_5"
+            android:layout_marginTop="@dimen/dp_5"
+            android:layout_weight="4.2"
+            android:orientation="horizontal">
+
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="2"
+                android:text="@string/buyer_bedroom_type"
+                android:textColor="@color/color_grey_800" />
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight=".2"
+                android:text=":"
+                android:textColor="@color/color_grey_500" />
+
+            <TextView
+                android:id="@+id/row_txt_property_bedroom"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="2"
+                android:text="mortage"
+                android:textColor="@color/color_grey_600" />
+
+
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/dp_5"
+            android:layout_marginTop="@dimen/dp_5"
+            android:layout_weight="4.2"
+            android:orientation="horizontal">
+
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="2"
+                android:text="@string/buyer_bathroom_type"
+                android:textColor="@color/color_grey_800" />
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_weight=".2"
+                android:text=":"
+                android:textColor="@color/color_grey_500" />
+
+            <TextView
+                android:id="@+id/row_txt_property_bathroom"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="2"
+                android:text="0"
+                android:textColor="@color/color_grey_600" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/dp_5"
+            android:layout_marginTop="@dimen/dp_5"
+            android:layout_weight="4.2"
+            android:orientation="horizontal">
+
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="2"
+                android:text="@string/buyer_garage_type"
+                android:textColor="@color/color_grey_800" />
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_weight=".2"
+                android:text=":"
+                android:textColor="@color/color_grey_500" />
+
+            <TextView
+                android:id="@+id/row_txt_property_garage"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="2"
+                android:text="122"
+                android:textColor="@color/color_grey_600" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/dp_5"
+            android:layout_marginTop="@dimen/dp_5"
+            android:layout_weight="4.2"
+            android:orientation="horizontal">
+
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="2"
+                android:text="@string/buyer_style_type"
+                android:textColor="@color/color_grey_800" />
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_weight=".2"
+                android:text=":"
+                android:textColor="@color/color_grey_500" />
+
+            <TextView
+                android:id="@+id/row_txt_property_style"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="2"
+                android:text="122"
+                android:textColor="@color/color_grey_600" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="right"
+            android:orientation="horizontal"
+            android:padding="@dimen/dp_5"
+            android:layout_marginRight="@dimen/dp_5">
+
+            <LinearLayout
+                android:id="@+id/lin_property_edit"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/row_edit_button"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:layout_marginRight="@dimen/dp_5"
+                android:padding="@dimen/dp_5">
+
+
+                <ImageView
+                    android:layout_width="23dp"
+                    android:layout_height="24dp"
+                    android:background="@drawable/ic_edit" />
+
+                <TextView
+
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/dp_5"
+                    android:text="Edit "
+                    android:textColor="@color/colorWhite" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/lin_property_delete"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/dp_5"
+                android:layout_marginRight="@dimen/dp_5"
+                android:background="@drawable/row_delete_button"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:padding="@dimen/dp_5">
+
+                <ImageView
+                    android:layout_width="23dp"
+                    android:layout_height="24dp"
+                    android:background="@drawable/ic_delete" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/dp_2"
+                    android:text="Delete"
+                    android:textColor="@color/colorWhite" />
+            </LinearLayout>
+        </LinearLayout>
+    </LinearLayout>
+</android.support.v7.widget.CardView>

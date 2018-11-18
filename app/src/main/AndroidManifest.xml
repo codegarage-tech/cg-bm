@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.rc.buyermarket">
+
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+
+    <application
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme.NoActionBar">
+        <activity
+            android:name=".SplashScreenDesign.SplashScreen"
+            android:theme="@style/SplashScreen">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <activity
+            android:name=".activity.ActivityUserLogin"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar" />
+
+        <activity
+            android:name=".activity.ActivityUserSignUp"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar" />
+
+        <activity android:name=".activity.MainActivity"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar"/>
+
+        <activity
+            android:name=".activity.ActivitySellerSearchProperty"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar" />
+
+        <activity
+            android:name=".activity.ActivitySearchPropertyDetails"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar" />
+
+        <activity
+            android:name=".activity.ActivityAddProperty"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar"
+         />
+
+
+        <activity android:name=".DashBoardMenu.Login" />
+        <activity android:name=".DashBoardMenu.Add" />
+        <activity android:name=".DashBoardMenu.Links" />
+        <activity android:name=".DashBoardMenu.Wifi" />
+        <activity android:name=".DashBoardMenu.Singup" />
+        <activity android:name=".DashBoardMenu.AddHouse" />
+        <activity android:name=".NavigationDrawerMenu.UpdateSettingsNavigation" />
+        <activity android:name=".NavigationDrawerMenu.Home_Navigation" />
+        <activity android:name=".NavigationDrawerMenu.Support_Navigation"></activity>
+
+    </application>
+
+</manifest>

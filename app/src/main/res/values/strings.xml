@@ -1,0 +1,230 @@
+<resources>
+    <string name="app_title">The Buyer Market</string>
+    <string name="menu_home">Home</string>
+    <string name="menu_profile">Profile</string>
+    <string name="menu_property">Property</string>
+    <string name="add_property">Add Property</string>
+    <string name="property_details">Property Detail</string>
+    <string name="account">Update Settings</string>
+    <string name="txt_reg">Create a new account\?</string>
+    <string name="txt_login_here">Login Here\!</string>
+    <string name="support">Support</string>
+    <string name="logout">Logout</string>
+    <string name="webAddress">www.buyermarket.com</string>
+    <string name="navigation_drawer_open">Open</string>
+    <string name="navigation_drawer_close">Close</string>
+    <string name="title_buyer_market">Buyer Market</string>
+    <string name="title_ok">Ok</string>
+    <string name="txt_logout">Logout</string>
+    <string name="dialog_cancel">Cancel</string>
+    <string name="title_buyer_logout">Please logout\!  \nLogin  as Seller</string>
+    <string name="title_seller_logout">Please logout\!  \nLogin as Buyer </string>
+    <string name="title_logout">Please logout\! </string>
+    <string name="mgs_buyer_logout">Login as Seller</string>
+    <string name="mgs_seller_logout">Login as Buyer</string>
+    <string name="seller_search">Seller Search</string>
+    <string name="title_activity_add_card">Add Card</string>
+
+
+    <!--Sign Up text-->
+    <string name="radio_one"> \$2.99/24 Hour</string>
+    <string name="radio_two"> \$5.99/30 Day</string>
+    <string name="title_checkbox_terms"> I agree with all Terms &amp; Conditions</string>
+    <string name="title_pay_card"> Pay with Cards</string>
+    <string name="title_pay"> Pay </string>
+    <string name="title_checkbox_remember">Remember me </string>
+    <string name="title_signup_pay">Signup Payment\: </string>
+    <string name="title_signup_and_pay">Pay &amp; Signup</string>
+
+    <!-- Toast message -->
+    <string name="toast_could_not_retrieve_info">Could not retrieve info</string>
+    <string name="toast_network_error">You have no internet connection!\nPlease connect to internet.</string>
+    <string name="toast_no_info_found">No info found</string>
+    <string name="toast_please_input_valid_card_information">Please input valid card information</string>
+    <string name="toast_something_went_wrong">Something went wrong!</string>
+    <string name="toast_select_any_days">Please select any days</string>
+    <string name="toast_select_terms_conditions">Please accept all Terms and Conditions</string>
+    <string name="toast_please_input_mobile_no">Please input mobile number</string>
+    <string name="toast_please_input_valid_mobile_no">Please input valid mobile number</string>
+    <string name="toast_please_input_your_fname">Please input your first name</string>
+    <string name="toast_please_input_your_lname">Please input your last name</string>
+    <string name="toast_please_input_your_email">Please input your email</string>
+    <string name="toast_please_input_valid_email">Please input valid email</string>
+    <string name="toast_please_input_your_password">Please input your password</string>
+    <string name="toast_please_input_your_city">Please input your city</string>
+    <string name="toast_please_input_your_zipcode">Please input your zip code</string>
+    <string name="toast_error_on_creating_token">Error on creating token</string>
+    <string name="toast_invalid_card">Invalid card</string>
+    <string name="toast_payment_is_successful">Payment is successful</string>
+    <string name="toast_payment_is_not_successful">Payment is not successful</string>
+    <string name="toast_payment_and_signup_are_successful">Payment and signup are successful</string>
+    <string name="toast_please_select_card">Please select card</string>
+
+    <!-- Spinner text -->
+    <string name="txt_default_prc_approved">Please select prc approved</string>
+    <string name="txt_default_bedrooms">Please select bedrooms</string>
+    <string name="txt_default_bathrooms">Please select bathrooms</string>
+    <string name="txt_default_basement">Please select basement</string>
+    <string name="txt_default_garage">Please select garage</string>
+    <string name="txt_default_exterior">Please select exterior</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="account_fragment">Account Activity</string>
+    <string name="home_fragment">Home Activity</string>
+    <string name="support_fragment">Support Activity</string>
+    <string name="username">UserName</string>
+    <string name="password">Password</string>
+
+    <string name="FirstName">Fist Name</string>
+    <string name="LastName">Last Name</string>
+    <string name="EmailSingup">Email</string>
+    <string name="PassWord">Password</string>
+    <string name="Phone">Phone</string>
+
+    <string name="login">Login</string>
+    <string name="signup">Sign Up</string>
+    <string name="search_property">Search Property</string>
+    <string name="search_property_details">Property Detail</string>
+    <string name="textTitle">welcome to Buyer Market</string>
+    <string name="BuyerRg">Buyer Registration </string>
+    <string name="submit">Submit</string>
+
+
+    <string name="textDetails">A buyer market is a situation in which supply exceeds demand, giving purchasers an advantage over sellers in price negotiations. The term \"buyer\'s market\" is commonly used to describe real estate markets, but it applies to any type of market in which there is more product available than there are people who want to buy it\.</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <string name="learnmore">Learn more</string>
+    <string name="jointheclube">Join the Club</string>
+
+    <string name="Zipcode"> Zip Code</string>
+    <string name="country"> Country </string>
+    <string name="city"> City </string>
+    <string name="state"> State </string>
+    <string name="search"> Search </string>
+    <string name="update"> Update </string>
+
+    <string name="no_item">No Item</string>
+
+    <!--Add Property Added-->
+    <string name="buyer_property_type">Property Type </string>
+    <string name="buyer_preapproved_type">Prc Approved</string>
+    <string name="buyer_purchase_type">Purchase  Type </string>
+    <string name="buyer_bedroom_type">Bedroom </string>
+    <string name="buyer_bathroom_type">Bathroom </string>
+    <string name="buyer_basement_type">Basement </string>
+    <string name="buyer_credit_type">Credit Scores </string>
+    <string name="buyer_exterior_type">Exterior </string>
+    <string name="buyer_garage_type">Garage </string>
+    <string name="buyer_style_type">Style </string>
+
+    <!-- View message -->
+    <string name="view_loading">Loading\.\.\.</string>
+
+    <string-array name="purchase_type">
+        <item> Purchase Type</item>
+        <item> Cash </item>
+        <item> Mortgage</item>
+        <item> Land Contract</item>
+
+    </string-array>
+
+    <string-array name="pre_approved">
+        <item> Pre Approved </item>
+        <item> YES </item>
+        <item> NO </item>
+    </string-array>
+
+    <string-array name="buy_Credit">
+        <item> Credit Score </item>
+        <item> Excellent Credit\: 750\+</item>
+        <item> Good Credit\: 700\-749 </item>
+        <item> Fair Credit\: 650\-699</item>
+        <item> Poor Credit\: 600\-649 </item>
+        <item> Bad Credit\: below 600 </item>
+        <item> DON\'T KNOW </item>
+    </string-array>
+
+    <string-array name="buy_price">
+        <item> Price Ranges</item>
+        <item> 0\-100,000</item>
+        <item> 100,000\-150,000 </item>
+        <item> 150,000\-200,000</item>
+        <item> 200,000\-250,000</item>
+        <item> 250,000\-300,000 </item>
+        <item> 300,000\-350,000</item>
+        <item> 350,000\-400,000 </item>
+        <item> 400,000\-450,000</item>
+        <item> 450,000\-500,000 </item>
+        <item> 500,000\+ </item>
+    </string-array>
+
+    <string-array name="buy_property">
+        <item> Property Type </item>
+        <item> Residential  </item>
+        <item> Condominium</item>
+
+    </string-array>
+    <string-array name="buy_State">
+        <item> State </item>
+        <item> Michigan </item>
+        <item> New York</item>
+
+    </string-array>
+
+    <string-array name="buy_City">
+        <item> Select City </item>
+        <item> Google city list by state </item>
+
+    </string-array>
+
+    <string-array name="Buy_bedroom">
+        <item> Bedrooms </item>
+        <item> 1\+ </item>
+        <item> 2\+ </item>
+        <item> 3\+ </item>
+        <item> 4\+ </item>
+        <item> 5\+ </item>
+
+    </string-array>
+    <string-array name="buy_bath">
+        <item> Bathroom </item>
+        <item> 1\+ </item>
+        <item> 2\+ </item>
+        <item> Don\'t Matter</item>
+
+    </string-array>
+
+    <string-array name="buy_basement">
+        <item> Basement</item>
+        <item> YES</item>
+        <item> NO </item>
+        <item> Don\'t Matter</item>
+
+    </string-array>
+    <string-array name="buy_Garage">
+        <item> Garage</item>
+        <item> YES</item>
+        <item> NO </item>
+        <item> Don\'t Matter</item>
+
+    </string-array>
+    <string-array name="buy_Style">
+        <item> Style </item>
+        <item> Bungalow</item>
+        <item> Colonial</item>
+        <item> Ranch</item>
+        <item> Cape Cod</item>
+        <item> Victorian </item>
+        <item> Don\'t Matter</item>
+
+    </string-array>
+    <string-array name="buy_Exterior">
+        <item> Exterior </item>
+        <item> Brick</item>
+        <item> Frame</item>
+        <item> Don\'t Matter</item>
+
+    </string-array>
+
+</resources>

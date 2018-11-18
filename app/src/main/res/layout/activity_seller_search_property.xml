@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/relLayout"
+    android:layout_width="fill_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorWhite">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <include layout="@layout/toolbar_base" />
+
+        <include layout="@layout/ui_line" />
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:scrollbarThumbVertical="@drawable/scrollbar_view"
+            android:layout_marginBottom="@dimen/dp_55">
+
+            <LinearLayout
+                android:id="@+id/lin_lay_hide_tools"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="15dp"
+                android:orientation="vertical">
+
+                <include layout="@layout/search_filtering_view" />
+            </LinearLayout>
+        </ScrollView>
+    </LinearLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true">
+
+        <Button
+            android:id="@+id/btn_search_submit"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="right"
+            android:background="@color/colorPrimary"
+            android:text="SEARCH"
+            android:textAllCaps="false"
+            android:textColor="@color/white" />
+
+    </RelativeLayout>
+
+
+</RelativeLayout>

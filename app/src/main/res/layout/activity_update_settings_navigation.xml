@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    android:layout_marginTop="20dp"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <LinearLayout
+        android:layout_marginTop="40dp"
+        android:gravity="center_horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <EditText
+            android:drawablePadding="10dp"
+            android:drawableLeft="@drawable/ic_person_outline_black_24dp"
+            android:inputType="text"
+            android:layout_width="350dp"
+            android:layout_height="wrap_content"
+            android:hint="@string/FirstName"/>
+        <EditText
+            android:drawablePadding="10dp"
+            android:drawableLeft="@drawable/ic_person_outline_black_24dp"
+            android:inputType="text"
+            android:layout_width="350dp"
+            android:layout_height="wrap_content"
+            android:hint="@string/LastName"/>
+        <EditText
+            android:drawablePadding="10dp"
+            android:drawableLeft="@drawable/ic_email_black_24dp"
+            android:inputType="text"
+            android:layout_width="350dp"
+            android:layout_height="wrap_content"
+            android:hint="@string/EmailSingup"/>
+
+        <EditText
+            android:drawablePadding="10dp"
+            android:drawableLeft="@drawable/ic_smartphone_black_24dp"
+            android:inputType="text"
+            android:layout_width="350dp"
+            android:layout_height="wrap_content"
+            android:hint="@string/Phone"/>
+
+
+
+        <Spinner
+            android:padding="10dp"
+            android:id="@+id/purchasetype"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content" />
+
+        <Spinner
+            android:padding="10dp"
+            android:id="@+id/buy_preap"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content" />
+
+        <Spinner
+            android:padding="5dp"
+            android:id="@+id/buy_ceditSco"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content" />
+
+        <Spinner
+            android:padding="10dp"
+            android:id="@+id/buy_price"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content" />
+
+        <Spinner
+            android:padding="10dp"
+            android:id="@+id/buy_propertytype"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content" />
+
+        <Spinner
+            android:padding="10dp"
+            android:id="@+id/buy_state"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content" />
+        <EditText
+            android:drawablePadding="10dp"
+
+            android:inputType="text"
+            android:layout_width="350dp"
+            android:layout_height="wrap_content"
+            android:hint="@string/country"/>
+        <Spinner
+            android:padding="10dp"
+            android:id="@+id/buy_city"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content" />
+
+        <EditText
+            android:drawablePadding="10dp"
+
+            android:inputType="text"
+            android:layout_width="350dp"
+            android:layout_height="wrap_content"
+            android:hint="@string/Zipcode"/>
+        <Spinner
+            android:padding="10dp"
+            android:id="@+id/buy_bedrooms"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content" />
+
+        <Spinner
+            android:padding="10dp"
+            android:id="@+id/buy_bathroom"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content" />
+
+        <Spinner
+            android:padding="10dp"
+            android:id="@+id/buy_basement"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content" />
+
+        <Spinner
+            android:padding="10dp"
+            android:id="@+id/buy_garage"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content" />
+
+        <Spinner
+            android:padding="10dp"
+            android:id="@+id/buy_style"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content" />
+
+
+        <Spinner
+            android:padding="10dp"
+            android:id="@+id/buy_exterior"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content" />
+
+
+
+        <Button
+            android:layout_marginTop="20dp"
+            android:layout_width="350dp"
+            android:layout_height="wrap_content"
+            android:text="@string/update"
+            android:textColor="@color/colorWhite"
+            android:background="@drawable/buttonstylepink" />
+
+
+    </LinearLayout>
+
+
+</ScrollView>
