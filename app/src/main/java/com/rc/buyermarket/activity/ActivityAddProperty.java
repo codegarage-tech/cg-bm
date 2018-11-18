@@ -225,7 +225,7 @@ public class ActivityAddProperty extends BaseActivity {
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
                 priceRange = progress;
                 Log.e("priceRange", priceRange + ">>");
-                txtPriceValue.setText("$" + priceRange + " - " + "$1000");
+                txtPriceValue.setText("$" + priceRange + " - " + "$10000000");
             }
 
             @Override
@@ -476,13 +476,15 @@ public class ActivityAddProperty extends BaseActivity {
             Log.e("getPurchase_type", addPropertyEditData.getPurchase_type() + "");
             Log.e("getProperty_type", addPropertyEditData.getProperty_type() + "");
             Log.e("getState", addPropertyEditData.getState() + "");
+            seekBarPrice.setMin(10000);
+            seekBarPrice.setMax(10000000);
             if (AppUtil.isNullOrEmpty(addPropertyEditData.getPrice_min())) {
-                seekBarPrice.setProgress(0);
-                txtPriceValue.setText("$0 - $1000");
+                seekBarPrice.setProgress(10000);
+                txtPriceValue.setText("$10000 - $10000000");
 
             } else {
                 seekBarPrice.setProgress(Integer.parseInt(addPropertyEditData.getPrice_min()));
-                txtPriceValue.setText("$" + addPropertyEditData.getPrice_min() + " - " + "$1000");
+                txtPriceValue.setText("$" + addPropertyEditData.getPrice_min() + " - " + "$10000000");
 
             }
 

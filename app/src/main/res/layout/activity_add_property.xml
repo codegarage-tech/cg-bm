@@ -271,7 +271,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="16dp"
-                        android:text="$0 - $1000"
+                        android:text="$10000 - $10000000"
                         android:textSize="15sp"/>
                 </LinearLayout>
 
@@ -279,7 +279,8 @@
                     android:id="@+id/seekBar_price"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:max="1000"
+                    android:max="10000000"
+                    android:min="10000"
                     android:progressBackgroundTint="@color/colorPrimary"
                     android:theme="@style/MySeekBarTheme"
                     android:layout_alignParentLeft="true"
