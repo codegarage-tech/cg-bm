@@ -78,7 +78,6 @@ public class IntentManager {
             context.startActivity(youtubeIntent);
 
         } catch (PackageManager.NameNotFoundException e) {
-            Log.d("twittere api", "exception");
             // Youtube is not installed. Open in the browser
             Uri uri = Uri.parse(socialLink);
             context.startActivity(new Intent(Intent.ACTION_VIEW, uri));

@@ -171,13 +171,21 @@ public class ActivitySellerSearchProperty extends BaseActivity {
                 initActivityBackPress();
             }
         });
-        seekBarPrice.setProgress(0);
+
+        seekBarPrice.setMin(10000);
+        seekBarPrice.setMax(10000000);
+        seekBarPrice.setProgress(10000);
+        txtPriceValue.setText("$10000 - $10000000");
         seekBarPrice.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
-                priceRange = progress;
+                if (seekBar.getProgress() < 10000) {
+                    seekBar.setProgress(10000);
+                }
+
+                priceRange = seekBar.getProgress();
                 Log.e("priceRange", priceRange + ">>");
-                txtPriceValue.setText("$"+priceRange+" - "+"$1000");
+                txtPriceValue.setText("$" + priceRange + " - " + "$10000000");
             }
 
             @Override

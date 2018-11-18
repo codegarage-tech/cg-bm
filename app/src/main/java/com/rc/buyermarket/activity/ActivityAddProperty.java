@@ -223,14 +223,17 @@ public class ActivityAddProperty extends BaseActivity {
         seekBarPrice.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
-                priceRange = progress;
+                if (seekBar.getProgress() < 10000) {
+                    seekBar.setProgress(10000);
+                }
+
+                priceRange = seekBar.getProgress();
                 Log.e("priceRange", priceRange + ">>");
                 txtPriceValue.setText("$" + priceRange + " - " + "$10000000");
             }
 
             @Override
             public void onStartTrackingTouch(SeekBar seekBar) {
-
             }
 
             @Override
@@ -485,9 +488,7 @@ public class ActivityAddProperty extends BaseActivity {
             } else {
                 seekBarPrice.setProgress(Integer.parseInt(addPropertyEditData.getPrice_min()));
                 txtPriceValue.setText("$" + addPropertyEditData.getPrice_min() + " - " + "$10000000");
-
             }
-
 
             spPurchaseType.setSelection(purchaseTypeAdapter.getItemPosition(addPropertyEditData.getPurchase_type()));
             spPreapproved.setSelection(preApprovedAdapter.getItemPosition(addPropertyEditData.getPrc_approved()));

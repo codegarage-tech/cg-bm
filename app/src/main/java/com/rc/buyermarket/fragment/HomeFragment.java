@@ -18,6 +18,7 @@ import com.rc.buyermarket.enumeration.PropertyEnum;
 import com.rc.buyermarket.enumeration.UserType;
 import com.rc.buyermarket.util.AllConstants;
 import com.rc.buyermarket.util.AppPref;
+import com.rc.buyermarket.util.IntentManager;
 
 import cn.ymex.popup.controller.AlertController;
 import cn.ymex.popup.dialog.PopupDialog;
@@ -32,9 +33,9 @@ public class HomeFragment extends BaseFragment {
     // initialize CardView
     private CardView cvAddProperty;
     private CardView cvSearchProperty;
-    private CardView cvAdd;
-    private CardView cvLinks;
-    private CardView cvWifi;
+    private CardView cvSeller;
+    private CardView cvBuyer;
+    private CardView cvFaq;
 
     private UserType userType;
     private PropertyEnum propertyEnum;
@@ -51,9 +52,9 @@ public class HomeFragment extends BaseFragment {
         //defining cards
         cvAddProperty =(CardView)parentView.findViewById (R.id.bank_cardId);
         cvSearchProperty =(CardView)parentView.findViewById(R.id.search_cardId);
-        cvAdd=(CardView)parentView.findViewById(R.id.add_cardId);
-        cvWifi=(CardView)parentView.findViewById(R.id.links_cardId);
-        cvLinks=(CardView)parentView.findViewById(R.id.wifi_cardId);
+        cvSeller=(CardView)parentView.findViewById(R.id.cv_seller);
+        cvBuyer=(CardView)parentView.findViewById(R.id.cv_buyer);
+        cvFaq=(CardView)parentView.findViewById(R.id.cv_faq);
     }
 
     @Override
@@ -112,27 +113,23 @@ public class HomeFragment extends BaseFragment {
 
             }
         });
-//        cvAdd.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                Intent  iAddCard=new Intent(getActivity(),Login.class);
-//                startActivity(iAddCard);
-//            }
-//        });
-//        cvLinks.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                Intent  iLinksCard=new Intent(getActivity(),Links.class);
-//                startActivity(iLinksCard);
-//            }
-//        });
-//        cvWifi.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                Intent  iWifiCard=new Intent(getActivity(),Wifi.class);
-//                startActivity(iWifiCard);
-//            }
-//        });
+        cvSeller.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                IntentManager.openYoutubeVideo(getActivity(), "-zl1r6APkc0");
+            }
+        });
+        cvBuyer.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                IntentManager.openYoutubeVideo(getActivity(), "1Q1hl9urB7o");
+            }
+        });
+        cvFaq.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+            }
+        });
 
 
     }
