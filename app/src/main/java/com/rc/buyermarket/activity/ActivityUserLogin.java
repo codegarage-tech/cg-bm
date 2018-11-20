@@ -184,10 +184,10 @@ public class ActivityUserLogin extends BaseActivity {
             Toast.makeText(getActivity(), getString(R.string.toast_please_input_your_email), Toast.LENGTH_SHORT).show();
             return;
         }
-        if (!ValidationManager.isValidEmail(email)) {
-            Toast.makeText(getActivity(), getString(R.string.toast_please_input_valid_email), Toast.LENGTH_SHORT).show();
-            return;
-        }
+//        if (!ValidationManager.isValidEmail(email)) {
+//            Toast.makeText(getActivity(), getString(R.string.toast_please_input_valid_email), Toast.LENGTH_SHORT).show();
+//            return;
+//        }
 
         if (AppUtil.isNullOrEmpty(password)) {
             Toast.makeText(getActivity(), getString(R.string.toast_please_input_your_password), Toast.LENGTH_SHORT).show();

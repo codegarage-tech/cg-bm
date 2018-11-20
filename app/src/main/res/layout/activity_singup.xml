@@ -110,7 +110,7 @@
                     android:drawableLeft="@drawable/ic_email_black_24dp"
                     android:drawablePadding="10dp"
                     android:hint="@string/EmailSingup"
-                    android:inputType="text" />
+                    android:inputType="textEmailAddress" />
 
                 <EditText
                     android:id="@+id/et_signup_pass"

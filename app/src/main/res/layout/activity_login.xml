@@ -90,7 +90,7 @@
                     android:drawableLeft="@drawable/ic_person_outline_black_24dp"
                     android:drawablePadding="10dp"
                     android:hint="@string/username"
-                    android:inputType="text" />
+                    android:inputType="textEmailAddress" />
 
                 <EditText
                     android:id="@+id/et_login_pass"
