@@ -1,6 +1,6 @@
 package com.rc.buyermarket.model;
 
-public class SellerSearchProperty {
+public class SellerSearchBuyer {
     private String id = "";
     private String first_name = "";
     private String last_name = "";
@@ -221,7 +221,7 @@ public class SellerSearchProperty {
 
     @Override
     public String toString() {
-        return "SellerSearchProperty{" +
+        return "{" +
                 "id='" + id + '\'' +
                 ", first_name='" + first_name + '\'' +
                 ", last_name='" + last_name + '\'' +

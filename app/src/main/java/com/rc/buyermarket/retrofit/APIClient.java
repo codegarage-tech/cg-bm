@@ -48,7 +48,7 @@ public class APIClient {
 
     private static String BASE_URL = "http://thebuyermarket.com/buyer_market/index.php/";
     private static Retrofit retrofit = null;
-    private static int REQUEST_TIMEOUT = 60;
+    private static int REQUEST_TIMEOUT = 30;
     private static OkHttpClient okHttpClient;
 
     public static Retrofit getClient(Context context) {

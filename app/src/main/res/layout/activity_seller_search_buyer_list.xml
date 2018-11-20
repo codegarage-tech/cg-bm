@@ -11,6 +11,7 @@
         android:orientation="vertical">
 
         <include layout="@layout/toolbar_base" />
+
         <include layout="@layout/ui_line" />
 
         <LinearLayout

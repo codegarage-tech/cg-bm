@@ -1,16 +1,13 @@
 package com.rc.buyermarket.fragment;
 
-import android.content.DialogInterface;
 import android.content.Intent;
-import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.CardView;
 import android.util.Log;
 import android.view.View;
-import android.widget.Button;
 
 import com.rc.buyermarket.R;
 import com.rc.buyermarket.activity.ActivityAddProperty;
-import com.rc.buyermarket.activity.ActivitySellerSearchProperty;
+import com.rc.buyermarket.activity.ActivitySellerSearchBuyer;
 import com.rc.buyermarket.activity.ActivityUserLogin;
 import com.rc.buyermarket.activity.MainActivity;
 import com.rc.buyermarket.base.BaseFragment;
@@ -96,7 +93,7 @@ public class HomeFragment extends BaseFragment {
                 if (AppPref.getBooleanSetting(getActivity(), AllConstants.SESSION_IS_LOGGED_IN, false)) {
 
                     if (AppPref.getPreferences(getActivity(),AllConstants.SESSION_USER_TYPE).equalsIgnoreCase("1")) {
-                        Intent iAddHome = new Intent(getActivity(), ActivitySellerSearchProperty.class);
+                        Intent iAddHome = new Intent(getActivity(), ActivitySellerSearchBuyer.class);
                         startActivity(iAddHome);
                     } else {
                        // alertShow(getResources().getString(R.string.title_buyer_logout));

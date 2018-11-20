@@ -3,7 +3,7 @@ package com.rc.buyermarket.model;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-public class ParamsSellerSearchProperty implements Parcelable{
+public class ParamsSellerSearchBuyer implements Parcelable{
 
     private String purchase_type = "";
     private String property_type = "";
@@ -17,7 +17,7 @@ public class ParamsSellerSearchProperty implements Parcelable{
     private String style = "";
     private String exterior = "";
 
-    public ParamsSellerSearchProperty(String purchase_type, String property_type, String country, String city, String state, String bedroom, String bathroom, String basement, String garage, String style, String exterior) {
+    public ParamsSellerSearchBuyer(String purchase_type, String property_type, String country, String city, String state, String bedroom, String bathroom, String basement, String garage, String style, String exterior) {
         this.purchase_type = purchase_type;
         this.property_type = property_type;
         this.country = country;
@@ -33,7 +33,7 @@ public class ParamsSellerSearchProperty implements Parcelable{
 
     @Override
     public String toString() {
-        return "ParamsSellerSearchProperty{" +
+        return "{" +
                 "purchase_type='" + purchase_type + '\'' +
                 ", property_type='" + property_type + '\'' +
                 ", country='" + country + '\'' +
@@ -73,7 +73,7 @@ public class ParamsSellerSearchProperty implements Parcelable{
         dest.writeString(exterior);
     }
 
-    protected ParamsSellerSearchProperty(Parcel in) {
+    protected ParamsSellerSearchBuyer(Parcel in) {
         purchase_type = in.readString();
         property_type = in.readString();
         country = in.readString();
@@ -87,15 +87,15 @@ public class ParamsSellerSearchProperty implements Parcelable{
         exterior = in.readString();
     }
 
-    public static final Creator<ParamsSellerSearchProperty> CREATOR = new Creator<ParamsSellerSearchProperty>() {
+    public static final Creator<ParamsSellerSearchBuyer> CREATOR = new Creator<ParamsSellerSearchBuyer>() {
         @Override
-        public ParamsSellerSearchProperty createFromParcel(Parcel in) {
-            return new ParamsSellerSearchProperty(in);
+        public ParamsSellerSearchBuyer createFromParcel(Parcel in) {
+            return new ParamsSellerSearchBuyer(in);
         }
 
         @Override
-        public ParamsSellerSearchProperty[] newArray(int size) {
-            return new ParamsSellerSearchProperty[size];
+        public ParamsSellerSearchBuyer[] newArray(int size) {
+            return new ParamsSellerSearchBuyer[size];
         }
     };
 

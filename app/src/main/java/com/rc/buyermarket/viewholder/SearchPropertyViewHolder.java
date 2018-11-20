@@ -6,14 +6,14 @@ import android.widget.TextView;
 
 import com.jude.easyrecyclerview.adapter.BaseViewHolder;
 import com.rc.buyermarket.R;
-import com.rc.buyermarket.model.SellerSearchProperty;
+import com.rc.buyermarket.model.SellerSearchBuyer;
 import com.rc.buyermarket.util.DataUtil;
 
 /**
  * @author Md. Rashadul Alam
  * Email: rashed.droid@gmail.com
  */
-public class SearchPropertyViewHolder extends BaseViewHolder<SellerSearchProperty> {
+public class SearchPropertyViewHolder extends BaseViewHolder<SellerSearchBuyer> {
 
     TextView tvName;
     TextView tvAddress;
@@ -51,7 +51,7 @@ public class SearchPropertyViewHolder extends BaseViewHolder<SellerSearchPropert
     }
 
     @Override
-    public void setData(final SellerSearchProperty data) {
+    public void setData(final SellerSearchBuyer data) {
         tvName.setText(data.getFirst_name() + "  " + data.getLast_name());
         tvAmount.setText("$" + data.getPrice_min() + " - " + "$" + data.getPrice_max());
         tvAddress.setText(data.getZipcode() + " " + data.getCity() + ", " + data.getState() + ", " + data.getCountry());

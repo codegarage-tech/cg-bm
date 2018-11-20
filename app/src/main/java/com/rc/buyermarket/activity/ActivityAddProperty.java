@@ -479,8 +479,8 @@ public class ActivityAddProperty extends BaseActivity {
             Log.e("getPurchase_type", addPropertyEditData.getPurchase_type() + "");
             Log.e("getProperty_type", addPropertyEditData.getProperty_type() + "");
             Log.e("getState", addPropertyEditData.getState() + "");
-            seekBarPrice.setMin(10000);
-            seekBarPrice.setMax(10000000);
+//            seekBarPrice.setMin(10000);
+//            seekBarPrice.setMax(10000000);
             if (AppUtil.isNullOrEmpty(addPropertyEditData.getPrice_min())) {
                 seekBarPrice.setProgress(10000);
                 txtPriceValue.setText("$10000 - $10000000");

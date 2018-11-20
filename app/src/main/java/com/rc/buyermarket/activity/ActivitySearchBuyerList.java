@@ -15,8 +15,8 @@ import android.widget.Toast;
 import com.rc.buyermarket.R;
 import com.rc.buyermarket.adapter.SearchPropertyListAdapter;
 import com.rc.buyermarket.base.BaseActivity;
-import com.rc.buyermarket.model.ParamsSellerSearchProperty;
-import com.rc.buyermarket.model.SellerSearchProperty;
+import com.rc.buyermarket.model.ParamsSellerSearchBuyer;
+import com.rc.buyermarket.model.SellerSearchBuyer;
 import com.rc.buyermarket.network.NetworkManager;
 import com.rc.buyermarket.retrofit.APIClient;
 import com.rc.buyermarket.retrofit.APIInterface;
@@ -31,29 +31,30 @@ import retrofit2.Response;
 
 import static com.rc.buyermarket.util.AllConstants.INTENT_KEY_SEARCH_PROPERTY;
 
-public class ActivitySearchPropertyDetails extends BaseActivity {
+public class ActivitySearchBuyerList extends BaseActivity {
 
     //Toolbar
     ImageView ivBack;
     CanaroTextView tvTitle;
-    LinearLayout llMainSearchList,llShow;
+    LinearLayout llMainSearchList, llShow;
     // initialize SpinnerAdapter
     private SearchPropertyListAdapter searchPropertyListAdapter;
     RecyclerView rvSearchProperty;
     private APIInterface apiInterface;
-    SellerSearchProperty sellerSearchProperty;
+    SellerSearchBuyer sellerSearchBuyer;
     GetSellerSearchPropertyTask getSellerSearchPropertyTask;
-    ParamsSellerSearchProperty pSellerSearchProperty;
+    ParamsSellerSearchBuyer pSellerSearchProperty;
 
-    List<SellerSearchProperty> questions = new ArrayList<>();
+    List<SellerSearchBuyer> questions = new ArrayList<>();
+
     @Override
     public String initActivityTag() {
-        return ActivitySearchPropertyDetails.class.getSimpleName();
+        return ActivitySearchBuyerList.class.getSimpleName();
     }
 
     @Override
     public int initActivityLayout() {
-        return R.layout.activity_seller_search_property_details;
+        return R.layout.activity_seller_search_buyer_list;
     }
 
     @Override
@@ -68,18 +69,15 @@ public class ActivitySearchPropertyDetails extends BaseActivity {
 
     @Override
     public void initIntentData(Bundle savedInstanceState, Intent intent) {
-        if (intent != null ) {
+        if (intent != null) {
             //Intent data
-            ParamsSellerSearchProperty getParamsSellerSearchProperty = intent.getParcelableExtra(INTENT_KEY_SEARCH_PROPERTY);
-            if (getParamsSellerSearchProperty != null) {
-                pSellerSearchProperty = getParamsSellerSearchProperty;
-                Log.d(TAG, TAG + ">>>" + " paramsSellerSearchProperty: " + getParamsSellerSearchProperty.toString());
+            ParamsSellerSearchBuyer getParamsSellerSearchBuyer = intent.getParcelableExtra(INTENT_KEY_SEARCH_PROPERTY);
+            if (getParamsSellerSearchBuyer != null) {
+                pSellerSearchProperty = getParamsSellerSearchBuyer;
+                Log.d(TAG, TAG + ">>>" + " paramsSellerSearchProperty: " + getParamsSellerSearchBuyer.toString());
             }
-
-
         }
     }
-
 
 
     @Override
@@ -106,7 +104,7 @@ public class ActivitySearchPropertyDetails extends BaseActivity {
             Toast.makeText(getActivity(), getResources().getString(R.string.toast_network_error), Toast.LENGTH_SHORT).show();
             return;
         } else {
-            getSellerSearchPropertyTask = new GetSellerSearchPropertyTask(getActivity(), apiInterface);
+            getSellerSearchPropertyTask = new GetSellerSearchPropertyTask(getActivity());
             getSellerSearchPropertyTask.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
         }
 
@@ -152,11 +150,9 @@ public class ActivitySearchPropertyDetails extends BaseActivity {
     private class GetSellerSearchPropertyTask extends AsyncTask<String, Integer, Response> {
 
         Context mContext;
-        APIInterface mApiInterface;
 
-        public GetSellerSearchPropertyTask(Context context, APIInterface apiInterface) {
+        public GetSellerSearchPropertyTask(Context context) {
             mContext = context;
-            mApiInterface = apiInterface;
         }
 
         @Override
@@ -167,15 +163,8 @@ public class ActivitySearchPropertyDetails extends BaseActivity {
         @Override
         protected Response doInBackground(String... params) {
             try {
-//
-//                ParamsSellerSearchProperty pSearchProperty = new ParamsSellerSearchProperty(purchaseType,propertyType,"usa","detroit",stateName,bedroomType,bathroomType,"1","0",
-//                        styleType,exteriorType );
-//
-//               ParamsSellerSearchProperty pSearchProperty = new ParamsSellerSearchProperty("","","usa","detroit","","","","","","","");
-                Call<APIResponse<List<SellerSearchProperty>>> call  = apiInterface.doSellerSearchProperty(pSellerSearchProperty);
-                Log.d(TAG, "GetSellerSearchPropertyTask: onResponse-server = " + pSellerSearchProperty.toString());
-                Log.e("SellerSearchProperty",pSellerSearchProperty.toString()+">>");
-
+                Call<APIResponse<List<SellerSearchBuyer>>> call = apiInterface.doSellerSearchProperty(pSellerSearchProperty);
+                Log.d(TAG, "APIResponse(param): " + pSellerSearchProperty.toString());
 
                 Response response = call.execute();
                 if (response.isSuccessful()) {
@@ -195,21 +184,21 @@ public class ActivitySearchPropertyDetails extends BaseActivity {
 
                 if (result != null && result.isSuccessful()) {
                     Log.d(TAG, "APIResponse(GetSellerSearchPropertyTask): onResponse-server = " + result.toString());
-                    APIResponse<List<SellerSearchProperty>> data = (APIResponse<List<SellerSearchProperty>>) result.body();
+                    APIResponse<List<SellerSearchBuyer>> data = (APIResponse<List<SellerSearchBuyer>>) result.body();
 
                     if (data != null && data.getStatus().equalsIgnoreCase("1")) {
-                        Log.d(TAG, "APIResponse(SellerSearchProperty()): onResponse-object = " + data.toString());
+                        Log.d(TAG, "APIResponse(SellerSearchBuyer()): onResponse-object = " + data.toString());
                         Log.d(TAG, "SearchProperty" + data.getData().size());
-                         if (data.getData().size()>0){
-                             llMainSearchList.setVisibility(View.VISIBLE);
-                             llShow.setVisibility(View.GONE);
-                             searchPropertyListAdapter.addAll(data.getData());
-                             searchPropertyListAdapter.notifyDataSetChanged();
+                        if (data.getData().size() > 0) {
+                            llMainSearchList.setVisibility(View.VISIBLE);
+                            llShow.setVisibility(View.GONE);
+                            searchPropertyListAdapter.addAll(data.getData());
+                            searchPropertyListAdapter.notifyDataSetChanged();
 
-                         } else {
-                             llShow.setVisibility(View.VISIBLE);
-                             llMainSearchList.setVisibility(View.GONE);
-                         }
+                        } else {
+                            llShow.setVisibility(View.VISIBLE);
+                            llMainSearchList.setVisibility(View.GONE);
+                        }
 
 //                        setValueClear();
                     } else {

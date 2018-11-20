@@ -83,8 +83,8 @@
 
     <string name="login">Login</string>
     <string name="signup">Sign Up</string>
-    <string name="search_property">Search Property</string>
-    <string name="search_property_details">Property Detail</string>
+    <string name="search_buyer">Search Buyer</string>
+    <string name="search_buyer_details">Buyer Detail</string>
     <string name="textTitle">welcome to Buyer Market</string>
     <string name="BuyerRg">Buyer Registration </string>
     <string name="submit">Submit</string>

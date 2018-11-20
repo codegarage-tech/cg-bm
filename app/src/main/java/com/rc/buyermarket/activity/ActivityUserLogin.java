@@ -96,13 +96,13 @@ public class ActivityUserLogin extends BaseActivity {
 
             case BUYER:
                 if (AppUtil.isDebug(getActivity())) {
-                    etUsername.setText("rashed.droid1@gmail.com");
-                    etUserPass.setText("123456");
+                    etUsername.setText("seait@live.com");
+                    etUserPass.setText("12345678");
                 }
                 break;
             case SELLER:
                 if (AppUtil.isDebug(getActivity())) {
-                    etUsername.setText("niloy.cste@gmail.com");
+                    etUsername.setText("sid@gmail.com");
                     etUserPass.setText("123456");
                 }
                 break;

@@ -20,7 +20,7 @@ import com.rc.buyermarket.base.BaseActivity;
 import com.rc.buyermarket.enumeration.UserType;
 import com.rc.buyermarket.model.Country;
 import com.rc.buyermarket.model.Exterior;
-import com.rc.buyermarket.model.ParamsSellerSearchProperty;
+import com.rc.buyermarket.model.ParamsSellerSearchBuyer;
 import com.rc.buyermarket.model.PropertyType;
 import com.rc.buyermarket.model.SPModel;
 import com.rc.buyermarket.model.States;
@@ -41,7 +41,7 @@ import retrofit2.Response;
 import static com.rc.buyermarket.util.AllConstants.INTENT_KEY_SEARCH_PROPERTY;
 import static com.rc.buyermarket.util.AllConstants.INTENT_KEY_USER_TYPE;
 
-public class ActivitySellerSearchProperty extends BaseActivity {
+public class ActivitySellerSearchBuyer extends BaseActivity {
 
     //Toolbar
     ImageView ivBack;
@@ -49,7 +49,7 @@ public class ActivitySellerSearchProperty extends BaseActivity {
     TextView txtPriceValue;
 
     Button btnSearchSubmit;
-    String purchaseType = "", bedroomType = "", bathroomType = "", propertyType = "", styleType = "", exteriorType = "", stateName = "";
+    String defaultSelectedCountry = "United States", defaultSelectedCity = "detroit", defaultSelectedBasement = "", defaultSelectedGarage = "", purchaseType = "", bedroomType = "", bathroomType = "", propertyType = "", styleType = "", exteriorType = "", stateName = "";
     List<SPModel> purchaseTypeList;
     List<SPModel> bedroomTypeList;
     List<SPModel> bathroomTypeList;
@@ -60,12 +60,12 @@ public class ActivitySellerSearchProperty extends BaseActivity {
     List<Exterior> exteriorList;
 
     // initialize Spinner
-    private Spinner spPurchaseType,spBuyPropertyType,spCountry,spState,
-            spBuyBedrooms,spBuyBathroom,spBuyStyle,spBuyExterior;
+    private Spinner spPurchaseType, spBuyPropertyType, spCountry, spState,
+            spBuyBedrooms, spBuyBathroom, spBuyStyle, spBuyExterior;
     private Button btnUserLogin;
     private UserType userType;
     // initialize SpinnerAdapter
-    private CommonSpinnerAdapter purchaseAdapter,bedroomAdapter,bathroomAdapter,stateTypeAdapter,propertyTypeAdapter,styleAdapter,exteriorAdapter;
+    private CommonSpinnerAdapter purchaseAdapter, bedroomAdapter, bathroomAdapter, stateTypeAdapter, propertyTypeAdapter, styleAdapter, exteriorAdapter;
     private APIInterface apiInterface;
 
     //Background task
@@ -73,11 +73,11 @@ public class ActivitySellerSearchProperty extends BaseActivity {
     GetPropertyTypeTask getPropertyTypeTask;
     GetExteriorTask getExteriorTask;
     GetStyleTask getStyleTask;
-    int priceRange=0;
+    int priceRange = 0;
 
     @Override
     public String initActivityTag() {
-        return ActivitySellerSearchProperty.class.getSimpleName();
+        return ActivitySellerSearchBuyer.class.getSimpleName();
     }
 
     @Override
@@ -108,20 +108,20 @@ public class ActivitySellerSearchProperty extends BaseActivity {
         tvTitle = (CanaroTextView) findViewById(R.id.tv_title);
         txtPriceValue = (TextView) findViewById(R.id.txt_price_value);
         btnSearchSubmit = (Button) findViewById(R.id.btn_search_submit);
-        spState = (Spinner)findViewById(R.id.sp_select_state);
-        spBuyPropertyType = (Spinner)findViewById(R.id.sp_select_property_type);
-        spPurchaseType = (Spinner)findViewById(R.id.sp_select_purchase_type);
+        spState = (Spinner) findViewById(R.id.sp_select_state);
+        spBuyPropertyType = (Spinner) findViewById(R.id.sp_select_property_type);
+        spPurchaseType = (Spinner) findViewById(R.id.sp_select_purchase_type);
         seekBarPrice = (SeekBar) findViewById(R.id.seekBar_price);
-        spBuyBedrooms = (Spinner)findViewById(R.id.sp_select_bathrooms);
-        spBuyBathroom = (Spinner)findViewById(R.id.sp_select_bedrooms);
-        spBuyStyle = (Spinner)findViewById(R.id.sp_select_style);
-        spBuyExterior = (Spinner)findViewById(R.id.sp_select_exterior);
+        spBuyBedrooms = (Spinner) findViewById(R.id.sp_select_bedrooms);
+        spBuyBathroom = (Spinner) findViewById(R.id.sp_select_bathrooms);
+        spBuyStyle = (Spinner) findViewById(R.id.sp_select_style);
+        spBuyExterior = (Spinner) findViewById(R.id.sp_select_exterior);
 
     }
 
     @Override
     public void initActivityViewsData(Bundle savedInstanceState) {
-        tvTitle.setText(getString(R.string.search_property));
+        tvTitle.setText(getString(R.string.search_buyer));
         apiInterface = APIClient.getClient(getActivity()).create(APIInterface.class);
 
         initializeAddList();
@@ -172,8 +172,8 @@ public class ActivitySellerSearchProperty extends BaseActivity {
             }
         });
 
-        seekBarPrice.setMin(10000);
-        seekBarPrice.setMax(10000000);
+//        seekBarPrice.setMin(10000);
+//        seekBarPrice.setMax(10000000);
         seekBarPrice.setProgress(10000);
         txtPriceValue.setText("$10000 - $10000000");
         seekBarPrice.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
@@ -203,7 +203,7 @@ public class ActivitySellerSearchProperty extends BaseActivity {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 States item = (States) parent.getItemAtPosition(position);
-                stateName =  item.getName();
+                stateName = item.getName();
                 Log.d(TAG, "stateName= " + stateName);
 
             }
@@ -219,11 +219,11 @@ public class ActivitySellerSearchProperty extends BaseActivity {
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
 
                 PropertyType item = (PropertyType) parent.getItemAtPosition(position);
-                propertyType =  item.getProperty_value();
-                if (propertyType.equalsIgnoreCase( "Select property type" )){
+                propertyType = item.getProperty_value();
+                if (propertyType.equalsIgnoreCase("Select property type")) {
                     propertyType = "";
                 } else {
-                    propertyType =  item.getProperty_value();
+                    propertyType = item.getProperty_value();
                 }
 
                 Log.d(TAG, "propertyType= " + propertyType);
@@ -241,11 +241,11 @@ public class ActivitySellerSearchProperty extends BaseActivity {
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
 
                 SPModel item = (SPModel) parent.getItemAtPosition(position);
-                purchaseType =  item.getSp_title();
-                if (purchaseType.equalsIgnoreCase( "Select purchase type" )){
+                purchaseType = item.getSp_title();
+                if (purchaseType.equalsIgnoreCase("Select purchase type")) {
                     purchaseType = "";
                 } else {
-                    purchaseType =  item.getSp_title();
+                    purchaseType = item.getSp_title();
                 }
                 Log.d(TAG, "purchaseType= " + purchaseType);
             }
@@ -262,10 +262,10 @@ public class ActivitySellerSearchProperty extends BaseActivity {
 
                 SPModel item = (SPModel) parent.getItemAtPosition(position);
                 bedroomType = AppUtil.SplitDateList(item.getSp_title());
-                if (bedroomType.equalsIgnoreCase( "Select bedroom" )){
+                if (bedroomType.equalsIgnoreCase("Select bedroom")) {
                     bedroomType = "";
                 } else {
-                    bedroomType =  AppUtil.SplitDateList(item.getSp_title());
+                    bedroomType = AppUtil.SplitDateList(item.getSp_title());
                 }
 
                 Log.d(TAG, "bedroomType= " + bedroomType);
@@ -281,11 +281,11 @@ public class ActivitySellerSearchProperty extends BaseActivity {
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
 
                 SPModel item = (SPModel) parent.getItemAtPosition(position);
-                bathroomType =  AppUtil.SplitDateList(item.getSp_title());
-                if (bathroomType.equalsIgnoreCase( "Select bathroom" )){
+                bathroomType = AppUtil.SplitDateList(item.getSp_title());
+                if (bathroomType.equalsIgnoreCase("Select bathroom")) {
                     bathroomType = "";
                 } else {
-                    bathroomType =  AppUtil.SplitDateList(item.getSp_title());
+                    bathroomType = AppUtil.SplitDateList(item.getSp_title());
                 }
                 Log.d(TAG, "bathroomType= " + bathroomType);
             }
@@ -300,11 +300,11 @@ public class ActivitySellerSearchProperty extends BaseActivity {
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
 
                 Exterior item = (Exterior) parent.getItemAtPosition(position);
-                exteriorType =  item.getExterior_value();
-                if (exteriorType.equalsIgnoreCase( "Select exterior" )){
+                exteriorType = item.getExterior_value();
+                if (exteriorType.equalsIgnoreCase("Select exterior")) {
                     exteriorType = "";
                 } else {
-                    exteriorType =  item.getExterior_value();
+                    exteriorType = item.getExterior_value();
                 }
                 Log.d(TAG, "exteriorType= " + exteriorType);
                 // Toast.makeText(getActivity(), exterior, Toast.LENGTH_LONG).show();
@@ -321,11 +321,11 @@ public class ActivitySellerSearchProperty extends BaseActivity {
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
 
                 Styles item = (Styles) parent.getItemAtPosition(position);
-                styleType =  item.getStyle_vaue();
-                if (styleType.equalsIgnoreCase( "Select style" )){
+                styleType = item.getStyle_vaue();
+                if (styleType.equalsIgnoreCase("Select style")) {
                     styleType = "";
                 } else {
-                    styleType =  item.getStyle_vaue();
+                    styleType = item.getStyle_vaue();
                 }
 
                 Log.d(TAG, "styleType= " + styleType);
@@ -362,29 +362,26 @@ public class ActivitySellerSearchProperty extends BaseActivity {
     public void initActivityPermissionResult(int requestCode, String[] permissions, int[] grantResults) {
 
     }
+
     /************************
      * validation check for empty  *
      ************************/
     private void validationUserField() {
-        //  bedroomType = (((SPModel) spBuyBedrooms.getSelectedItem()).getSp_title().equalsIgnoreCase(getString(R.string.txt_default_country)) ? "" : ((SPModel) spBuyBedrooms.getSelectedItem()).getSp_title());
-        if (bedroomType.equalsIgnoreCase(getString(R.string.txt_default_bedrooms)) ) {
-            Toast.makeText(getActivity(), "Please enter your bedrooms", Toast.LENGTH_SHORT).show();
-            return;
-        }
-        if (bathroomType.equalsIgnoreCase(getString(R.string.txt_default_bathrooms)) ) {
-            Toast.makeText(getActivity(), "Please enter your bathrooms", Toast.LENGTH_SHORT).show();
-            return;
-        }
+//        if (bedroomType.equalsIgnoreCase(getString(R.string.txt_default_bedrooms))) {
+//            Toast.makeText(getActivity(), "Please enter your bedrooms", Toast.LENGTH_SHORT).show();
+//            return;
+//        }
+//        if (bathroomType.equalsIgnoreCase(getString(R.string.txt_default_bathrooms))) {
+//            Toast.makeText(getActivity(), "Please enter your bathrooms", Toast.LENGTH_SHORT).show();
+//            return;
+//        }
 
-        ParamsSellerSearchProperty pSearchProperty = new ParamsSellerSearchProperty(purchaseType,propertyType,"usa","detroit",stateName,bedroomType,bathroomType,"","",
-                styleType,exteriorType );
-        //       ParamsSellerSearchProperty pSearchProperty = new ParamsSellerSearchProperty("","","usa","detroit","","","","","","","");
+        ParamsSellerSearchBuyer pSearchProperty = new ParamsSellerSearchBuyer(purchaseType, propertyType, defaultSelectedCountry, defaultSelectedCity, stateName, bedroomType, bathroomType, defaultSelectedBasement, defaultSelectedGarage, styleType, exteriorType);
 
-        Intent iSearchProperty = new Intent(getActivity(), ActivitySearchPropertyDetails.class);
+        Intent iSearchProperty = new Intent(getActivity(), ActivitySearchBuyerList.class);
         iSearchProperty.putExtra(INTENT_KEY_SEARCH_PROPERTY, pSearchProperty);
         startActivity(iSearchProperty);
     }
-
 
     private void setData() {
         purchaseAdapter = new CommonSpinnerAdapter(getActivity(), CommonSpinnerAdapter.ADAPTER_TYPE.PURCHASE_TYPE);
@@ -405,17 +402,17 @@ public class ActivitySellerSearchProperty extends BaseActivity {
     }
 
     private void initializeAddList() {
-        purchaseTypeList = new ArrayList<>(  );
+        purchaseTypeList = new ArrayList<>();
         purchaseTypeList.clear();
-        bedroomTypeList = new ArrayList<>(  );
+        bedroomTypeList = new ArrayList<>();
         bedroomTypeList.clear();
-        bathroomTypeList = new ArrayList<>(  );
+        bathroomTypeList = new ArrayList<>();
         bathroomTypeList.clear();
-        exteriorList = new ArrayList<>(  );
+        exteriorList = new ArrayList<>();
         exteriorList.clear();
-        stylesList = new ArrayList<>(  );
+        stylesList = new ArrayList<>();
         stylesList.clear();
-        propertyTypesList  = new ArrayList<>(  );
+        propertyTypesList = new ArrayList<>();
         propertyTypesList.clear();
         //purchase type
         purchaseTypeList.add(new SPModel("", "Select purchase type"));
@@ -431,11 +428,11 @@ public class ActivitySellerSearchProperty extends BaseActivity {
         bedroomTypeList.add(new SPModel("5", "5+"));
 
         // bathroom type
-        // bathroom type
         bathroomTypeList.add(new SPModel("", "Select bathroom"));
         bathroomTypeList.add(new SPModel("2", "2+"));
         bathroomTypeList.add(new SPModel("3", "3+"));
         bathroomTypeList.add(new SPModel("4", "4+"));
+        bathroomTypeList.add(new SPModel("5", "5+"));
 
 
     }
@@ -443,11 +440,6 @@ public class ActivitySellerSearchProperty extends BaseActivity {
     /************************
      * Server communication *
      ************************/
-
-    /************************
-     * Server communication *
-     ************************/
-
     private class GetCountryWithCityTask extends AsyncTask<String, Integer, Response> {
 
         Context mContext;
@@ -487,11 +479,11 @@ public class ActivitySellerSearchProperty extends BaseActivity {
                 if (result != null && result.isSuccessful()) {
                     Log.d(TAG, "APIResponse(GetCountryWithCityTask): onResponse-server = " + result.toString());
                     APIResponse<List<Country>> data = (APIResponse<List<Country>>) result.body();
-                    Log.e("Country",data.toString()+"");
+                    Log.e("Country", data.toString() + "");
 
                     if (data != null && data.getStatus().equalsIgnoreCase("1")) {
                         Log.d(TAG, "APIResponse(GetCountryWithCityTask()): onResponse-object = " + data.toString());
-                        stateTypeAdapter.setData(data.getData().get( 0 ).getStates());
+                        stateTypeAdapter.setData(data.getData().get(0).getStates());
                         spState.setSelection(0);
                     } else {
                         Toast.makeText(getActivity(), getResources().getString(R.string.toast_no_info_found), Toast.LENGTH_SHORT).show();
@@ -544,11 +536,11 @@ public class ActivitySellerSearchProperty extends BaseActivity {
                 if (result != null && result.isSuccessful()) {
                     Log.d(TAG, "APIResponse(GetStyleTask): onResponse-server = " + result.toString());
                     APIResponse<List<PropertyType>> data = (APIResponse<List<PropertyType>>) result.body();
-                    Log.e("Exterior",data.toString()+"");
+                    Log.e("Exterior", data.toString() + "");
 
                     if (data != null && data.getStatus().equalsIgnoreCase("1")) {
                         Log.d(TAG, "APIResponse(GetStyleTask()): onResponse-object = " + data.toString());
-                        propertyTypesList= getPropertyList(data.getData());
+                        propertyTypesList = getPropertyList(data.getData());
                         propertyTypeAdapter.setData(propertyTypesList);
                         spBuyPropertyType.setSelection(0);
                     } else {
@@ -602,7 +594,7 @@ public class ActivitySellerSearchProperty extends BaseActivity {
                 if (result != null && result.isSuccessful()) {
                     Log.d(TAG, "APIResponse(GetStyleTask): onResponse-server = " + result.toString());
                     APIResponse<List<Styles>> data = (APIResponse<List<Styles>>) result.body();
-                    Log.e("Exterior",data.toString()+"");
+                    Log.e("Exterior", data.toString() + "");
 
                     if (data != null && data.getStatus().equalsIgnoreCase("1")) {
                         Log.d(TAG, "APIResponse(GetStyleTask()): onResponse-object = " + data.toString());
@@ -666,7 +658,7 @@ public class ActivitySellerSearchProperty extends BaseActivity {
 
                         exteriorList = getExteriorList(data.getData());
 
-                        Log.e("exteriorList",exteriorList.size()+"");
+                        Log.e("exteriorList", exteriorList.size() + "");
 
                         exteriorAdapter.setData(exteriorList);
                         spBuyExterior.setSelection(0);
@@ -683,35 +675,35 @@ public class ActivitySellerSearchProperty extends BaseActivity {
     }
 
     private List<Exterior> getExteriorList(List<Exterior> data) {
-        List<Exterior> exList = new ArrayList<Exterior>(  );
-        Exterior exterior = new Exterior( "999999","Select Exterior" ,"Select exterior") ;
-        exList.add( exterior );
-        for (int i= 0;i<data.size();i++){
-            exterior = new Exterior( data.get( i ) .getId(),data.get( i ) .getExterior_key(),data.get( i ) .getExterior_value());
-            exList.add(exterior );
+        List<Exterior> exList = new ArrayList<Exterior>();
+        Exterior exterior = new Exterior("999999", "Select Exterior", "Select exterior");
+        exList.add(exterior);
+        for (int i = 0; i < data.size(); i++) {
+            exterior = new Exterior(data.get(i).getId(), data.get(i).getExterior_key(), data.get(i).getExterior_value());
+            exList.add(exterior);
         }
         return exList;
     }
 
     private List<Styles> getStylesList(List<Styles> data) {
-        List<Styles> stylesList = new ArrayList<Styles>(  );
-        Styles exterior = new Styles( "9999999","Select Style" ,"Select style") ;
-        stylesList.add( exterior );
-        for (int i= 0;i<data.size();i++){
-            exterior = new Styles( data.get( i ) .getId(),data.get( i ) .getStyle_key(),data.get( i ) .getStyle_vaue());
-            stylesList.add(exterior );
+        List<Styles> stylesList = new ArrayList<Styles>();
+        Styles exterior = new Styles("9999999", "Select Style", "Select style");
+        stylesList.add(exterior);
+        for (int i = 0; i < data.size(); i++) {
+            exterior = new Styles(data.get(i).getId(), data.get(i).getStyle_key(), data.get(i).getStyle_vaue());
+            stylesList.add(exterior);
         }
         return stylesList;
     }
 
 
     private List<PropertyType> getPropertyList(List<PropertyType> data) {
-        List<PropertyType> propertyList = new ArrayList<PropertyType>(  );
-        PropertyType propertyType = new PropertyType( "99999999","Select Property Type" ,"Select property type") ;
-        propertyList.add( propertyType );
-        for (int i= 0;i<data.size();i++){
-            propertyType = new PropertyType( data.get( i ) .getId(),data.get( i ) .getProperty_key(),data.get( i ) .getProperty_value());
-            propertyList.add(propertyType );
+        List<PropertyType> propertyList = new ArrayList<PropertyType>();
+        PropertyType propertyType = new PropertyType("99999999", "Select Property Type", "Select property type");
+        propertyList.add(propertyType);
+        for (int i = 0; i < data.size(); i++) {
+            propertyType = new PropertyType(data.get(i).getId(), data.get(i).getProperty_key(), data.get(i).getProperty_value());
+            propertyList.add(propertyType);
         }
         return propertyList;
     }

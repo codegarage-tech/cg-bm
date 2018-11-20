@@ -36,12 +36,12 @@
             android:theme="@style/AppTheme.NoActionBar"/>
 
         <activity
-            android:name=".activity.ActivitySellerSearchProperty"
+            android:name=".activity.ActivitySellerSearchBuyer"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar" />
 
         <activity
-            android:name=".activity.ActivitySearchPropertyDetails"
+            android:name=".activity.ActivitySearchBuyerList"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar" />
 

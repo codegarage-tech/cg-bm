@@ -10,13 +10,13 @@ import com.rc.buyermarket.model.ParamsAddProperty;
 import com.rc.buyermarket.model.ParamsBuyerLogin;
 import com.rc.buyermarket.model.ParamsBuyerSignUp;
 import com.rc.buyermarket.model.ParamsSellerLogin;
-import com.rc.buyermarket.model.ParamsSellerSearchProperty;
+import com.rc.buyermarket.model.ParamsSellerSearchBuyer;
 import com.rc.buyermarket.model.ParamsSellerSignUp;
 import com.rc.buyermarket.model.ParamsUpdateSellerProfile;
 import com.rc.buyermarket.model.PropertyDelete;
 import com.rc.buyermarket.model.PropertyType;
 import com.rc.buyermarket.model.SellerLogin;
-import com.rc.buyermarket.model.SellerSearchProperty;
+import com.rc.buyermarket.model.SellerSearchBuyer;
 import com.rc.buyermarket.model.Styles;
 
 import java.util.List;
@@ -33,11 +33,9 @@ import retrofit2.http.Path;
  */
 public interface APIInterface {
 
-//
-
     @POST("buyer_login/signin")
     Call<APIResponse<List<BuyerLogin>>> doBuyerLogin(@Body ParamsBuyerLogin paramsBuyerLogin);
-//
+
     @POST("buyer_login/signup")
     Call<APIResponse<List<BuyerLogin>>> doBuyerSignUp(@Body ParamsBuyerSignUp paramsBuyerSignUp);
 
@@ -54,7 +52,7 @@ public interface APIInterface {
     Call<APIResponse<List<AddProperty>>> doAddPropety(@Body ParamsAddProperty paramsAddProperty);
 
     @POST("properties/search")
-    Call<APIResponse<List<SellerSearchProperty>>> doSellerSearchProperty(@Body ParamsSellerSearchProperty paramsSellerSearchProperty);
+    Call<APIResponse<List<SellerSearchBuyer>>> doSellerSearchProperty(@Body ParamsSellerSearchBuyer paramsSellerSearchBuyer);
 
     @GET("lists/details/exterior")
     Call<APIResponse<List<Exterior>>> doGetListExterior();
