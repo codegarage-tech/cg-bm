@@ -20,14 +20,20 @@ import com.rc.buyermarket.adapter.CommonSpinnerAdapter;
 import com.rc.buyermarket.base.BaseActivity;
 import com.rc.buyermarket.enumeration.PropertyEnum;
 import com.rc.buyermarket.model.AddProperty;
+import com.rc.buyermarket.model.Bathroom;
+import com.rc.buyermarket.model.Bedroom;
 import com.rc.buyermarket.model.Country;
 import com.rc.buyermarket.model.Exterior;
 import com.rc.buyermarket.model.ParamsAddProperty;
 import com.rc.buyermarket.model.PropertyType;
+import com.rc.buyermarket.model.PurchaseType;
 import com.rc.buyermarket.model.SPModel;
+import com.rc.buyermarket.model.SessionBathroomList;
+import com.rc.buyermarket.model.SessionBedroomList;
 import com.rc.buyermarket.model.SessionCountryWithAreaList;
 import com.rc.buyermarket.model.SessionExteriorList;
 import com.rc.buyermarket.model.SessionPropertyTypeList;
+import com.rc.buyermarket.model.SessionPurchaseTypeList;
 import com.rc.buyermarket.model.SessionStyleList;
 import com.rc.buyermarket.model.States;
 import com.rc.buyermarket.model.Styles;
@@ -39,7 +45,6 @@ import com.rc.buyermarket.util.AllConstants;
 import com.rc.buyermarket.util.AppPref;
 import com.rc.buyermarket.util.AppUtil;
 import com.rc.buyermarket.util.DataUtil;
-import com.rc.buyermarket.util.ValidationManager;
 import com.rc.buyermarket.view.CanaroTextView;
 
 import java.util.List;
@@ -74,6 +79,9 @@ public class ActivityAddProperty extends BaseActivity {
     GetExteriorTask getExteriorTask;
     GetStyleTask getStyleTask;
     GetAddPropertyTask getAddPropertyTask;
+    GetBathroomTask getBathroomTask;
+    GetBedroomTask getBedroomTask;
+    GetPurchaseTypeTask getPurchaseTypeTask;
 
     AddProperty addPropertyEditData;
     PropertyEnum propertyEnum;
@@ -101,7 +109,6 @@ public class ActivityAddProperty extends BaseActivity {
 
     @Override
     public void initIntentData(Bundle savedInstanceState, Intent intent) {
-
         if (intent != null) {
             String propertyType = intent.getStringExtra(INTENT_KEY_PROPERTY_ENUM);
             if (!AppUtil.isNullOrEmpty(propertyType)) {
@@ -119,7 +126,6 @@ public class ActivityAddProperty extends BaseActivity {
 
     @Override
     public void initActivityViews() {
-
         ivBack = (ImageView) findViewById(R.id.iv_back);
         tvTitle = (CanaroTextView) findViewById(R.id.tv_title);
         txtPriceValue = (TextView) findViewById(R.id.txt_price_value);
@@ -143,40 +149,54 @@ public class ActivityAddProperty extends BaseActivity {
         spBuyStyle = (Spinner) findViewById(R.id.sp_buy_style);
         spBuyExterior = (Spinner) findViewById(R.id.sp_buy_exterior);
         btnSubmit = (Button) findViewById(R.id.btn_property_submit);
-
     }
 
     @Override
     public void initActivityViewsData(Bundle savedInstanceState) {
-        tvTitle.setText(getString(R.string.add_property));
         apiInterface = APIClient.getClient(getActivity()).create(APIInterface.class);
-        setData();
+
+        if (propertyEnum == PropertyEnum.PROPERTY_ADD) {
+            tvTitle.setText(getString(R.string.add_property));
+        } else {
+            tvTitle.setText(getString(R.string.property_details));
+        }
+
+        purchaseTypeAdapter = new CommonSpinnerAdapter(ActivityAddProperty.this, CommonSpinnerAdapter.ADAPTER_TYPE.PURCHASE_TYPE);
+        spPurchaseType.setAdapter(purchaseTypeAdapter);
+
+        preApprovedAdapter = new CommonSpinnerAdapter(ActivityAddProperty.this, CommonSpinnerAdapter.ADAPTER_TYPE.PRE_APPROVED);
+        spPreapproved.setAdapter(preApprovedAdapter);
+
         propertyTypeAdapter = new CommonSpinnerAdapter(ActivityAddProperty.this, CommonSpinnerAdapter.ADAPTER_TYPE.PROPERTY_TYPE);
         spBuyPropertyType.setAdapter(propertyTypeAdapter);
-        styleAdapter = new CommonSpinnerAdapter(ActivityAddProperty.this, CommonSpinnerAdapter.ADAPTER_TYPE.STYLE);
-        spBuyStyle.setAdapter(styleAdapter);
-        exteriorAdapter = new CommonSpinnerAdapter(ActivityAddProperty.this, CommonSpinnerAdapter.ADAPTER_TYPE.EXTERIOR);
-        spBuyExterior.setAdapter(exteriorAdapter);
+
         countryTypeAdapter = new CommonSpinnerAdapter(ActivityAddProperty.this, CommonSpinnerAdapter.ADAPTER_TYPE.COUNTRY);
         spCountry.setAdapter(countryTypeAdapter);
+        spCountry.setEnabled(false);
+
         stateTypeAdapter = new CommonSpinnerAdapter(ActivityAddProperty.this, CommonSpinnerAdapter.ADAPTER_TYPE.STATE);
         spState.setAdapter(stateTypeAdapter);
 
-        if (!NetworkManager.isInternetAvailable(getActivity())) {
-//            Toast.makeText(getActivity(), getResources().getString(R.string.toast_network_error), Toast.LENGTH_SHORT).show();
+        bedroomAdapter = new CommonSpinnerAdapter(ActivityAddProperty.this, CommonSpinnerAdapter.ADAPTER_TYPE.BEDROOM);
+        spBuyBedrooms.setAdapter(bedroomAdapter);
 
-            propertyTypeAdapter.setData(DataUtil.getAllPropertyTypes(getActivity()));
-            spBuyPropertyType.setSelection((addPropertyEditData != null) ? propertyTypeAdapter.getItemPosition(addPropertyEditData.getProperty_type()) : 0);
+        bathroomAdapter = new CommonSpinnerAdapter(ActivityAddProperty.this, CommonSpinnerAdapter.ADAPTER_TYPE.BATHROOM);
+        spBuyBathroom.setAdapter(bathroomAdapter);
 
-            styleAdapter.setData(DataUtil.getAllStyles(getActivity()));
-            spBuyStyle.setSelection((addPropertyEditData != null) ? styleAdapter.getItemPosition(addPropertyEditData.getStyle()) : 0);
+        basementAdapter = new CommonSpinnerAdapter(ActivityAddProperty.this, CommonSpinnerAdapter.ADAPTER_TYPE.BASEMANT);
+        spBuyBasement.setAdapter(basementAdapter);
 
-            exteriorAdapter.setData(DataUtil.getAllExteriors(getActivity()));
-            spBuyExterior.setSelection((addPropertyEditData != null) ? exteriorAdapter.getItemPosition(addPropertyEditData.getExterior()) : 0);
+        garageAdapter = new CommonSpinnerAdapter(ActivityAddProperty.this, CommonSpinnerAdapter.ADAPTER_TYPE.GARAGE);
+        spBuyGarage.setAdapter(garageAdapter);
 
-            countryTypeAdapter.setData(DataUtil.getAllCountryWithStates(getActivity()));
-            spCountry.setSelection((addPropertyEditData != null) ? countryTypeAdapter.getItemPosition(addPropertyEditData.getCountry()) : 0);
-        } else {
+        styleAdapter = new CommonSpinnerAdapter(ActivityAddProperty.this, CommonSpinnerAdapter.ADAPTER_TYPE.STYLE);
+        spBuyStyle.setAdapter(styleAdapter);
+
+        exteriorAdapter = new CommonSpinnerAdapter(ActivityAddProperty.this, CommonSpinnerAdapter.ADAPTER_TYPE.EXTERIOR);
+        spBuyExterior.setAdapter(exteriorAdapter);
+
+        if (NetworkManager.isInternetAvailable(getActivity())) {
+            //Load spinner data
             getPropertyTypeTask = new GetPropertyTypeTask(getActivity(), apiInterface);
             getPropertyTypeTask.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
 
@@ -188,19 +208,99 @@ public class ActivityAddProperty extends BaseActivity {
 
             getCountryWithCityTask = new GetCountryWithCityTask(getActivity(), apiInterface);
             getCountryWithCityTask.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
-        }
 
-        switch (propertyEnum) {
-            case PROPERTY_EDIT:
-                tvTitle.setText(getString(R.string.property_details));
-                setDataPropertyEdit();
-                break;
+            getBathroomTask = new GetBathroomTask(getActivity(), apiInterface);
+            getBathroomTask.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+
+            getBedroomTask = new GetBedroomTask(getActivity(), apiInterface);
+            getBedroomTask.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+
+            getPurchaseTypeTask = new GetPurchaseTypeTask(getActivity(), apiInterface);
+            getPurchaseTypeTask.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+
+            //Load edit property data
+            if (addPropertyEditData != null) {
+                etFname.setText(addPropertyEditData.getFirst_name());
+                etLname.setText(addPropertyEditData.getLast_name());
+                etEmail.setText(addPropertyEditData.getEmail());
+                etPhone.setText(addPropertyEditData.getContact());
+                if (AppUtil.isNullOrEmpty(addPropertyEditData.getPrice_max())) {
+                    seekBarPrice.setProgress(10000);
+                    txtPriceValue.setText("$10000 - $10000000");
+                } else {
+                    seekBarPrice.setProgress(Integer.parseInt(addPropertyEditData.getPrice_max()));
+                    txtPriceValue.setText("$10000" + " - " + "$" + addPropertyEditData.getPrice_max());
+                }
+//                spPurchaseType.setSelection(purchaseTypeAdapter.getItemPosition(addPropertyEditData.getPurchase_type()));
+                preApprovedAdapter.setData(DataUtil.getAllPreApproved());
+                spPreapproved.setSelection(preApprovedAdapter.getItemPosition(addPropertyEditData.getPrc_approved()));
+                etCreditScore.setText(addPropertyEditData.getCredit_score());
+//                spBuyPropertyType.setSelection(propertyTypeAdapter.getItemPosition(addPropertyEditData.getProperty_type()));
+//                spCountry.setSelection(countryTypeAdapter.getItemPosition(addPropertyEditData.getCountry()));
+//                spState.setSelection(stateTypeAdapter.getItemPosition(addPropertyEditData.getState()));
+                etCity.setText(addPropertyEditData.getCity());
+                etZipcode.setText(addPropertyEditData.getZipcode());
+//                spBuyBedrooms.setSelection(bedroomAdapter.getItemPosition(addPropertyEditData.getBedroom()));
+//                spBuyBathroom.setSelection(bathroomAdapter.getItemPosition(addPropertyEditData.getBathroom()));
+                basementAdapter.setData(DataUtil.getAllBasements());
+                spBuyBasement.setSelection(basementAdapter.getItemPosition(addPropertyEditData.getBasement()));
+                garageAdapter.setData(DataUtil.getAllGarages());
+                spBuyGarage.setSelection(garageAdapter.getItemPosition(addPropertyEditData.getGarage()));
+//                spBuyStyle.setSelection(styleAdapter.getItemPosition(addPropertyEditData.getStyle()));
+//                spBuyExterior.setSelection(exteriorAdapter.getItemPosition(addPropertyEditData.getExterior()));
+            }
+        } else {
+            loadOfflineData();
+            setPropertyData();
         }
+    }
+
+    private void setPropertyData() {
+        if (addPropertyEditData != null) {
+            etFname.setText(addPropertyEditData.getFirst_name());
+            etLname.setText(addPropertyEditData.getLast_name());
+            etEmail.setText(addPropertyEditData.getEmail());
+            etPhone.setText(addPropertyEditData.getContact());
+            if (AppUtil.isNullOrEmpty(addPropertyEditData.getPrice_max())) {
+                seekBarPrice.setProgress(10000);
+                txtPriceValue.setText("$10000 - $10000000");
+            } else {
+                seekBarPrice.setProgress(Integer.parseInt(addPropertyEditData.getPrice_max()));
+                txtPriceValue.setText("$10000" + " - " + "$" + addPropertyEditData.getPrice_max());
+            }
+            spPurchaseType.setSelection(purchaseTypeAdapter.getItemPosition(addPropertyEditData.getPurchase_type()));
+            spPreapproved.setSelection(preApprovedAdapter.getItemPosition(addPropertyEditData.getPrc_approved()));
+            etCreditScore.setText(addPropertyEditData.getCredit_score());
+            spBuyPropertyType.setSelection(propertyTypeAdapter.getItemPosition(addPropertyEditData.getProperty_type()));
+            spCountry.setSelection(countryTypeAdapter.getItemPosition(addPropertyEditData.getCountry()));
+            spState.setSelection(stateTypeAdapter.getItemPosition(addPropertyEditData.getState()));
+            etCity.setText(addPropertyEditData.getCity());
+            etZipcode.setText(addPropertyEditData.getZipcode());
+            spBuyBedrooms.setSelection(bedroomAdapter.getItemPosition(addPropertyEditData.getBedroom()));
+            spBuyBathroom.setSelection(bathroomAdapter.getItemPosition(addPropertyEditData.getBathroom()));
+            spBuyBasement.setSelection(basementAdapter.getItemPosition(addPropertyEditData.getBasement()));
+            spBuyGarage.setSelection(garageAdapter.getItemPosition(addPropertyEditData.getGarage()));
+            spBuyStyle.setSelection(styleAdapter.getItemPosition(addPropertyEditData.getStyle()));
+            spBuyExterior.setSelection(exteriorAdapter.getItemPosition(addPropertyEditData.getExterior()));
+        }
+    }
+
+    private void loadOfflineData() {
+        purchaseTypeAdapter.setData(DataUtil.getAllPurchaseTypes(getActivity()));
+        preApprovedAdapter.setData(DataUtil.getAllPreApproved());
+        propertyTypeAdapter.setData(DataUtil.getAllPropertyTypes(getActivity()));
+        countryTypeAdapter.setData(DataUtil.getAllCountryWithStates(getActivity()));
+        stateTypeAdapter.setData(DataUtil.getAllCountryWithStates(getActivity()).get(0).getStates());
+        bedroomAdapter.setData(DataUtil.getAllBedrooms(getActivity()));
+        bathroomAdapter.setData(DataUtil.getAllBathrooms(getActivity()));
+        basementAdapter.setData(DataUtil.getAllBasements());
+        garageAdapter.setData(DataUtil.getAllGarages());
+        styleAdapter.setData(DataUtil.getAllStyles(getActivity()));
+        exteriorAdapter.setData(DataUtil.getAllExteriors(getActivity()));
     }
 
     @Override
     public void initActivityActions(Bundle savedInstanceState) {
-
         btnSubmit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -229,7 +329,7 @@ public class ActivityAddProperty extends BaseActivity {
 
                 priceRange = seekBar.getProgress();
                 Log.e("priceRange", priceRange + ">>");
-                txtPriceValue.setText("$" + priceRange + " - " + "$10000000");
+                txtPriceValue.setText("$10000" + " - " + "$" + priceRange);
             }
 
             @Override
@@ -246,8 +346,8 @@ public class ActivityAddProperty extends BaseActivity {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
 
-                SPModel item = (SPModel) parent.getItemAtPosition(position);
-                purchaseType = item.getSp_title();
+                PurchaseType item = (PurchaseType) parent.getItemAtPosition(position);
+                purchaseType = item.getPurchase_key();
                 Log.d(TAG, "purchaseType= " + purchaseType);
             }
 
@@ -313,8 +413,8 @@ public class ActivityAddProperty extends BaseActivity {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
 
-                SPModel item = (SPModel) parent.getItemAtPosition(position);
-                bedroomType = item.getId();
+                Bedroom item = (Bedroom) parent.getItemAtPosition(position);
+                bedroomType = item.getBedroom_key();
                 Log.d(TAG, "bedroomType= " + bedroomType);
             }
 
@@ -327,8 +427,8 @@ public class ActivityAddProperty extends BaseActivity {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
 
-                SPModel item = (SPModel) parent.getItemAtPosition(position);
-                bathroomType = item.getId();
+                Bathroom item = (Bathroom) parent.getItemAtPosition(position);
+                bathroomType = item.getBathroom_key();
                 Log.d(TAG, "bathroomType= " + bathroomType);
             }
 
@@ -417,8 +517,6 @@ public class ActivityAddProperty extends BaseActivity {
 
             }
         });
-
-
     }
 
     @Override
@@ -455,51 +553,22 @@ public class ActivityAddProperty extends BaseActivity {
             getStyleTask.cancel(true);
         }
 
+        if (getBathroomTask != null && getBathroomTask.getStatus() == AsyncTask.Status.RUNNING) {
+            getBathroomTask.cancel(true);
+        }
+
+        if (getBedroomTask != null && getBedroomTask.getStatus() == AsyncTask.Status.RUNNING) {
+            getBedroomTask.cancel(true);
+        }
+
+        if (getPurchaseTypeTask != null && getPurchaseTypeTask.getStatus() == AsyncTask.Status.RUNNING) {
+            getPurchaseTypeTask.cancel(true);
+        }
     }
 
     @Override
     public void initActivityPermissionResult(int requestCode, String[] permissions, int[] grantResults) {
 
-    }
-
-    /************************
-     * setDataPropertyEdit function  *
-     ************************/
-    private void setDataPropertyEdit() {
-        if (addPropertyEditData != null) {
-            Log.e("addPropertyEditData", addPropertyEditData.toString() + "");
-
-            etFname.setText(addPropertyEditData.getFirst_name());
-            etLname.setText(addPropertyEditData.getLast_name());
-            etEmail.setText(addPropertyEditData.getEmail());
-            etPhone.setText(addPropertyEditData.getContact());
-            etCreditScore.setText(addPropertyEditData.getCredit_score());
-            etZipcode.setText(addPropertyEditData.getZipcode());
-            etCity.setText(addPropertyEditData.getCity());
-            Log.e("getPurchase_type", addPropertyEditData.getPurchase_type() + "");
-            Log.e("getProperty_type", addPropertyEditData.getProperty_type() + "");
-            Log.e("getState", addPropertyEditData.getState() + "");
-//            seekBarPrice.setMin(10000);
-//            seekBarPrice.setMax(10000000);
-            if (AppUtil.isNullOrEmpty(addPropertyEditData.getPrice_min())) {
-                seekBarPrice.setProgress(10000);
-                txtPriceValue.setText("$10000 - $10000000");
-
-            } else {
-                seekBarPrice.setProgress(Integer.parseInt(addPropertyEditData.getPrice_min()));
-                txtPriceValue.setText("$" + addPropertyEditData.getPrice_min() + " - " + "$10000000");
-            }
-
-            spPurchaseType.setSelection(purchaseTypeAdapter.getItemPosition(addPropertyEditData.getPurchase_type()));
-            spPreapproved.setSelection(preApprovedAdapter.getItemPosition(addPropertyEditData.getPrc_approved()));
-            spBuyBathroom.setSelection(bathroomAdapter.getItemPosition(addPropertyEditData.getBathroom()));
-            spBuyBedrooms.setSelection(bedroomAdapter.getItemPosition(addPropertyEditData.getBedroom()));
-            spBuyBasement.setSelection(basementAdapter.getItemPosition(addPropertyEditData.getBasement()));
-            spBuyGarage.setSelection(garageAdapter.getItemPosition(addPropertyEditData.getGarage()));
-//            spBuyStyle.setSelection(styleAdapter.getItemPosition(addPropertyEditData.getStyle()));
-//            spBuyExterior.setSelection(exteriorAdapter.getItemPosition(addPropertyEditData.getExterior()));
-
-        }
     }
 
     /************************
@@ -527,12 +596,12 @@ public class ActivityAddProperty extends BaseActivity {
             Toast.makeText(getActivity(), getString(R.string.toast_please_input_your_email), Toast.LENGTH_SHORT).show();
             return;
         }
-        if (!ValidationManager.isValidEmail(email)) {
-            Toast.makeText(getActivity(), getString(R.string.toast_please_input_valid_email), Toast.LENGTH_SHORT).show();
-            return;
-        }
-        if (!AppUtil.isNullOrEmpty(phoneNumber)) {
-            Toast.makeText(getActivity(), getString(R.string.toast_please_input_valid_mobile_no), Toast.LENGTH_SHORT).show();
+//        if (!ValidationManager.isValidEmail(email)) {
+//            Toast.makeText(getActivity(), getString(R.string.toast_please_input_valid_email), Toast.LENGTH_SHORT).show();
+//            return;
+//        }
+        if (AppUtil.isNullOrEmpty(phoneNumber)) {
+            Toast.makeText(getActivity(), getString(R.string.toast_please_input_mobile_no), Toast.LENGTH_SHORT).show();
             return;
         }
         if (AppUtil.isNullOrEmpty(city)) {
@@ -566,42 +635,6 @@ public class ActivityAddProperty extends BaseActivity {
         Log.e("propertyEnum", propertyEnum + "");
         getAddPropertyTask = new GetAddPropertyTask(getActivity(), apiInterface);
         getAddPropertyTask.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
-    }
-
-
-    /************************
-     * setData in spinner  *
-     ************************/
-    private void setData() {
-        purchaseTypeAdapter = new CommonSpinnerAdapter(ActivityAddProperty.this, CommonSpinnerAdapter.ADAPTER_TYPE.PURCHASE_TYPE);
-        spPurchaseType.setAdapter(purchaseTypeAdapter);
-        purchaseTypeAdapter.setData(DataUtil.getAllPurchaseTypes());
-        spPurchaseType.setSelection(0);
-
-        preApprovedAdapter = new CommonSpinnerAdapter(ActivityAddProperty.this, CommonSpinnerAdapter.ADAPTER_TYPE.PRE_APPROVED);
-        spPreapproved.setAdapter(preApprovedAdapter);
-        preApprovedAdapter.setData(DataUtil.getAllPreApproved());
-        spPreapproved.setSelection(0);
-
-        bedroomAdapter = new CommonSpinnerAdapter(ActivityAddProperty.this, CommonSpinnerAdapter.ADAPTER_TYPE.BEDROOM);
-        spBuyBedrooms.setAdapter(bedroomAdapter);
-        bedroomAdapter.setData(DataUtil.getAllBedrooms());
-        spBuyBedrooms.setSelection(0);
-
-        bathroomAdapter = new CommonSpinnerAdapter(ActivityAddProperty.this, CommonSpinnerAdapter.ADAPTER_TYPE.BATHROOM);
-        spBuyBathroom.setAdapter(bathroomAdapter);
-        bathroomAdapter.setData(DataUtil.getAllBathrooms());
-        spBuyBathroom.setSelection(0);
-
-        basementAdapter = new CommonSpinnerAdapter(ActivityAddProperty.this, CommonSpinnerAdapter.ADAPTER_TYPE.BASEMANT);
-        spBuyBasement.setAdapter(basementAdapter);
-        basementAdapter.setData(DataUtil.getAllBasements());
-        spBuyBasement.setSelection(0);
-
-        garageAdapter = new CommonSpinnerAdapter(ActivityAddProperty.this, CommonSpinnerAdapter.ADAPTER_TYPE.GARAGE);
-        spBuyGarage.setAdapter(garageAdapter);
-        garageAdapter.setData(DataUtil.getAllGarages());
-        spBuyGarage.setSelection(0);
     }
 
     /************************
@@ -659,6 +692,9 @@ public class ActivityAddProperty extends BaseActivity {
 
                             countryTypeAdapter.setData(DataUtil.getAllCountryWithStates(mContext));
                             spCountry.setSelection((addPropertyEditData != null) ? countryTypeAdapter.getItemPosition(addPropertyEditData.getCountry()) : 0);
+
+                            stateTypeAdapter.setData(DataUtil.getAllCountryWithStates(getActivity()).get(0).getStates());
+                            spState.setSelection((addPropertyEditData != null) ? stateTypeAdapter.getItemPosition(addPropertyEditData.getState()) : 0);
                         }
                     } else {
                         Toast.makeText(getActivity(), getResources().getString(R.string.toast_no_info_found), Toast.LENGTH_SHORT).show();
@@ -861,6 +897,192 @@ public class ActivityAddProperty extends BaseActivity {
         }
     }
 
+    private class GetBathroomTask extends AsyncTask<String, Integer, Response> {
+
+        Context mContext;
+        APIInterface mApiInterface;
+
+        public GetBathroomTask(Context context, APIInterface apiInterface) {
+            mContext = context;
+            mApiInterface = apiInterface;
+        }
+
+        @Override
+        protected void onPreExecute() {
+            showProgressDialog();
+        }
+
+        @Override
+        protected Response doInBackground(String... params) {
+            try {
+                Call<APIResponse<List<Bathroom>>> call = apiInterface.getAllBathroomTypes();
+                Response response = call.execute();
+                if (response.isSuccessful()) {
+                    return response;
+                }
+            } catch (Exception ex) {
+                ex.printStackTrace();
+            }
+
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(Response result) {
+            try {
+                dismissProgressDialog();
+
+                if (result != null && result.isSuccessful()) {
+                    Log.d(TAG, "APIResponse(GetBathroomTask): onResponse-server = " + result.toString());
+                    APIResponse<List<Bathroom>> data = (APIResponse<List<Bathroom>>) result.body();
+                    Log.e("Bathroom", data.toString() + "");
+
+                    if (data != null && data.getStatus().equalsIgnoreCase("1")) {
+                        Log.d(TAG, "APIResponse(GetBathroomTask()): onResponse-object = " + data.toString());
+
+                        if (data.getData() != null && data.getData().size() > 0) {
+                            //Save data into the session
+                            AppPref.savePreferences(getActivity(), AllConstants.SESSION_BATHROOM_LIST, SessionBathroomList.getResponseString(new SessionBathroomList(data.getData())));
+
+                            bathroomAdapter.setData(DataUtil.getAllBathrooms(mContext));
+                            spBuyBathroom.setSelection((addPropertyEditData != null) ? bathroomAdapter.getItemPosition(addPropertyEditData.getBathroom()) : 0);
+                        }
+                    } else {
+                        Toast.makeText(getActivity(), getResources().getString(R.string.toast_no_info_found), Toast.LENGTH_SHORT).show();
+                    }
+                } else {
+                    Toast.makeText(getActivity(), getResources().getString(R.string.toast_could_not_retrieve_info), Toast.LENGTH_SHORT).show();
+                }
+            } catch (Exception exception) {
+                exception.printStackTrace();
+            }
+        }
+    }
+
+    private class GetBedroomTask extends AsyncTask<String, Integer, Response> {
+
+        Context mContext;
+        APIInterface mApiInterface;
+
+        public GetBedroomTask(Context context, APIInterface apiInterface) {
+            mContext = context;
+            mApiInterface = apiInterface;
+        }
+
+        @Override
+        protected void onPreExecute() {
+            showProgressDialog();
+        }
+
+        @Override
+        protected Response doInBackground(String... params) {
+            try {
+                Call<APIResponse<List<Bedroom>>> call = apiInterface.getAllBedroomTypes();
+                Response response = call.execute();
+                if (response.isSuccessful()) {
+                    return response;
+                }
+            } catch (Exception ex) {
+                ex.printStackTrace();
+            }
+
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(Response result) {
+            try {
+                dismissProgressDialog();
+
+                if (result != null && result.isSuccessful()) {
+                    Log.d(TAG, "APIResponse(GetBedroomTask): onResponse-server = " + result.toString());
+                    APIResponse<List<Bedroom>> data = (APIResponse<List<Bedroom>>) result.body();
+                    Log.e("Bedroom", data.toString() + "");
+
+                    if (data != null && data.getStatus().equalsIgnoreCase("1")) {
+                        Log.d(TAG, "APIResponse(GetBedroomTask()): onResponse-object = " + data.toString());
+
+                        if (data.getData() != null && data.getData().size() > 0) {
+                            //Save data into the session
+                            AppPref.savePreferences(getActivity(), AllConstants.SESSION_BEDROOM_LIST, SessionBedroomList.getResponseString(new SessionBedroomList(data.getData())));
+
+                            bedroomAdapter.setData(DataUtil.getAllBedrooms(mContext));
+                            spBuyBedrooms.setSelection((addPropertyEditData != null) ? bedroomAdapter.getItemPosition(addPropertyEditData.getBedroom()) : 0);
+                        }
+                    } else {
+                        Toast.makeText(getActivity(), getResources().getString(R.string.toast_no_info_found), Toast.LENGTH_SHORT).show();
+                    }
+                } else {
+                    Toast.makeText(getActivity(), getResources().getString(R.string.toast_could_not_retrieve_info), Toast.LENGTH_SHORT).show();
+                }
+            } catch (Exception exception) {
+                exception.printStackTrace();
+            }
+        }
+    }
+
+    private class GetPurchaseTypeTask extends AsyncTask<String, Integer, Response> {
+
+        Context mContext;
+        APIInterface mApiInterface;
+
+        public GetPurchaseTypeTask(Context context, APIInterface apiInterface) {
+            mContext = context;
+            mApiInterface = apiInterface;
+        }
+
+        @Override
+        protected void onPreExecute() {
+            showProgressDialog();
+        }
+
+        @Override
+        protected Response doInBackground(String... params) {
+            try {
+                Call<APIResponse<List<PurchaseType>>> call = apiInterface.getAllPurchaseTypes();
+                Response response = call.execute();
+                if (response.isSuccessful()) {
+                    return response;
+                }
+            } catch (Exception ex) {
+                ex.printStackTrace();
+            }
+
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(Response result) {
+            try {
+                dismissProgressDialog();
+
+                if (result != null && result.isSuccessful()) {
+                    Log.d(TAG, "APIResponse(GetPurchaseTypeTask): onResponse-server = " + result.toString());
+                    APIResponse<List<PurchaseType>> data = (APIResponse<List<PurchaseType>>) result.body();
+                    Log.e("Bedroom", data.toString() + "");
+
+                    if (data != null && data.getStatus().equalsIgnoreCase("1")) {
+                        Log.d(TAG, "APIResponse(GetPurchaseTypeTask()): onResponse-object = " + data.toString());
+
+                        if (data.getData() != null && data.getData().size() > 0) {
+                            //Save data into the session
+                            AppPref.savePreferences(getActivity(), AllConstants.SESSION_PURCHASE_TYPE_LIST, SessionPurchaseTypeList.getResponseString(new SessionPurchaseTypeList(data.getData())));
+
+                            purchaseTypeAdapter.setData(DataUtil.getAllPurchaseTypes(mContext));
+                            spPurchaseType.setSelection((addPropertyEditData != null) ? purchaseTypeAdapter.getItemPosition(addPropertyEditData.getPurchase_type()) : 0);
+                        }
+                    } else {
+                        Toast.makeText(getActivity(), getResources().getString(R.string.toast_no_info_found), Toast.LENGTH_SHORT).show();
+                    }
+                } else {
+                    Toast.makeText(getActivity(), getResources().getString(R.string.toast_could_not_retrieve_info), Toast.LENGTH_SHORT).show();
+                }
+            } catch (Exception exception) {
+                exception.printStackTrace();
+            }
+        }
+    }
+
     private class GetAddPropertyTask extends AsyncTask<String, Integer, Response> {
 
         Context mContext;
@@ -885,7 +1107,7 @@ public class ActivityAddProperty extends BaseActivity {
                     case PROPERTY_ADD:
                         ParamsAddProperty pAddProperty = new ParamsAddProperty("0", etFname.getText().toString(), etLname.getText().toString(), etEmail.getText().toString(), etPhone.getText().toString(),
                                 purchaseType, preApproveType, etCreditScore.getText().toString(), propertyType, buyerId, countryName, etCity.getText().toString(), stateName, etZipcode.getText().toString(), bedroomType, bathroomType, basementType,
-                                garageType, styleType, exteriorType, String.valueOf(priceRange), "1000");
+                                garageType, styleType, exteriorType, "10000", String.valueOf(priceRange));
                         call = apiInterface.doAddPropety(pAddProperty);
                         Log.d(TAG, "pAddProperty: onResponse-server = " + pAddProperty.toString());
                         Log.e("pAddProperty", pAddProperty.toString() + ">>");
@@ -894,14 +1116,13 @@ public class ActivityAddProperty extends BaseActivity {
                         if (addPropertyEditData != null) {
                             ParamsAddProperty pUpdateProperty = new ParamsAddProperty(addPropertyEditData.getId(), etFname.getText().toString(), etLname.getText().toString(), etEmail.getText().toString(), etPhone.getText().toString(),
                                     purchaseType, preApproveType, etCreditScore.getText().toString(), propertyType, buyerId, countryName, etCity.getText().toString(), stateName, etZipcode.getText().toString(), bedroomType, bathroomType, basementType,
-                                    garageType, styleType, exteriorType, String.valueOf(priceRange), "1000");
+                                    garageType, styleType, exteriorType, "10000", String.valueOf(priceRange));
                             call = apiInterface.doAddPropety(pUpdateProperty);
                             Log.d(TAG, "pAddProperty: onResponse-server = " + pUpdateProperty.toString());
                             Log.e("pAddProperty", pUpdateProperty.toString() + ">>");
                         }
                         break;
                 }
-
 
                 Response response = call.execute();
                 if (response.isSuccessful()) {

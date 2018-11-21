@@ -15,6 +15,29 @@
             android:layout_height="wrap_content"
             android:layout_gravity="left"
             android:layout_marginTop="@dimen/dp_5"
+            android:text="@string/country"
+            android:textSize="@dimen/sp_15" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dp_5"
+            android:background="@drawable/edit_text_background">
+
+            <Spinner
+                android:id="@+id/sp_select_country"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_gravity="center"
+                android:popupBackground="@drawable/spinner_bg"
+                android:spinnerMode="dropdown" />
+        </LinearLayout>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="left"
+            android:layout_marginTop="@dimen/dp_5"
             android:text="@string/state"
             android:textSize="@dimen/sp_15" />
 
@@ -32,6 +55,48 @@
                 android:popupBackground="@drawable/spinner_bg"
                 android:spinnerMode="dropdown" />
         </LinearLayout>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="left"
+            android:layout_marginTop="@dimen/dp_5"
+            android:text="@string/city"
+            android:textSize="@dimen/sp_15" />
+
+        <EditText
+            android:id="@+id/et_city"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dp_5"
+            android:background="@drawable/edit_text_background"
+            android:hint="@string/city"
+            android:imeOptions="actionNext"
+            android:padding="@dimen/dp_8"
+            android:singleLine="true"
+            android:textColor="@color/color_grey_600"
+            android:textColorHint="@color/color_grey_500" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="left"
+            android:layout_marginTop="@dimen/dp_5"
+            android:text="@string/Zipcode"
+            android:textSize="@dimen/sp_15" />
+
+        <EditText
+            android:id="@+id/et_zipcode"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dp_5"
+            android:background="@drawable/edit_text_background"
+            android:hint="@string/Zipcode"
+            android:imeOptions="actionNext"
+            android:padding="@dimen/dp_8"
+            android:singleLine="true"
+            android:textColor="@color/color_grey_600"
+            android:textColorHint="@color/color_grey_500" />
 
         <TextView
             android:layout_width="wrap_content"

@@ -9,6 +9,9 @@ public class AllConstants {
     //Session keys
     public static final String SESSION_CITY_WITH_AREA_LIST = "SESSION_CITY_WITH_AREA_LIST";
     public static final String SESSION_EXTERIOR_LIST = "SESSION_EXTERIOR_LIST";
+    public static final String SESSION_BATHROOM_LIST = "SESSION_BATHROOM_LIST";
+    public static final String SESSION_BEDROOM_LIST = "SESSION_BEDROOM_LIST";
+    public static final String SESSION_PURCHASE_TYPE_LIST = "SESSION_PURCHASE_TYPE_LIST";
     public static final String SESSION_STYLE_LIST = "SESSION_STYLE_LIST";
     public static final String SESSION_PROPERTY_TYPE_LIST = "SESSION_PROPERTY_TYPE_LIST";
     public static final String SESSION_USER_BUYER = "SESSION_USER_BUYER";

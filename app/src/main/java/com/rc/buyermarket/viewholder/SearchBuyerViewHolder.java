@@ -13,7 +13,7 @@ import com.rc.buyermarket.util.DataUtil;
  * @author Md. Rashadul Alam
  * Email: rashed.droid@gmail.com
  */
-public class SearchPropertyViewHolder extends BaseViewHolder<SellerSearchBuyer> {
+public class SearchBuyerViewHolder extends BaseViewHolder<SellerSearchBuyer> {
 
     TextView tvName;
     TextView tvAddress;
@@ -31,8 +31,8 @@ public class SearchPropertyViewHolder extends BaseViewHolder<SellerSearchBuyer> 
     LinearLayout llPropertyDelete;
     LinearLayout llPropertyEdit;
 
-    public SearchPropertyViewHolder(ViewGroup parent) {
-        super(parent, R.layout.row_search_property_list_view);
+    public SearchBuyerViewHolder(ViewGroup parent) {
+        super(parent, R.layout.row_list_search_buyer);
         tvName = (TextView) $(R.id.row_txt_property_name);
         tvAddress = (TextView) $(R.id.row_txt_property_address);
         tvAmount = (TextView) $(R.id.row_txt_property_amount);
@@ -57,12 +57,12 @@ public class SearchPropertyViewHolder extends BaseViewHolder<SellerSearchBuyer> 
         tvAddress.setText(data.getZipcode() + " " + data.getCity() + ", " + data.getState() + ", " + data.getCountry());
         tvPreApproved.setText((DataUtil.getPreApproved(data.getPrc_approved()) != null) ? DataUtil.getPreApproved(data.getPrc_approved()).getSp_title() : "");
         tvPropertyType.setText((DataUtil.getPropertyType(getContext(), data.getProperty_type()) != null) ? DataUtil.getPropertyType(getContext(), data.getProperty_type()).getProperty_value() : "");
-        tvPurchageType.setText((DataUtil.getPurchaseType(data.getPurchase_type()) != null) ? DataUtil.getPurchaseType(data.getPurchase_type()).getSp_title() : "");
+        tvPurchageType.setText((DataUtil.getPurchaseType(getContext(), data.getPurchase_type()) != null) ? DataUtil.getPurchaseType(getContext(), data.getPurchase_type()).getPurchase_value() : "");
         tvExterior.setText((DataUtil.getExterior(getContext(), data.getExterior()) != null) ? DataUtil.getExterior(getContext(), data.getExterior()).getExterior_value() : "");
         tvBasement.setText((DataUtil.getBasement(data.getBasement()) != null) ? DataUtil.getBasement(data.getBasement()).getSp_title() : "");
         tvCreditScores.setText(data.getCredit_score());
-        tvBedroom.setText((DataUtil.getBedroom(data.getBedroom()) != null) ? DataUtil.getBedroom(data.getBedroom()).getSp_title() : "");
-        tvBathroom.setText((DataUtil.getBathroom(data.getBathroom()) != null) ? DataUtil.getBathroom(data.getBathroom()).getSp_title() : "");
+        tvBedroom.setText((DataUtil.getBedroom(getContext(), data.getBedroom()) != null) ? DataUtil.getBedroom(getContext(), data.getBedroom()).getBedroom_value() : "");
+        tvBathroom.setText((DataUtil.getBathroom(getContext(), data.getBathroom()) != null) ? DataUtil.getBathroom(getContext(), data.getBathroom()).getBathroom_value() : "");
         tvGarage.setText((DataUtil.getGarage(data.getGarage()) != null) ? DataUtil.getGarage(data.getGarage()).getSp_title() : "");
         tvStyle.setText((DataUtil.getStyle(getContext(), data.getStyle()) != null) ? DataUtil.getStyle(getContext(), data.getStyle()).getStyle_vaue() : "");
     }

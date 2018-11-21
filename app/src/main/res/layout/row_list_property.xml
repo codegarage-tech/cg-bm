@@ -23,8 +23,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@color/colorWhite"
-            android:orientation="horizontal"
-            android:weightSum="1">
+            android:orientation="horizontal">
 
             <LinearLayout
                 android:layout_width="0dip"
@@ -56,28 +55,25 @@
                 android:id="@+id/row_txt_property_amount"
                 android:layout_width="0dip"
                 android:layout_height="match_parent"
-                android:layout_marginBottom="@dimen/dp_5"
-                android:layout_marginTop="@dimen/dp_5"
                 android:layout_weight=".5"
                 android:gravity="right"
-                android:text="$461 - $1000"
+                android:text="$10000 - $10000000"
                 android:textColor="@color/colorPrimary"
-                android:textSize="25dip"
+                android:textSize="20dip"
                 android:textStyle="bold" />
         </LinearLayout>
-
 
         <View
             android:layout_width="match_parent"
             android:layout_height="1dp"
-            android:background="@color/blue_grey_100"
-            android:layout_marginTop="@dimen/dp_7"/>
+            android:layout_marginTop="@dimen/dp_7"
+            android:background="@color/blue_grey_100" />
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="@dimen/dp_5"
             android:layout_marginTop="@dimen/dp_5"
+            android:layout_marginBottom="@dimen/dp_5"
             android:layout_weight="4.2"
             android:orientation="horizontal">
 
@@ -103,8 +99,7 @@
                 android:layout_weight="2"
                 android:text=""
                 android:textColor="@color/color_grey_600"
-                android:textSize="@dimen/sp_15"
-               />
+                android:textSize="@dimen/sp_15" />
 
         </LinearLayout>
 
@@ -112,8 +107,8 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="@dimen/dp_5"
             android:layout_marginTop="@dimen/dp_5"
+            android:layout_marginBottom="@dimen/dp_5"
             android:layout_weight="4.2"
             android:orientation="horizontal">
 
@@ -147,8 +142,8 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="@dimen/dp_5"
             android:layout_marginTop="@dimen/dp_5"
+            android:layout_marginBottom="@dimen/dp_5"
             android:layout_weight="4.2"
             android:orientation="horizontal">
 
@@ -182,8 +177,8 @@
             android:id="@+id/lin_lay_khotiyan_mamla_no"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="@dimen/dp_5"
             android:layout_marginTop="@dimen/dp_5"
+            android:layout_marginBottom="@dimen/dp_5"
             android:layout_weight="4.2"
             android:orientation="horizontal">
 
@@ -217,8 +212,8 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="@dimen/dp_5"
             android:layout_marginTop="@dimen/dp_5"
+            android:layout_marginBottom="@dimen/dp_5"
             android:layout_weight="4.2"
             android:orientation="horizontal">
 
@@ -251,8 +246,8 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="@dimen/dp_5"
             android:layout_marginTop="@dimen/dp_5"
+            android:layout_marginBottom="@dimen/dp_5"
             android:layout_weight="4.2"
             android:orientation="horizontal">
 
@@ -285,8 +280,8 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="@dimen/dp_5"
             android:layout_marginTop="@dimen/dp_5"
+            android:layout_marginBottom="@dimen/dp_5"
             android:layout_weight="4.2"
             android:orientation="horizontal">
 
@@ -320,8 +315,8 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="@dimen/dp_5"
             android:layout_marginTop="@dimen/dp_5"
+            android:layout_marginBottom="@dimen/dp_5"
             android:layout_weight="4.2"
             android:orientation="horizontal">
 
@@ -354,8 +349,8 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="@dimen/dp_5"
             android:layout_marginTop="@dimen/dp_5"
+            android:layout_marginBottom="@dimen/dp_5"
             android:layout_weight="4.2"
             android:orientation="horizontal">
 
@@ -388,8 +383,8 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="@dimen/dp_5"
             android:layout_marginTop="@dimen/dp_5"
+            android:layout_marginBottom="@dimen/dp_5"
             android:layout_weight="4.2"
             android:orientation="horizontal">
 
@@ -422,20 +417,20 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginRight="@dimen/dp_5"
             android:layout_weight="1"
             android:gravity="right"
             android:orientation="horizontal"
-            android:padding="@dimen/dp_5"
-            android:layout_marginRight="@dimen/dp_5">
+            android:padding="@dimen/dp_5">
 
             <LinearLayout
                 android:id="@+id/lin_property_edit"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginRight="@dimen/dp_5"
                 android:background="@drawable/row_edit_button"
                 android:gravity="center_vertical"
                 android:orientation="horizontal"
-                android:layout_marginRight="@dimen/dp_5"
                 android:padding="@dimen/dp_5">
 
 

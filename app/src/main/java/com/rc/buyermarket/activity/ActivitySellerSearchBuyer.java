@@ -23,13 +23,20 @@ import com.rc.buyermarket.model.Exterior;
 import com.rc.buyermarket.model.ParamsSellerSearchBuyer;
 import com.rc.buyermarket.model.PropertyType;
 import com.rc.buyermarket.model.SPModel;
+import com.rc.buyermarket.model.SessionCountryWithAreaList;
+import com.rc.buyermarket.model.SessionExteriorList;
+import com.rc.buyermarket.model.SessionPropertyTypeList;
+import com.rc.buyermarket.model.SessionStyleList;
 import com.rc.buyermarket.model.States;
 import com.rc.buyermarket.model.Styles;
 import com.rc.buyermarket.network.NetworkManager;
 import com.rc.buyermarket.retrofit.APIClient;
 import com.rc.buyermarket.retrofit.APIInterface;
 import com.rc.buyermarket.retrofit.APIResponse;
+import com.rc.buyermarket.util.AllConstants;
+import com.rc.buyermarket.util.AppPref;
 import com.rc.buyermarket.util.AppUtil;
+import com.rc.buyermarket.util.DataUtil;
 import com.rc.buyermarket.view.CanaroTextView;
 
 import java.util.ArrayList;
@@ -55,17 +62,17 @@ public class ActivitySellerSearchBuyer extends BaseActivity {
     List<SPModel> bathroomTypeList;
     SeekBar seekBarPrice;
 
-    List<PropertyType> propertyTypesList;
-    List<Styles> stylesList;
-    List<Exterior> exteriorList;
+//    List<PropertyType> propertyTypesList;
+//    List<Styles> stylesList;
+//    List<Exterior> exteriorList;
 
     // initialize Spinner
-    private Spinner spPurchaseType, spBuyPropertyType, spCountry, spState,
+    private Spinner spPurchaseType, spBuyPropertyType, spState, spCountry,
             spBuyBedrooms, spBuyBathroom, spBuyStyle, spBuyExterior;
     private Button btnUserLogin;
     private UserType userType;
     // initialize SpinnerAdapter
-    private CommonSpinnerAdapter purchaseAdapter, bedroomAdapter, bathroomAdapter, stateTypeAdapter, propertyTypeAdapter, styleAdapter, exteriorAdapter;
+    private CommonSpinnerAdapter purchaseAdapter, bedroomAdapter, bathroomAdapter, countryTypeAdapter, stateTypeAdapter, propertyTypeAdapter, styleAdapter, exteriorAdapter;
     private APIInterface apiInterface;
 
     //Background task
@@ -82,7 +89,7 @@ public class ActivitySellerSearchBuyer extends BaseActivity {
 
     @Override
     public int initActivityLayout() {
-        return R.layout.activity_seller_search_property;
+        return R.layout.activity_seller_search_buyer;
     }
 
     @Override
@@ -116,7 +123,7 @@ public class ActivitySellerSearchBuyer extends BaseActivity {
         spBuyBathroom = (Spinner) findViewById(R.id.sp_select_bathrooms);
         spBuyStyle = (Spinner) findViewById(R.id.sp_select_style);
         spBuyExterior = (Spinner) findViewById(R.id.sp_select_exterior);
-
+        spCountry = (Spinner) findViewById(R.id.sp_select_country);
     }
 
     @Override
@@ -133,12 +140,28 @@ public class ActivitySellerSearchBuyer extends BaseActivity {
         spBuyStyle.setAdapter(styleAdapter);
         exteriorAdapter = new CommonSpinnerAdapter(getActivity(), CommonSpinnerAdapter.ADAPTER_TYPE.EXTERIOR);
         spBuyExterior.setAdapter(exteriorAdapter);
+        countryTypeAdapter = new CommonSpinnerAdapter(getActivity(), CommonSpinnerAdapter.ADAPTER_TYPE.COUNTRY);
+        spCountry.setAdapter(countryTypeAdapter);
+        spCountry.setEnabled(false);
         stateTypeAdapter = new CommonSpinnerAdapter(getActivity(), CommonSpinnerAdapter.ADAPTER_TYPE.STATE);
         spState.setAdapter(stateTypeAdapter);
 
         if (!NetworkManager.isInternetAvailable(getActivity())) {
-            Toast.makeText(getActivity(), getResources().getString(R.string.toast_network_error), Toast.LENGTH_SHORT).show();
-            return;
+//            Toast.makeText(getActivity(), getResources().getString(R.string.toast_network_error), Toast.LENGTH_SHORT).show();
+            countryTypeAdapter.setData(DataUtil.getAllCountryWithStates(getActivity()));
+            spCountry.setSelection(0);
+
+            stateTypeAdapter.setData(DataUtil.getAllCountryWithStates(getActivity()).get(0).getStates());
+            spState.setSelection(0);
+
+            propertyTypeAdapter.setData(DataUtil.getAllPropertyTypes(getActivity()));
+            spBuyPropertyType.setSelection(0);
+
+            styleAdapter.setData(DataUtil.getAllStyles(getActivity()));
+            spBuyStyle.setSelection(0);
+
+            exteriorAdapter.setData(DataUtil.getAllExteriors(getActivity()));
+            spBuyExterior.setSelection(0);
         } else {
             getPropertyTypeTask = new GetPropertyTypeTask(getActivity(), apiInterface);
             getPropertyTypeTask.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
@@ -408,14 +431,14 @@ public class ActivitySellerSearchBuyer extends BaseActivity {
         bedroomTypeList.clear();
         bathroomTypeList = new ArrayList<>();
         bathroomTypeList.clear();
-        exteriorList = new ArrayList<>();
-        exteriorList.clear();
-        stylesList = new ArrayList<>();
-        stylesList.clear();
-        propertyTypesList = new ArrayList<>();
-        propertyTypesList.clear();
+//        exteriorList = new ArrayList<>();
+//        exteriorList.clear();
+//        stylesList = new ArrayList<>();
+//        stylesList.clear();
+//        propertyTypesList = new ArrayList<>();
+//        propertyTypesList.clear();
         //purchase type
-        purchaseTypeList.add(new SPModel("", "Select purchase type"));
+//        purchaseTypeList.add(new SPModel("", "Select purchase type"));
         purchaseTypeList.add(new SPModel("", "Cash"));
         purchaseTypeList.add(new SPModel("", "Mortgage"));
         purchaseTypeList.add(new SPModel("", "Land Contract"));
@@ -482,8 +505,14 @@ public class ActivitySellerSearchBuyer extends BaseActivity {
                     Log.e("Country", data.toString() + "");
 
                     if (data != null && data.getStatus().equalsIgnoreCase("1")) {
+                        //Save data into the session
+                        AppPref.savePreferences(getActivity(), AllConstants.SESSION_CITY_WITH_AREA_LIST, SessionCountryWithAreaList.getResponseString(new SessionCountryWithAreaList(data.getData())));
+
                         Log.d(TAG, "APIResponse(GetCountryWithCityTask()): onResponse-object = " + data.toString());
-                        stateTypeAdapter.setData(data.getData().get(0).getStates());
+                        countryTypeAdapter.setData(DataUtil.getAllCountryWithStates(mContext));
+                        spCountry.setSelection(0);
+
+                        stateTypeAdapter.setData(DataUtil.getAllCountryWithStates(mContext).get(0).getStates());
                         spState.setSelection(0);
                     } else {
                         Toast.makeText(getActivity(), getResources().getString(R.string.toast_no_info_found), Toast.LENGTH_SHORT).show();
@@ -540,8 +569,12 @@ public class ActivitySellerSearchBuyer extends BaseActivity {
 
                     if (data != null && data.getStatus().equalsIgnoreCase("1")) {
                         Log.d(TAG, "APIResponse(GetStyleTask()): onResponse-object = " + data.toString());
-                        propertyTypesList = getPropertyList(data.getData());
-                        propertyTypeAdapter.setData(propertyTypesList);
+
+                        //Save data into the session
+                        AppPref.savePreferences(getActivity(), AllConstants.SESSION_PROPERTY_TYPE_LIST, SessionPropertyTypeList.getResponseString(new SessionPropertyTypeList(data.getData())));
+
+//                        propertyTypesList = getPropertyList(data.getData());
+                        propertyTypeAdapter.setData(DataUtil.getAllPropertyTypes(mContext));
                         spBuyPropertyType.setSelection(0);
                     } else {
                         Toast.makeText(getActivity(), getResources().getString(R.string.toast_no_info_found), Toast.LENGTH_SHORT).show();
@@ -597,9 +630,10 @@ public class ActivitySellerSearchBuyer extends BaseActivity {
                     Log.e("Exterior", data.toString() + "");
 
                     if (data != null && data.getStatus().equalsIgnoreCase("1")) {
-                        Log.d(TAG, "APIResponse(GetStyleTask()): onResponse-object = " + data.toString());
-                        stylesList = getStylesList(data.getData());
-                        styleAdapter.setData(stylesList);
+                        //Save data into the session
+                        AppPref.savePreferences(getActivity(), AllConstants.SESSION_STYLE_LIST, SessionStyleList.getResponseString(new SessionStyleList(data.getData())));
+
+                        styleAdapter.setData(DataUtil.getAllStyles(mContext));
                         spBuyStyle.setSelection(0);
                     } else {
                         Toast.makeText(getActivity(), getResources().getString(R.string.toast_no_info_found), Toast.LENGTH_SHORT).show();
@@ -655,12 +689,10 @@ public class ActivitySellerSearchBuyer extends BaseActivity {
 
                     if (data != null && data.getStatus().equalsIgnoreCase("1")) {
                         Log.d(TAG, "APIResponse(GetExteriorTask()): onResponse-object = " + data.toString());
+                        //Save data into the session
+                        AppPref.savePreferences(getActivity(), AllConstants.SESSION_EXTERIOR_LIST, SessionExteriorList.getResponseString(new SessionExteriorList(data.getData())));
 
-                        exteriorList = getExteriorList(data.getData());
-
-                        Log.e("exteriorList", exteriorList.size() + "");
-
-                        exteriorAdapter.setData(exteriorList);
+                        exteriorAdapter.setData(DataUtil.getAllExteriors(mContext));
                         spBuyExterior.setSelection(0);
                     } else {
                         Toast.makeText(getActivity(), getResources().getString(R.string.toast_no_info_found), Toast.LENGTH_SHORT).show();
@@ -674,39 +706,37 @@ public class ActivitySellerSearchBuyer extends BaseActivity {
         }
     }
 
-    private List<Exterior> getExteriorList(List<Exterior> data) {
-        List<Exterior> exList = new ArrayList<Exterior>();
-        Exterior exterior = new Exterior("999999", "Select Exterior", "Select exterior");
-        exList.add(exterior);
-        for (int i = 0; i < data.size(); i++) {
-            exterior = new Exterior(data.get(i).getId(), data.get(i).getExterior_key(), data.get(i).getExterior_value());
-            exList.add(exterior);
-        }
-        return exList;
-    }
-
-    private List<Styles> getStylesList(List<Styles> data) {
-        List<Styles> stylesList = new ArrayList<Styles>();
-        Styles exterior = new Styles("9999999", "Select Style", "Select style");
-        stylesList.add(exterior);
-        for (int i = 0; i < data.size(); i++) {
-            exterior = new Styles(data.get(i).getId(), data.get(i).getStyle_key(), data.get(i).getStyle_vaue());
-            stylesList.add(exterior);
-        }
-        return stylesList;
-    }
-
-
-    private List<PropertyType> getPropertyList(List<PropertyType> data) {
-        List<PropertyType> propertyList = new ArrayList<PropertyType>();
-        PropertyType propertyType = new PropertyType("99999999", "Select Property Type", "Select property type");
-        propertyList.add(propertyType);
-        for (int i = 0; i < data.size(); i++) {
-            propertyType = new PropertyType(data.get(i).getId(), data.get(i).getProperty_key(), data.get(i).getProperty_value());
-            propertyList.add(propertyType);
-        }
-        return propertyList;
-    }
-
-
+//    private List<Exterior> getExteriorList(List<Exterior> data) {
+//        List<Exterior> exList = new ArrayList<Exterior>();
+//        Exterior exterior = new Exterior("999999", "Select Exterior", "Select exterior");
+//        exList.add(exterior);
+//        for (int i = 0; i < data.size(); i++) {
+//            exterior = new Exterior(data.get(i).getId(), data.get(i).getExterior_key(), data.get(i).getExterior_value());
+//            exList.add(exterior);
+//        }
+//        return exList;
+//    }
+//
+//    private List<Styles> getStylesList(List<Styles> data) {
+//        List<Styles> stylesList = new ArrayList<Styles>();
+//        Styles exterior = new Styles("9999999", "Select Style", "Select style");
+//        stylesList.add(exterior);
+//        for (int i = 0; i < data.size(); i++) {
+//            exterior = new Styles(data.get(i).getId(), data.get(i).getStyle_key(), data.get(i).getStyle_vaue());
+//            stylesList.add(exterior);
+//        }
+//        return stylesList;
+//    }
+//
+//
+//    private List<PropertyType> getPropertyList(List<PropertyType> data) {
+//        List<PropertyType> propertyList = new ArrayList<PropertyType>();
+//        PropertyType propertyType = new PropertyType("99999999", "Select Property Type", "Select property type");
+//        propertyList.add(propertyType);
+//        for (int i = 0; i < data.size(); i++) {
+//            propertyType = new PropertyType(data.get(i).getId(), data.get(i).getProperty_key(), data.get(i).getProperty_value());
+//            propertyList.add(propertyType);
+//        }
+//        return propertyList;
+//    }
 }

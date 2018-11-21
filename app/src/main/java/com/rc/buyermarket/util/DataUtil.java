@@ -3,13 +3,19 @@ package com.rc.buyermarket.util;
 import android.content.Context;
 import android.util.Log;
 
+import com.rc.buyermarket.model.Bathroom;
+import com.rc.buyermarket.model.Bedroom;
 import com.rc.buyermarket.model.Country;
 import com.rc.buyermarket.model.Exterior;
 import com.rc.buyermarket.model.PropertyType;
+import com.rc.buyermarket.model.PurchaseType;
 import com.rc.buyermarket.model.SPModel;
+import com.rc.buyermarket.model.SessionBathroomList;
+import com.rc.buyermarket.model.SessionBedroomList;
 import com.rc.buyermarket.model.SessionCountryWithAreaList;
 import com.rc.buyermarket.model.SessionExteriorList;
 import com.rc.buyermarket.model.SessionPropertyTypeList;
+import com.rc.buyermarket.model.SessionPurchaseTypeList;
 import com.rc.buyermarket.model.SessionStyleList;
 import com.rc.buyermarket.model.Styles;
 
@@ -26,29 +32,32 @@ public class DataUtil {
     private static final String DEFAULT_EXTERIOR_LIST = "{\"data\":[{\"id\":\"1\",\"exterior_key\":\"dont_matter\",\"exterior_value\":\"Dont Matter\"},{\"id\":\"2\",\"exterior_key\":\"brick\",\"exterior_value\":\"Brick\"},{\"id\":\"3\",\"exterior_key\":\"frame\",\"exterior_value\":\"Frame\"}]}";
     private static final String DEFAULT_STYLE_LIST = "{\"data\":[{\"id\":\"1\",\"style_key\":\"dont_matter\",\"style_vaue\":\"Dont Matter\"},{\"id\":\"2\",\"style_key\":\"bungalow\",\"style_vaue\":\"Bungalow\"},{\"id\":\"3\",\"style_key\":\"colonial\",\"style_vaue\":\"Colonial\"},{\"id\":\"4\",\"style_key\":\"cape_cod\",\"style_vaue\":\"Cape Cod\"},{\"id\":\"5\",\"style_key\":\"ranch\",\"style_vaue\":\"Ranch\"},{\"id\":\"6\",\"style_key\":\"victorian\",\"style_vaue\":\"Victorian\"}]}";
     private static final String DEFAULT_PROPERTY_TYPE_LIST = "{\"data\":[{\"id\":\"1\",\"property_key\":\"residential\",\"property_value\":\"Residential\"},{\"id\":\"2\",\"property_key\":\"condominium\",\"property_value\":\"Condominium\"}]}";
+    private static final String DEFAULT_BATHROORM_LIST = "{\"data\":[{\"id\":\"1\",\"bathroom_key\":\"1\",\"bathroom_value\":\"1+\"},{\"id\":\"2\",\"bathroom_key\":\"2\",\"bathroom_value\":\"2+\"},{\"id\":\"3\",\"bathroom_key\":\"3\",\"bathroom_value\":\"3+\"},{\"id\":\"4\",\"bathroom_key\":\"4\",\"bathroom_value\":\"4+\"},{\"id\":\"5\",\"bathroom_key\":\"5\",\"bathroom_value\":\"5+\"},{\"id\":\"6\",\"bathroom_key\":\"6\",\"bathroom_value\":\"6+\"},{\"id\":\"9\",\"bathroom_key\":\"7\",\"bathroom_value\":\"7+\"},{\"id\":\"10\",\"bathroom_key\":\"8\",\"bathroom_value\":\"8+\"},{\"id\":\"11\",\"bathroom_key\":\"9\",\"bathroom_value\":\"9+\"},{\"id\":\"12\",\"bathroom_key\":\"10\",\"bathroom_value\":\"10+\"}]}";
+    private static final String DEFAULT_BEDROOM_LIST = "{\"data\":[{\"id\":\"1\",\"bedroom_key\":\"1\",\"bedroom_value\":\"1+\"},{\"id\":\"2\",\"bedroom_key\":\"2\",\"bedroom_value\":\"2+\"},{\"id\":\"3\",\"bedroom_key\":\"3\",\"bedroom_value\":\"3+\"},{\"id\":\"4\",\"bedroom_key\":\"4\",\"bedroom_value\":\"4+\"},{\"id\":\"5\",\"bedroom_key\":\"5\",\"bedroom_value\":\"5+\"},{\"id\":\"6\",\"bedroom_key\":\"6\",\"bedroom_value\":\"6+\"},{\"id\":\"9\",\"bedroom_key\":\"7\",\"bedroom_value\":\"7+\"},{\"id\":\"10\",\"bedroom_key\":\"8\",\"bedroom_value\":\"8+\"},{\"id\":\"11\",\"bedroom_key\":\"9\",\"bedroom_value\":\"9+\"},{\"id\":\"12\",\"bedroom_key\":\"10\",\"bedroom_value\":\"10+\"}]}";
+    private static final String DEFAULT_PURCHASE_TYPE_LIST = "{\"data\":[{\"id\":\"1\",\"purchase_key\":\"cash\",\"purchase_value\":\"Cash\"},{\"id\":\"2\",\"purchase_key\":\"mortage\",\"purchase_value\":\"Mortage\"},{\"id\":\"3\",\"purchase_key\":\"land_contract\",\"purchase_value\":\"Land Contract\"}]}";
 
-    /* Purchase type */
-    public static List<SPModel> getAllPurchaseTypes() {
-        List<SPModel> purchaseTypes = new ArrayList<>();
-
-        purchaseTypes.add(new SPModel("", "Cash"));
-        purchaseTypes.add(new SPModel("", "Mortgage"));
-        purchaseTypes.add(new SPModel("", "Land Contract"));
-
-        return purchaseTypes;
-    }
-
-    public static SPModel getPurchaseType(String purchaseTypeName) {
-        List<SPModel> data = getAllPurchaseTypes();
-        if (data != null && data.size() > 0) {
-            for (SPModel spModel : data) {
-                if (spModel.getSp_title().equalsIgnoreCase(purchaseTypeName)) {
-                    return spModel;
-                }
-            }
-        }
-        return null;
-    }
+//    /* Purchase type */
+//    public static List<SPModel> getAllPurchaseTypes() {
+//        List<SPModel> purchaseTypes = new ArrayList<>();
+//
+//        purchaseTypes.add(new SPModel("", "Cash"));
+//        purchaseTypes.add(new SPModel("", "Mortgage"));
+//        purchaseTypes.add(new SPModel("", "Land Contract"));
+//
+//        return purchaseTypes;
+//    }
+//
+//    public static SPModel getPurchaseType(String purchaseTypeName) {
+//        List<SPModel> data = getAllPurchaseTypes();
+//        if (data != null && data.size() > 0) {
+//            for (SPModel spModel : data) {
+//                if (spModel.getSp_title().equalsIgnoreCase(purchaseTypeName)) {
+//                    return spModel;
+//                }
+//            }
+//        }
+//        return null;
+//    }
 
     /* Pre approved */
     public static List<SPModel> getAllPreApproved() {
@@ -72,53 +81,53 @@ public class DataUtil {
         return null;
     }
 
-    /* Bedroom */
-    public static List<SPModel> getAllBedrooms() {
-        List<SPModel> bedroomList = new ArrayList<>();
-
-        bedroomList.add(new SPModel("1", "1+"));
-        bedroomList.add(new SPModel("2", "2+"));
-        bedroomList.add(new SPModel("3", "3+"));
-        bedroomList.add(new SPModel("4", "4+"));
-        bedroomList.add(new SPModel("5", "5+"));
-
-        return bedroomList;
-    }
-
-    public static SPModel getBedroom(String bedroomKey) {
-        List<SPModel> data = getAllBedrooms();
-        if (data != null && data.size() > 0) {
-            for (SPModel spModel : data) {
-                if (spModel.getId().equalsIgnoreCase(bedroomKey)) {
-                    return spModel;
-                }
-            }
-        }
-        return null;
-    }
+//    /* Bedroom */
+//    public static List<SPModel> getAllBedrooms() {
+//        List<SPModel> bedroomList = new ArrayList<>();
+//
+//        bedroomList.add(new SPModel("1", "1+"));
+//        bedroomList.add(new SPModel("2", "2+"));
+//        bedroomList.add(new SPModel("3", "3+"));
+//        bedroomList.add(new SPModel("4", "4+"));
+//        bedroomList.add(new SPModel("5", "5+"));
+//
+//        return bedroomList;
+//    }
+//
+//    public static SPModel getBedroom(String bedroomKey) {
+//        List<SPModel> data = getAllBedrooms();
+//        if (data != null && data.size() > 0) {
+//            for (SPModel spModel : data) {
+//                if (spModel.getId().equalsIgnoreCase(bedroomKey)) {
+//                    return spModel;
+//                }
+//            }
+//        }
+//        return null;
+//    }
 
     /* Bathroom */
-    public static List<SPModel> getAllBathrooms() {
-        List<SPModel> bathroomList = new ArrayList<>();
-
-        bathroomList.add(new SPModel("", "Don't Matter"));
-        bathroomList.add(new SPModel("1", "1+"));
-        bathroomList.add(new SPModel("2", "2+"));
-
-        return bathroomList;
-    }
-
-    public static SPModel getBathroom(String bathroomKey) {
-        List<SPModel> data = getAllBathrooms();
-        if (data != null && data.size() > 0) {
-            for (SPModel spModel : data) {
-                if (spModel.getId().equalsIgnoreCase(bathroomKey)) {
-                    return spModel;
-                }
-            }
-        }
-        return null;
-    }
+//    public static List<SPModel> getAllBathrooms() {
+//        List<SPModel> bathroomList = new ArrayList<>();
+//
+//        bathroomList.add(new SPModel("", "Don't Matter"));
+//        bathroomList.add(new SPModel("1", "1+"));
+//        bathroomList.add(new SPModel("2", "2+"));
+//
+//        return bathroomList;
+//    }
+//
+//    public static SPModel getBathroom(String bathroomKey) {
+//        List<SPModel> data = getAllBathrooms();
+//        if (data != null && data.size() > 0) {
+//            for (SPModel spModel : data) {
+//                if (spModel.getId().equalsIgnoreCase(bathroomKey)) {
+//                    return spModel;
+//                }
+//            }
+//        }
+//        return null;
+//    }
 
     /* Basement */
     public static List<SPModel> getAllBasements() {
@@ -252,6 +261,84 @@ public class DataUtil {
             for (Styles styles : data) {
                 if (styles.getStyle_key().equalsIgnoreCase(styleKey)) {
                     return styles;
+                }
+            }
+        }
+        return null;
+    }
+
+    /* Bathroom */
+    public static List<Bathroom> getAllBathrooms(Context context) {
+        String sessionData = AppPref.getPreferences(context, AllConstants.SESSION_BATHROOM_LIST);
+        List<Bathroom> offlineData = new ArrayList<>();
+
+        if (AppUtil.isNullOrEmpty(sessionData)) {
+            sessionData = DataUtil.DEFAULT_BATHROORM_LIST;
+            Log.d("SessionData: ", "getAllBathrooms(default): " + offlineData);
+        }
+        offlineData = SessionBathroomList.getResponseObject(sessionData, SessionBathroomList.class).getData();
+
+        return offlineData;
+    }
+
+    public static Bathroom getBathroom(Context context, String bathroomKey) {
+        List<Bathroom> data = getAllBathrooms(context);
+        if (data != null && data.size() > 0) {
+            for (Bathroom bathroom : data) {
+                if (bathroom.getBathroom_key().equalsIgnoreCase(bathroomKey)) {
+                    return bathroom;
+                }
+            }
+        }
+        return null;
+    }
+
+    /* Bedroom */
+    public static List<Bedroom> getAllBedrooms(Context context) {
+        String sessionData = AppPref.getPreferences(context, AllConstants.SESSION_BEDROOM_LIST);
+        List<Bedroom> offlineData = new ArrayList<>();
+
+        if (AppUtil.isNullOrEmpty(sessionData)) {
+            sessionData = DataUtil.DEFAULT_BEDROOM_LIST;
+            Log.d("SessionData: ", "getAllBedrooms(default): " + offlineData);
+        }
+        offlineData = SessionBedroomList.getResponseObject(sessionData, SessionBedroomList.class).getData();
+
+        return offlineData;
+    }
+
+    public static Bedroom getBedroom(Context context, String bedroomKey) {
+        List<Bedroom> data = getAllBedrooms(context);
+        if (data != null && data.size() > 0) {
+            for (Bedroom bedroom : data) {
+                if (bedroom.getBedroom_key().equalsIgnoreCase(bedroomKey)) {
+                    return bedroom;
+                }
+            }
+        }
+        return null;
+    }
+
+    /* Purchase type */
+    public static List<PurchaseType> getAllPurchaseTypes(Context context) {
+        String sessionData = AppPref.getPreferences(context, AllConstants.SESSION_PURCHASE_TYPE_LIST);
+        List<PurchaseType> offlineData = new ArrayList<>();
+
+        if (AppUtil.isNullOrEmpty(sessionData)) {
+            sessionData = DataUtil.DEFAULT_PURCHASE_TYPE_LIST;
+            Log.d("SessionData: ", "getAllPurchaseTypes(default): " + offlineData);
+        }
+        offlineData = SessionPurchaseTypeList.getResponseObject(sessionData, SessionPurchaseTypeList.class).getData();
+
+        return offlineData;
+    }
+
+    public static PurchaseType getPurchaseType(Context context, String purchaseTypeKey) {
+        List<PurchaseType> data = getAllPurchaseTypes(context);
+        if (data != null && data.size() > 0) {
+            for (PurchaseType purchaseType : data) {
+                if (purchaseType.getPurchase_key().equalsIgnoreCase(purchaseTypeKey)) {
+                    return purchaseType;
                 }
             }
         }

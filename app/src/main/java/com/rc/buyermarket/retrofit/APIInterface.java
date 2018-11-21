@@ -3,6 +3,8 @@ package com.rc.buyermarket.retrofit;
 
 
 import com.rc.buyermarket.model.AddProperty;
+import com.rc.buyermarket.model.Bathroom;
+import com.rc.buyermarket.model.Bedroom;
 import com.rc.buyermarket.model.BuyerLogin;
 import com.rc.buyermarket.model.Country;
 import com.rc.buyermarket.model.Exterior;
@@ -15,6 +17,7 @@ import com.rc.buyermarket.model.ParamsSellerSignUp;
 import com.rc.buyermarket.model.ParamsUpdateSellerProfile;
 import com.rc.buyermarket.model.PropertyDelete;
 import com.rc.buyermarket.model.PropertyType;
+import com.rc.buyermarket.model.PurchaseType;
 import com.rc.buyermarket.model.SellerLogin;
 import com.rc.buyermarket.model.SellerSearchBuyer;
 import com.rc.buyermarket.model.Styles;
@@ -69,8 +72,15 @@ public interface APIInterface {
     @GET("properties/lists/{id}")
     Call<APIResponse<List<AddProperty>>> doGetListProperty(@Path("id") String buyer_id);
 
-
     @GET("properties/deleteProperty/{id}")
     Call<APIResponse<PropertyDelete>> doGetDeleteListProperty(@Path("id") String property_id);
 
+    @GET("lists/bathroom")
+    Call<APIResponse<List<Bathroom>>> getAllBathroomTypes();
+
+    @GET("lists/bedroom")
+    Call<APIResponse<List<Bedroom>>> getAllBedroomTypes();
+
+    @GET("lists/purchase_type")
+    Call<APIResponse<List<PurchaseType>>> getAllPurchaseTypes();
 }

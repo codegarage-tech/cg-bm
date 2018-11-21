@@ -5,10 +5,8 @@ import android.view.ViewGroup;
 
 import com.jude.easyrecyclerview.adapter.BaseViewHolder;
 import com.jude.easyrecyclerview.adapter.RecyclerArrayAdapter;
-import com.rc.buyermarket.model.AddProperty;
 import com.rc.buyermarket.model.SellerSearchBuyer;
-import com.rc.buyermarket.viewholder.PropertyViewHolder;
-import com.rc.buyermarket.viewholder.SearchPropertyViewHolder;
+import com.rc.buyermarket.viewholder.SearchBuyerViewHolder;
 
 import java.security.InvalidParameterException;
 
@@ -33,7 +31,7 @@ public class SearchPropertyListAdapter extends RecyclerArrayAdapter<SellerSearch
     public BaseViewHolder OnCreateViewHolder(ViewGroup parent, int viewType) {
         switch (viewType) {
             case VIEW_TYPE_REGULAR:
-                return new SearchPropertyViewHolder(parent);
+                return new SearchBuyerViewHolder(parent);
             default:
                 throw new InvalidParameterException();
         }

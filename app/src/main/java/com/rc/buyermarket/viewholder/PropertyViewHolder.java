@@ -23,7 +23,6 @@ import com.rc.buyermarket.network.NetworkManager;
 import com.rc.buyermarket.retrofit.APIClient;
 import com.rc.buyermarket.retrofit.APIInterface;
 import com.rc.buyermarket.retrofit.APIResponse;
-import com.rc.buyermarket.util.AppUtil;
 import com.rc.buyermarket.util.DataUtil;
 
 import retrofit2.Call;
@@ -65,7 +64,7 @@ public class PropertyViewHolder extends BaseViewHolder<AddProperty> {
     GetDeletePropertyListTask getDeletePropertyListTask;
 
     public PropertyViewHolder(ViewGroup parent, Context context) {
-        super(parent, R.layout.row_property_list_view);
+        super(parent, R.layout.row_list_property);
         this.mContext = context;
         tvName = (TextView) $(R.id.row_txt_property_name);
         tvAddress = (TextView) $(R.id.row_txt_property_address);
@@ -91,17 +90,16 @@ public class PropertyViewHolder extends BaseViewHolder<AddProperty> {
         tvName.setText(data.getFirst_name() + "  " + data.getLast_name());
         tvAmount.setText("$" + data.getPrice_min() + " - " + "$" + data.getPrice_max());
         tvAddress.setText(data.getZipcode() + " " + data.getCity() + ", " + data.getState() + ", " + data.getCountry());
-        tvPreApproved.setText((DataUtil.getPreApproved(data.getPrc_approved())!=null)?DataUtil.getPreApproved(data.getPrc_approved()).getSp_title():"");
-        tvPropertyType.setText((DataUtil.getPropertyType(mContext, data.getProperty_type())!=null)?DataUtil.getPropertyType(mContext,data.getProperty_type()).getProperty_value():"");
-        tvPurchageType.setText((DataUtil.getPurchaseType(data.getPurchase_type())!=null)?DataUtil.getPurchaseType(data.getPurchase_type()).getSp_title():"");
-        tvExterior.setText((DataUtil.getExterior(mContext,data.getExterior())!=null)?DataUtil.getExterior(mContext,data.getExterior()).getExterior_value():"");
-        tvBasement.setText((DataUtil.getBasement(data.getBasement())!=null)?DataUtil.getBasement(data.getBasement()).getSp_title():"");
+        tvPreApproved.setText((DataUtil.getPreApproved(data.getPrc_approved()) != null) ? DataUtil.getPreApproved(data.getPrc_approved()).getSp_title() : "");
+        tvPropertyType.setText((DataUtil.getPropertyType(mContext, data.getProperty_type()) != null) ? DataUtil.getPropertyType(mContext, data.getProperty_type()).getProperty_value() : "");
+        tvPurchageType.setText((DataUtil.getPurchaseType(mContext, data.getPurchase_type()) != null) ? DataUtil.getPurchaseType(mContext, data.getPurchase_type()).getPurchase_value() : "");
+        tvExterior.setText((DataUtil.getExterior(mContext, data.getExterior()) != null) ? DataUtil.getExterior(mContext, data.getExterior()).getExterior_value() : "");
+        tvBasement.setText((DataUtil.getBasement(data.getBasement()) != null) ? DataUtil.getBasement(data.getBasement()).getSp_title() : "");
         tvCreditScores.setText(data.getCredit_score());
-        tvBedroom.setText((DataUtil.getBedroom(data.getBedroom())!=null)?DataUtil.getBedroom(data.getBedroom()).getSp_title():"");
-        tvBathroom.setText((DataUtil.getBathroom(data.getBathroom())!=null)?DataUtil.getBathroom(data.getBathroom()).getSp_title():"");
-        tvGarage.setText((DataUtil.getGarage(data.getGarage())!=null)?DataUtil.getGarage(data.getGarage()).getSp_title():"");
-        tvStyle.setText((DataUtil.getStyle(mContext,data.getStyle())!=null)?DataUtil.getStyle(mContext,data.getStyle()).getStyle_vaue():"");
-
+        tvBedroom.setText((DataUtil.getBedroom(mContext, data.getBedroom()) != null) ? DataUtil.getBedroom(mContext, data.getBedroom()).getBedroom_value() : "");
+        tvBathroom.setText((DataUtil.getBathroom(mContext, data.getBathroom()) != null) ? DataUtil.getBathroom(mContext, data.getBathroom()).getBathroom_value() : "");
+        tvGarage.setText((DataUtil.getGarage(data.getGarage()) != null) ? DataUtil.getGarage(data.getGarage()).getSp_title() : "");
+        tvStyle.setText((DataUtil.getStyle(mContext, data.getStyle()) != null) ? DataUtil.getStyle(mContext, data.getStyle()).getStyle_vaue() : "");
 
         llPropertyDelete.setOnClickListener(new View.OnClickListener() {
             @Override
