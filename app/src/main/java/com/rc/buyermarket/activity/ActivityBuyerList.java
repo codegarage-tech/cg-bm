@@ -31,7 +31,7 @@ import retrofit2.Response;
 
 import static com.rc.buyermarket.util.AllConstants.INTENT_KEY_SEARCH_PROPERTY;
 
-public class ActivitySearchBuyerList extends BaseActivity {
+public class ActivityBuyerList extends BaseActivity {
 
     //Toolbar
     ImageView ivBack;
@@ -49,12 +49,12 @@ public class ActivitySearchBuyerList extends BaseActivity {
 
     @Override
     public String initActivityTag() {
-        return ActivitySearchBuyerList.class.getSimpleName();
+        return ActivityBuyerList.class.getSimpleName();
     }
 
     @Override
     public int initActivityLayout() {
-        return R.layout.activity_seller_search_buyer_list;
+        return R.layout.activity_buyer_list;
     }
 
     @Override

@@ -7,7 +7,7 @@ import android.view.View;
 
 import com.rc.buyermarket.R;
 import com.rc.buyermarket.activity.ActivityAddProperty;
-import com.rc.buyermarket.activity.ActivitySellerSearchBuyer;
+import com.rc.buyermarket.activity.ActivitySearchBuyer;
 import com.rc.buyermarket.activity.ActivityUserLogin;
 import com.rc.buyermarket.activity.MainActivity;
 import com.rc.buyermarket.base.BaseFragment;
@@ -93,7 +93,7 @@ public class HomeFragment extends BaseFragment {
                 if (AppPref.getBooleanSetting(getActivity(), AllConstants.SESSION_IS_LOGGED_IN, false)) {
 
                     if (AppPref.getPreferences(getActivity(),AllConstants.SESSION_USER_TYPE).equalsIgnoreCase("1")) {
-                        Intent iAddHome = new Intent(getActivity(), ActivitySellerSearchBuyer.class);
+                        Intent iAddHome = new Intent(getActivity(), ActivitySearchBuyer.class);
                         startActivity(iAddHome);
                     } else {
                        // alertShow(getResources().getString(R.string.title_buyer_logout));

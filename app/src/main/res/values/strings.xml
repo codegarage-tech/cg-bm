@@ -45,6 +45,7 @@
     <string name="toast_select_any_days">Please select any days</string>
     <string name="toast_select_terms_conditions">Please accept all Terms and Conditions</string>
     <string name="toast_please_input_mobile_no">Please input mobile number</string>
+    <string name="toast_please_input_credit_score">Please input credit score</string>
     <string name="toast_please_input_valid_mobile_no">Please input valid mobile number</string>
     <string name="toast_please_input_your_fname">Please input your first name</string>
     <string name="toast_please_input_your_lname">Please input your last name</string>

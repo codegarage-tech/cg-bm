@@ -57,35 +57,32 @@ import static com.rc.buyermarket.util.AllConstants.INTENT_KEY_PROPERTY_ENUM;
 
 public class ActivityAddProperty extends BaseActivity {
     //Toolbar
-    ImageView ivBack;
-    CanaroTextView tvTitle;
-    TextView txtPriceValue;
-    // initialize Spinner
+    private ImageView ivBack;
+    private CanaroTextView tvTitle;
+    private TextView txtPriceValue;
     private Spinner spPurchaseType, spPreapproved, spBuyPropertyType, spCountry, spState,
             spBuyBedrooms, spBuyBathroom, spBuyBasement, spBuyGarage, spBuyStyle, spBuyExterior;
-    // initialize EditText and Button
     private EditText etFname, etLname, etEmail, etPhone, etCreditScore, etCity, etZipcode;
     private Button btnSubmit;
-    String preApproveType = "", purchaseType = "", bedroomType = "", bathroomType = "", basementType = "", garageType = "",
-            propertyType = "", styleType = "", exteriorType = "", countryName = "", countryId = "", stateName = "";
-    SeekBar seekBarPrice;
-    int priceRange = 0;
+    private String preApproveType = "", purchaseType = "", bedroomType = "", bathroomType = "", basementType = "", garageType = "",
+            propertyType = "", styleType = "", exteriorType = "", countryName = "", stateName = "";
+    private SeekBar seekBarPrice;
+    private int priceRange = 10000;
     private CommonSpinnerAdapter preApprovedAdapter, purchaseTypeAdapter, bedroomAdapter, bathroomAdapter, basementAdapter, garageAdapter,
             countryTypeAdapter, stateTypeAdapter, propertyTypeAdapter, styleAdapter, exteriorAdapter;
     private APIInterface apiInterface;
     //Background task
-    GetCountryWithCityTask getCountryWithCityTask;
-    GetPropertyTypeTask getPropertyTypeTask;
-    GetExteriorTask getExteriorTask;
-    GetStyleTask getStyleTask;
-    GetAddPropertyTask getAddPropertyTask;
-    GetBathroomTask getBathroomTask;
-    GetBedroomTask getBedroomTask;
-    GetPurchaseTypeTask getPurchaseTypeTask;
+    private GetCountryWithCityTask getCountryWithCityTask;
+    private GetPropertyTypeTask getPropertyTypeTask;
+    private GetExteriorTask getExteriorTask;
+    private GetStyleTask getStyleTask;
+    private GetAddPropertyTask getAddPropertyTask;
+    private GetBathroomTask getBathroomTask;
+    private GetBedroomTask getBedroomTask;
+    private GetPurchaseTypeTask getPurchaseTypeTask;
 
-    AddProperty addPropertyEditData;
-    PropertyEnum propertyEnum;
-
+    private AddProperty addPropertyEditData;
+    private PropertyEnum propertyEnum;
 
     @Override
     public String initActivityTag() {
@@ -166,6 +163,7 @@ public class ActivityAddProperty extends BaseActivity {
 
         preApprovedAdapter = new CommonSpinnerAdapter(ActivityAddProperty.this, CommonSpinnerAdapter.ADAPTER_TYPE.PRE_APPROVED);
         spPreapproved.setAdapter(preApprovedAdapter);
+        preApprovedAdapter.setData(DataUtil.getAllPreApproved());
 
         propertyTypeAdapter = new CommonSpinnerAdapter(ActivityAddProperty.this, CommonSpinnerAdapter.ADAPTER_TYPE.PROPERTY_TYPE);
         spBuyPropertyType.setAdapter(propertyTypeAdapter);
@@ -185,9 +183,11 @@ public class ActivityAddProperty extends BaseActivity {
 
         basementAdapter = new CommonSpinnerAdapter(ActivityAddProperty.this, CommonSpinnerAdapter.ADAPTER_TYPE.BASEMANT);
         spBuyBasement.setAdapter(basementAdapter);
+        basementAdapter.setData(DataUtil.getAllBasements());
 
         garageAdapter = new CommonSpinnerAdapter(ActivityAddProperty.this, CommonSpinnerAdapter.ADAPTER_TYPE.GARAGE);
         spBuyGarage.setAdapter(garageAdapter);
+        garageAdapter.setData(DataUtil.getAllGarages());
 
         styleAdapter = new CommonSpinnerAdapter(ActivityAddProperty.this, CommonSpinnerAdapter.ADAPTER_TYPE.STYLE);
         spBuyStyle.setAdapter(styleAdapter);
@@ -232,7 +232,6 @@ public class ActivityAddProperty extends BaseActivity {
                     txtPriceValue.setText("$10000" + " - " + "$" + addPropertyEditData.getPrice_max());
                 }
 //                spPurchaseType.setSelection(purchaseTypeAdapter.getItemPosition(addPropertyEditData.getPurchase_type()));
-                preApprovedAdapter.setData(DataUtil.getAllPreApproved());
                 spPreapproved.setSelection(preApprovedAdapter.getItemPosition(addPropertyEditData.getPrc_approved()));
                 etCreditScore.setText(addPropertyEditData.getCredit_score());
 //                spBuyPropertyType.setSelection(propertyTypeAdapter.getItemPosition(addPropertyEditData.getProperty_type()));
@@ -242,9 +241,7 @@ public class ActivityAddProperty extends BaseActivity {
                 etZipcode.setText(addPropertyEditData.getZipcode());
 //                spBuyBedrooms.setSelection(bedroomAdapter.getItemPosition(addPropertyEditData.getBedroom()));
 //                spBuyBathroom.setSelection(bathroomAdapter.getItemPosition(addPropertyEditData.getBathroom()));
-                basementAdapter.setData(DataUtil.getAllBasements());
                 spBuyBasement.setSelection(basementAdapter.getItemPosition(addPropertyEditData.getBasement()));
-                garageAdapter.setData(DataUtil.getAllGarages());
                 spBuyGarage.setSelection(garageAdapter.getItemPosition(addPropertyEditData.getGarage()));
 //                spBuyStyle.setSelection(styleAdapter.getItemPosition(addPropertyEditData.getStyle()));
 //                spBuyExterior.setSelection(exteriorAdapter.getItemPosition(addPropertyEditData.getExterior()));
@@ -287,14 +284,14 @@ public class ActivityAddProperty extends BaseActivity {
 
     private void loadOfflineData() {
         purchaseTypeAdapter.setData(DataUtil.getAllPurchaseTypes(getActivity()));
-        preApprovedAdapter.setData(DataUtil.getAllPreApproved());
+//        preApprovedAdapter.setData(DataUtil.getAllPreApproved());
         propertyTypeAdapter.setData(DataUtil.getAllPropertyTypes(getActivity()));
         countryTypeAdapter.setData(DataUtil.getAllCountryWithStates(getActivity()));
         stateTypeAdapter.setData(DataUtil.getAllCountryWithStates(getActivity()).get(0).getStates());
         bedroomAdapter.setData(DataUtil.getAllBedrooms(getActivity()));
         bathroomAdapter.setData(DataUtil.getAllBathrooms(getActivity()));
-        basementAdapter.setData(DataUtil.getAllBasements());
-        garageAdapter.setData(DataUtil.getAllGarages());
+//        basementAdapter.setData(DataUtil.getAllBasements());
+//        garageAdapter.setData(DataUtil.getAllGarages());
         styleAdapter.setData(DataUtil.getAllStyles(getActivity()));
         exteriorAdapter.setData(DataUtil.getAllExteriors(getActivity()));
     }
@@ -307,9 +304,46 @@ public class ActivityAddProperty extends BaseActivity {
                 if (!NetworkManager.isInternetAvailable(getActivity())) {
                     Toast.makeText(getActivity(), getResources().getString(R.string.toast_network_error), Toast.LENGTH_SHORT).show();
                     return;
-                } else {
-                    doAddProperty();
                 }
+                String fName = etFname.getText().toString();
+                String lName = etLname.getText().toString();
+                String email = etEmail.getText().toString();
+                String phoneNumber = etPhone.getText().toString();
+//                String creditScore = etCreditScore.getText().toString();
+                String city = etCity.getText().toString();
+                String zipCode = etZipcode.getText().toString();
+
+                if (AppUtil.isNullOrEmpty(fName)) {
+                    Toast.makeText(getActivity(), getString(R.string.toast_please_input_your_fname), Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                if (AppUtil.isNullOrEmpty(lName)) {
+                    Toast.makeText(getActivity(), getString(R.string.toast_please_input_your_lname), Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                if (AppUtil.isNullOrEmpty(email)) {
+                    Toast.makeText(getActivity(), getString(R.string.toast_please_input_your_email), Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                if (AppUtil.isNullOrEmpty(phoneNumber)) {
+                    Toast.makeText(getActivity(), getString(R.string.toast_please_input_mobile_no), Toast.LENGTH_SHORT).show();
+                    return;
+                }
+//                if (AppUtil.isNullOrEmpty(creditScore)) {
+//                    Toast.makeText(getActivity(), getString(R.string.toast_please_input_credit_score), Toast.LENGTH_SHORT).show();
+//                    return;
+//                }
+                if (AppUtil.isNullOrEmpty(city)) {
+                    Toast.makeText(getActivity(), getString(R.string.toast_please_input_your_city), Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                if (AppUtil.isNullOrEmpty(zipCode)) {
+                    Toast.makeText(getActivity(), getString(R.string.toast_please_input_your_zipcode), Toast.LENGTH_SHORT).show();
+                    return;
+                }
+
+                getAddPropertyTask = new GetAddPropertyTask(getActivity(), apiInterface);
+                getAddPropertyTask.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
             }
         });
 
@@ -407,7 +441,6 @@ public class ActivityAddProperty extends BaseActivity {
 
             }
         });
-
 
         spBuyBedrooms.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
@@ -569,72 +602,6 @@ public class ActivityAddProperty extends BaseActivity {
     @Override
     public void initActivityPermissionResult(int requestCode, String[] permissions, int[] grantResults) {
 
-    }
-
-    /************************
-     * validation check for empty  *
-     ************************/
-    private void doAddProperty() {
-        //  bedroomType = (((SPModel) spBuyBedrooms.getSelectedItem()).getSp_title().equalsIgnoreCase(getString(R.string.txt_default_country)) ? "" : ((SPModel) spBuyBedrooms.getSelectedItem()).getSp_title());
-        String fName = etFname.getText().toString();
-        String lName = etLname.getText().toString();
-        String email = etEmail.getText().toString();
-        String phoneNumber = etPhone.getText().toString();
-        String city = etCity.getText().toString();
-        String zipCode = etZipcode.getText().toString();
-
-        if (AppUtil.isNullOrEmpty(fName)) {
-            Toast.makeText(getActivity(), getString(R.string.toast_please_input_your_fname), Toast.LENGTH_SHORT).show();
-            return;
-        }
-        if (AppUtil.isNullOrEmpty(lName)) {
-            Toast.makeText(getActivity(), getString(R.string.toast_please_input_your_lname), Toast.LENGTH_SHORT).show();
-            return;
-        }
-
-        if (AppUtil.isNullOrEmpty(email)) {
-            Toast.makeText(getActivity(), getString(R.string.toast_please_input_your_email), Toast.LENGTH_SHORT).show();
-            return;
-        }
-//        if (!ValidationManager.isValidEmail(email)) {
-//            Toast.makeText(getActivity(), getString(R.string.toast_please_input_valid_email), Toast.LENGTH_SHORT).show();
-//            return;
-//        }
-        if (AppUtil.isNullOrEmpty(phoneNumber)) {
-            Toast.makeText(getActivity(), getString(R.string.toast_please_input_mobile_no), Toast.LENGTH_SHORT).show();
-            return;
-        }
-        if (AppUtil.isNullOrEmpty(city)) {
-            Toast.makeText(getActivity(), getString(R.string.toast_please_input_your_city), Toast.LENGTH_SHORT).show();
-            return;
-        }
-
-        if (AppUtil.isNullOrEmpty(zipCode)) {
-            Toast.makeText(getActivity(), getString(R.string.toast_please_input_your_zipcode), Toast.LENGTH_SHORT).show();
-            return;
-        }
-
-//        if (bedroomType.equalsIgnoreCase(getString(R.string.txt_default_bedrooms)) ) {
-//            Toast.makeText(getActivity(), "Please enter your bedrooms", Toast.LENGTH_SHORT).show();
-//            return;
-//        }
-//        if (bathroomType.equalsIgnoreCase(getString(R.string.txt_default_bathrooms)) ) {
-//            Toast.makeText(getActivity(), "Please enter your bathrooms", Toast.LENGTH_SHORT).show();
-//            return;
-//        }
-//        if (basementType.equalsIgnoreCase(getString(R.string.txt_default_basement)) ) {
-//            Toast.makeText(getActivity(), "Please enter your basement", Toast.LENGTH_SHORT).show();
-//            return;
-//        }
-//
-//        if (garageType.equalsIgnoreCase(getString(R.string.txt_default_garage)) ) {
-//            Toast.makeText(getActivity(), "Please enter your garage", Toast.LENGTH_SHORT).show();
-//            return;
-//        }
-
-        Log.e("propertyEnum", propertyEnum + "");
-        getAddPropertyTask = new GetAddPropertyTask(getActivity(), apiInterface);
-        getAddPropertyTask.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
     }
 
     /************************
