@@ -1083,7 +1083,7 @@ public class ActivityAddProperty extends BaseActivity {
                                 garageType, styleType, exteriorType, priceMinimum + "", priceMaximum + "");
                         call = apiInterface.doAddPropety(pAddProperty);
                         Log.d(TAG, "pAddProperty: onResponse-server = " + pAddProperty.toString());
-                        Log.e("pAddProperty", pAddProperty.toString() + ">>");
+                        Log.d(TAG,"pAddProperty: "+ pAddProperty.toString());
                         break;
                     case PROPERTY_EDIT:
                         if (addPropertyEditData != null) {
@@ -1092,7 +1092,7 @@ public class ActivityAddProperty extends BaseActivity {
                                     garageType, styleType, exteriorType, priceMinimum + "", priceMaximum + "");
                             call = apiInterface.doAddPropety(pUpdateProperty);
                             Log.d(TAG, "pAddProperty: onResponse-server = " + pUpdateProperty.toString());
-                            Log.e("pAddProperty", pUpdateProperty.toString() + ">>");
+                            Log.d(TAG,"pAddProperty: "+ pUpdateProperty.toString());
                         }
                         break;
                 }
