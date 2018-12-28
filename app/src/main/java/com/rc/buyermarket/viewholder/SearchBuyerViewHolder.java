@@ -59,7 +59,7 @@ public class SearchBuyerViewHolder extends BaseViewHolder<SellerSearchBuyer> {
         tvName.setText(data.getFirst_name() + "  " + data.getLast_name());
         tvAmount.setText("$" + data.getPrice_min() + " - " + "$" + data.getPrice_max());
         tvAddress.setText(data.getZipcode() + " " + data.getCity() + ", " + data.getState() + ", " + data.getCountry());
-        tvPhone.setText(data.getPhone());
+        tvPhone.setText(data.getContact());
         tvEmail.setText(data.getEmail());
         tvPreApproved.setText((DataUtil.getPreApproved(data.getPrc_approved()) != null) ? DataUtil.getPreApproved(data.getPrc_approved()).getSp_title() : "");
         tvPropertyType.setText((DataUtil.getPropertyType(getContext(), data.getProperty_type()) != null) ? DataUtil.getPropertyType(getContext(), data.getProperty_type()).getProperty_value() : "");
