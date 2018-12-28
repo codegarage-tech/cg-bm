@@ -23,6 +23,7 @@ import com.rc.buyermarket.network.NetworkManager;
 import com.rc.buyermarket.retrofit.APIClient;
 import com.rc.buyermarket.retrofit.APIInterface;
 import com.rc.buyermarket.retrofit.APIResponse;
+import com.rc.buyermarket.util.AppUtil;
 import com.rc.buyermarket.util.DataUtil;
 
 import retrofit2.Call;
@@ -97,15 +98,15 @@ public class PropertyViewHolder extends BaseViewHolder<AddProperty> {
         tvPhone.setText(data.getContact());
         tvEmail.setText(data.getEmail());
         tvPreApproved.setText((DataUtil.getPreApproved(data.getPrc_approved()) != null) ? DataUtil.getPreApproved(data.getPrc_approved()).getSp_title() : "");
-        tvPropertyType.setText((DataUtil.getPropertyType(mContext, data.getProperty_type()) != null) ? DataUtil.getPropertyType(mContext, data.getProperty_type()).getProperty_value() : "");
-        tvPurchageType.setText((DataUtil.getPurchaseType(mContext, data.getPurchase_type()) != null) ? DataUtil.getPurchaseType(mContext, data.getPurchase_type()).getPurchase_value() : "");
-        tvExterior.setText((DataUtil.getExterior(mContext, data.getExterior()) != null) ? DataUtil.getExterior(mContext, data.getExterior()).getExterior_value() : "");
+        tvPropertyType.setText((DataUtil.getPropertyType(mContext, data.getProperty_type()) != null) ? (!AppUtil.isNullOrEmpty(DataUtil.getPropertyType(mContext, data.getProperty_type()).getProperty_key()) ? DataUtil.getPropertyType(mContext, data.getProperty_type()).getProperty_value() : "") : "");
+        tvPurchageType.setText((DataUtil.getPurchaseType(mContext, data.getPurchase_type()) != null) ? (!AppUtil.isNullOrEmpty(DataUtil.getPurchaseType(mContext, data.getPurchase_type()).getPurchase_key()) ? DataUtil.getPurchaseType(mContext, data.getPurchase_type()).getPurchase_value() : "") : "");
+        tvExterior.setText((DataUtil.getExterior(mContext, data.getExterior()) != null) ? (!AppUtil.isNullOrEmpty(DataUtil.getExterior(mContext, data.getExterior()).getExterior_key()) ? DataUtil.getExterior(mContext, data.getExterior()).getExterior_value() : "") : "");
         tvBasement.setText((DataUtil.getBasement(data.getBasement()) != null) ? DataUtil.getBasement(data.getBasement()).getSp_title() : "");
         tvCreditScores.setText(data.getCredit_score());
-        tvBedroom.setText((DataUtil.getBedroom(mContext, data.getBedroom()) != null) ? DataUtil.getBedroom(mContext, data.getBedroom()).getBedroom_value() : "");
-        tvBathroom.setText((DataUtil.getBathroom(mContext, data.getBathroom()) != null) ? DataUtil.getBathroom(mContext, data.getBathroom()).getBathroom_value() : "");
+        tvBedroom.setText((DataUtil.getBedroom(mContext, data.getBedroom()) != null) ? (!AppUtil.isNullOrEmpty(DataUtil.getBedroom(mContext, data.getBedroom()).getBedroom_key()) ? DataUtil.getBedroom(mContext, data.getBedroom()).getBedroom_value() : "") : "");
+        tvBathroom.setText((DataUtil.getBathroom(mContext, data.getBathroom()) != null) ? (!AppUtil.isNullOrEmpty(DataUtil.getBathroom(mContext, data.getBathroom()).getBathroom_key()) ? DataUtil.getBathroom(mContext, data.getBathroom()).getBathroom_value() : "") : "");
         tvGarage.setText((DataUtil.getGarage(data.getGarage()) != null) ? DataUtil.getGarage(data.getGarage()).getSp_title() : "");
-        tvStyle.setText((DataUtil.getStyle(mContext, data.getStyle()) != null) ? DataUtil.getStyle(mContext, data.getStyle()).getStyle_vaue() : "");
+        tvStyle.setText((DataUtil.getStyle(mContext, data.getStyle()) != null) ? (!AppUtil.isNullOrEmpty(DataUtil.getStyle(mContext, data.getStyle()).getStyle_key()) ? DataUtil.getStyle(mContext, data.getStyle()).getStyle_vaue() : "") : "");
 
         llPropertyDelete.setOnClickListener(new View.OnClickListener() {
             @Override

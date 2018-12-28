@@ -67,7 +67,8 @@ public class ActivityAddProperty extends BaseActivity {
     private String preApproveType = "", purchaseType = "", bedroomType = "", bathroomType = "", basementType = "", garageType = "",
             propertyType = "", styleType = "", exteriorType = "", countryName = "", stateName = "";
     private SeekBar seekBarPrice;
-    private int priceRange = 10000;
+    private int priceMinimum = 10000;
+    private int priceMaximum = 10000000;
     private CommonSpinnerAdapter preApprovedAdapter, purchaseTypeAdapter, bedroomAdapter, bathroomAdapter, basementAdapter, garageAdapter,
             countryTypeAdapter, stateTypeAdapter, propertyTypeAdapter, styleAdapter, exteriorAdapter;
     private APIInterface apiInterface;
@@ -224,12 +225,12 @@ public class ActivityAddProperty extends BaseActivity {
                 etLname.setText(addPropertyEditData.getLast_name());
                 etEmail.setText(addPropertyEditData.getEmail());
                 etPhone.setText(addPropertyEditData.getContact());
-                if (AppUtil.isNullOrEmpty(addPropertyEditData.getPrice_max())) {
-                    seekBarPrice.setProgress(10000);
-                    txtPriceValue.setText("$10000 - $10000000");
+                if (AppUtil.isNullOrEmpty(addPropertyEditData.getPrice_min())) {
+                    seekBarPrice.setProgress(priceMinimum);
+                    txtPriceValue.setText("$" + priceMinimum + " - " + "$" + priceMaximum);
                 } else {
-                    seekBarPrice.setProgress(Integer.parseInt(addPropertyEditData.getPrice_max()));
-                    txtPriceValue.setText("$10000" + " - " + "$" + addPropertyEditData.getPrice_max());
+                    seekBarPrice.setProgress(Integer.parseInt(addPropertyEditData.getPrice_min()));
+                    txtPriceValue.setText("$" + addPropertyEditData.getPrice_min() + " - " + "$" + addPropertyEditData.getPrice_max());
                 }
 //                spPurchaseType.setSelection(purchaseTypeAdapter.getItemPosition(addPropertyEditData.getPurchase_type()));
                 spPreapproved.setSelection(preApprovedAdapter.getItemPosition(addPropertyEditData.getPrc_approved()));
@@ -258,12 +259,12 @@ public class ActivityAddProperty extends BaseActivity {
             etLname.setText(addPropertyEditData.getLast_name());
             etEmail.setText(addPropertyEditData.getEmail());
             etPhone.setText(addPropertyEditData.getContact());
-            if (AppUtil.isNullOrEmpty(addPropertyEditData.getPrice_max())) {
-                seekBarPrice.setProgress(10000);
-                txtPriceValue.setText("$10000 - $10000000");
+            if (AppUtil.isNullOrEmpty(addPropertyEditData.getPrice_min())) {
+                seekBarPrice.setProgress(priceMinimum);
+                txtPriceValue.setText("$" + priceMinimum + " - " + "$" + priceMaximum);
             } else {
-                seekBarPrice.setProgress(Integer.parseInt(addPropertyEditData.getPrice_max()));
-                txtPriceValue.setText("$10000" + " - " + "$" + addPropertyEditData.getPrice_max());
+                seekBarPrice.setProgress(Integer.parseInt(addPropertyEditData.getPrice_min()));
+                txtPriceValue.setText("$" + addPropertyEditData.getPrice_min() + " - " + "$" + addPropertyEditData.getPrice_max());
             }
             spPurchaseType.setSelection(purchaseTypeAdapter.getItemPosition(addPropertyEditData.getPurchase_type()));
             spPreapproved.setSelection(preApprovedAdapter.getItemPosition(addPropertyEditData.getPrc_approved()));
@@ -333,6 +334,10 @@ public class ActivityAddProperty extends BaseActivity {
 //                    Toast.makeText(getActivity(), getString(R.string.toast_please_input_credit_score), Toast.LENGTH_SHORT).show();
 //                    return;
 //                }
+                if (AppUtil.isNullOrEmpty(stateName)) {
+                    Toast.makeText(getActivity(), getString(R.string.toast_please_input_your_state), Toast.LENGTH_SHORT).show();
+                    return;
+                }
                 if (AppUtil.isNullOrEmpty(city)) {
                     Toast.makeText(getActivity(), getString(R.string.toast_please_input_your_city), Toast.LENGTH_SHORT).show();
                     return;
@@ -361,9 +366,9 @@ public class ActivityAddProperty extends BaseActivity {
                     seekBar.setProgress(10000);
                 }
 
-                priceRange = seekBar.getProgress();
-                Log.e("priceRange", priceRange + ">>");
-                txtPriceValue.setText("$10000" + " - " + "$" + priceRange);
+                priceMinimum = seekBar.getProgress();
+                Log.e("priceMinimum", priceMinimum + ">>");
+                txtPriceValue.setText("$" + priceMinimum + " - " + "$" + priceMaximum);
             }
 
             @Override
@@ -431,9 +436,12 @@ public class ActivityAddProperty extends BaseActivity {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 States item = (States) parent.getItemAtPosition(position);
-                stateName = item.getName();
+                if (!item.getName().toLowerCase().equalsIgnoreCase(getString(R.string.txt_please_select).toLowerCase())) {
+                    stateName = item.getName();
+                } else {
+                    stateName = "";
+                }
                 Log.d(TAG, "stateName= " + stateName);
-
             }
 
             @Override
@@ -511,8 +519,6 @@ public class ActivityAddProperty extends BaseActivity {
                 Exterior item = (Exterior) parent.getItemAtPosition(position);
                 exteriorType = item.getExterior_key();
                 Log.d(TAG, "exteriorType= " + exteriorType);
-                // Toast.makeText(getActivity(), exterior, Toast.LENGTH_LONG).show();
-
             }
 
             @Override
@@ -1074,7 +1080,7 @@ public class ActivityAddProperty extends BaseActivity {
                     case PROPERTY_ADD:
                         ParamsAddProperty pAddProperty = new ParamsAddProperty("0", etFname.getText().toString(), etLname.getText().toString(), etEmail.getText().toString(), etPhone.getText().toString(),
                                 purchaseType, preApproveType, etCreditScore.getText().toString(), propertyType, buyerId, countryName, etCity.getText().toString(), stateName, etZipcode.getText().toString(), bedroomType, bathroomType, basementType,
-                                garageType, styleType, exteriorType, "10000", String.valueOf(priceRange));
+                                garageType, styleType, exteriorType, priceMinimum + "", priceMaximum + "");
                         call = apiInterface.doAddPropety(pAddProperty);
                         Log.d(TAG, "pAddProperty: onResponse-server = " + pAddProperty.toString());
                         Log.e("pAddProperty", pAddProperty.toString() + ">>");
@@ -1083,7 +1089,7 @@ public class ActivityAddProperty extends BaseActivity {
                         if (addPropertyEditData != null) {
                             ParamsAddProperty pUpdateProperty = new ParamsAddProperty(addPropertyEditData.getId(), etFname.getText().toString(), etLname.getText().toString(), etEmail.getText().toString(), etPhone.getText().toString(),
                                     purchaseType, preApproveType, etCreditScore.getText().toString(), propertyType, buyerId, countryName, etCity.getText().toString(), stateName, etZipcode.getText().toString(), bedroomType, bathroomType, basementType,
-                                    garageType, styleType, exteriorType, "10000", String.valueOf(priceRange));
+                                    garageType, styleType, exteriorType, priceMinimum + "", priceMaximum + "");
                             call = apiInterface.doAddPropety(pUpdateProperty);
                             Log.d(TAG, "pAddProperty: onResponse-server = " + pUpdateProperty.toString());
                             Log.e("pAddProperty", pUpdateProperty.toString() + ">>");

@@ -25,6 +25,7 @@
     <string name="mgs_seller_logout">Login as Buyer</string>
     <string name="seller_search">Seller Search</string>
     <string name="title_activity_add_card">Add Card</string>
+    <string name="txt_please_select">Please select</string>
 
 
     <!--Sign Up text-->
@@ -53,6 +54,7 @@
     <string name="toast_please_input_your_email">Please input your email</string>
     <string name="toast_please_input_valid_email">Please input valid email</string>
     <string name="toast_please_input_your_password">Please input your password</string>
+    <string name="toast_please_input_your_state">Please input your state</string>
     <string name="toast_please_input_your_city">Please input your city</string>
     <string name="toast_please_input_your_zipcode">Please input your zip code</string>
     <string name="toast_error_on_creating_token">Error on creating token</string>

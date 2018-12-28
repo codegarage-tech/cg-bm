@@ -16,8 +16,10 @@ public class ParamsSellerSearchBuyer implements Parcelable{
     private String garage = "";
     private String style = "";
     private String exterior = "";
+    private int price_min = 10000;
+    private int price_max = 10000;
 
-    public ParamsSellerSearchBuyer(String purchase_type, String property_type, String country, String city, String state, String bedroom, String bathroom, String basement, String garage, String style, String exterior) {
+    public ParamsSellerSearchBuyer(String purchase_type, String property_type, String country, String city, String state, String bedroom, String bathroom, String basement, String garage, String style, String exterior, int priceMin, int priceMax) {
         this.purchase_type = purchase_type;
         this.property_type = property_type;
         this.country = country;
@@ -29,6 +31,8 @@ public class ParamsSellerSearchBuyer implements Parcelable{
         this.garage = garage;
         this.style = style;
         this.exterior = exterior;
+        this.price_min = priceMin;
+        this.price_max = priceMax;
     }
 
     @Override
@@ -45,9 +49,10 @@ public class ParamsSellerSearchBuyer implements Parcelable{
                 ", garage='" + garage + '\'' +
                 ", style='" + style + '\'' +
                 ", exterior='" + exterior + '\'' +
+                ", price_min='" + price_min + '\'' +
+                ", price_max='" + price_max + '\'' +
                 '}';
     }
-
 
     /**************************
      * Methods for parcelable *
@@ -71,6 +76,8 @@ public class ParamsSellerSearchBuyer implements Parcelable{
         dest.writeString(garage);
         dest.writeString(style);
         dest.writeString(exterior);
+        dest.writeInt(price_min);
+        dest.writeInt(price_max);
     }
 
     protected ParamsSellerSearchBuyer(Parcel in) {
@@ -85,6 +92,8 @@ public class ParamsSellerSearchBuyer implements Parcelable{
         garage = in.readString();
         style = in.readString();
         exterior = in.readString();
+        price_min = in.readInt();
+        price_max = in.readInt();
     }
 
     public static final Creator<ParamsSellerSearchBuyer> CREATOR = new Creator<ParamsSellerSearchBuyer>() {

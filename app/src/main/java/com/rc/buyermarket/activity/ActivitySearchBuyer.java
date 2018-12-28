@@ -60,7 +60,8 @@ public class ActivitySearchBuyer extends BaseActivity {
     private Button btnSearchSubmit;
     private String countryName = "", stateName = "", zipCode = "", cityName = "", basementType = "", garageType = "", purchaseType = "", bedroomType = "", bathroomType = "", propertyType = "", styleType = "", exteriorType = "";
     private SeekBar seekBarPrice;
-    private int priceRange = 10000;
+    private int priceMinimum = 10000;
+    private int priceMaximum = 10000000;
 
     // initialize Spinner
     private Spinner spPurchaseType, spBuyPropertyType, spState, spCountry, spGarage, spBasement, spBuyBedrooms, spBuyBathroom, spBuyStyle, spBuyExterior;
@@ -128,8 +129,9 @@ public class ActivitySearchBuyer extends BaseActivity {
         tvTitle.setText(getString(R.string.search_buyer));
         apiInterface = APIClient.getClient(getActivity()).create(APIInterface.class);
 
-        seekBarPrice.setProgress(10000);
-        txtPriceValue.setText("$10000 - $10000000");
+        seekBarPrice.setProgress(priceMinimum);
+//        txtPriceValue.setText("$10000 - $10000000");
+        txtPriceValue.setText("$" + priceMinimum + " - " + "$" + priceMaximum);
 
         purchaseAdapter = new CommonSpinnerAdapter(getActivity(), CommonSpinnerAdapter.ADAPTER_TYPE.PURCHASE_TYPE);
         spPurchaseType.setAdapter(purchaseAdapter);
@@ -224,7 +226,7 @@ public class ActivitySearchBuyer extends BaseActivity {
 //                    return;
 //                }
 
-                ParamsSellerSearchBuyer pSearchProperty = new ParamsSellerSearchBuyer(purchaseType, propertyType, countryName, cityName, stateName, bedroomType, bathroomType, basementType, garageType, styleType, exteriorType);
+                ParamsSellerSearchBuyer pSearchProperty = new ParamsSellerSearchBuyer(purchaseType, propertyType, countryName, cityName, stateName, bedroomType, bathroomType, basementType, garageType, styleType, exteriorType, priceMinimum, priceMaximum);
                 Log.d(TAG, TAG + ">> pSearchProperty: " + pSearchProperty);
                 Intent iSearchProperty = new Intent(getActivity(), ActivityBuyerList.class);
                 iSearchProperty.putExtra(INTENT_KEY_SEARCH_PROPERTY, pSearchProperty);
@@ -246,9 +248,9 @@ public class ActivitySearchBuyer extends BaseActivity {
                     seekBar.setProgress(10000);
                 }
 
-                priceRange = seekBar.getProgress();
-                Log.e("priceRange", priceRange + ">>");
-                txtPriceValue.setText("$10000" + " - " + "$" + priceRange);
+                priceMinimum = seekBar.getProgress();
+                Log.e("priceMinimum", priceMinimum + ">>");
+                txtPriceValue.setText("$" + priceMinimum + " - " + "$" + priceMaximum);
             }
 
             @Override
@@ -302,9 +304,12 @@ public class ActivitySearchBuyer extends BaseActivity {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 States item = (States) parent.getItemAtPosition(position);
-                stateName = item.getName();
+                if (!item.getName().toLowerCase().equalsIgnoreCase(getString(R.string.txt_please_select).toLowerCase())) {
+                    stateName = item.getName();
+                } else {
+                    stateName = "";
+                }
                 Log.d(TAG, "stateName= " + stateName);
-
             }
 
             @Override
