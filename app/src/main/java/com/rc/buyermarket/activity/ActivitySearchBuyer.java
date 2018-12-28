@@ -215,14 +215,14 @@ public class ActivitySearchBuyer extends BaseActivity {
 
                 cityName = edtCity.getText().toString();
                 zipCode = edtZipCode.getText().toString();
-                if (cityName.equalsIgnoreCase("")) {
-                    Toast.makeText(getActivity(), getString(R.string.toast_please_input_your_city), Toast.LENGTH_SHORT).show();
-                    return;
-                }
-                if (zipCode.equalsIgnoreCase("")) {
-                    Toast.makeText(getActivity(), getString(R.string.toast_please_input_your_zipcode), Toast.LENGTH_SHORT).show();
-                    return;
-                }
+//                if (cityName.equalsIgnoreCase("")) {
+//                    Toast.makeText(getActivity(), getString(R.string.toast_please_input_your_city), Toast.LENGTH_SHORT).show();
+//                    return;
+//                }
+//                if (zipCode.equalsIgnoreCase("")) {
+//                    Toast.makeText(getActivity(), getString(R.string.toast_please_input_your_zipcode), Toast.LENGTH_SHORT).show();
+//                    return;
+//                }
 
                 ParamsSellerSearchBuyer pSearchProperty = new ParamsSellerSearchBuyer(purchaseType, propertyType, countryName, cityName, stateName, bedroomType, bathroomType, basementType, garageType, styleType, exteriorType);
                 Log.d(TAG, TAG + ">> pSearchProperty: " + pSearchProperty);

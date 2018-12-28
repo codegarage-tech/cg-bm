@@ -92,7 +92,7 @@ public class ActivityBuyerList extends BaseActivity {
 
     @Override
     public void initActivityViewsData(Bundle savedInstanceState) {
-        tvTitle.setText(getString(R.string.menu_property));
+        tvTitle.setText(getString(R.string.txt_buyer));
         apiInterface = APIClient.getClient(getActivity()).create(APIInterface.class);
         searchPropertyListAdapter = new SearchPropertyListAdapter(getActivity());
         rvSearchProperty.setLayoutManager(new LinearLayoutManager(getActivity()));

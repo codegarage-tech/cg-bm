@@ -43,6 +43,8 @@ public class PropertyViewHolder extends BaseViewHolder<AddProperty> {
     TextView tvName;
     TextView tvAddress;
     TextView tvAmount;
+    TextView tvPhone;
+    TextView tvEmail;
     TextView tvExterior;
     TextView tvPreApproved;
     TextView tvPropertyType;
@@ -69,6 +71,8 @@ public class PropertyViewHolder extends BaseViewHolder<AddProperty> {
         tvName = (TextView) $(R.id.row_txt_property_name);
         tvAddress = (TextView) $(R.id.row_txt_property_address);
         tvAmount = (TextView) $(R.id.row_txt_property_amount);
+        tvPhone = (TextView) $(R.id.row_txt_phone);
+        tvEmail = (TextView) $(R.id.row_txt_email);
         tvExterior = (TextView) $(R.id.row_txt_property_exterior);
         tvPreApproved = (TextView) $(R.id.row_txt_property_preapproved);
         tvPropertyType = (TextView) $(R.id.row_txt_property_type);
@@ -90,6 +94,8 @@ public class PropertyViewHolder extends BaseViewHolder<AddProperty> {
         tvName.setText(data.getFirst_name() + "  " + data.getLast_name());
         tvAmount.setText("$" + data.getPrice_min() + " - " + "$" + data.getPrice_max());
         tvAddress.setText(data.getZipcode() + " " + data.getCity() + ", " + data.getState() + ", " + data.getCountry());
+        tvPhone.setText(data.getContact());
+        tvEmail.setText(data.getEmail());
         tvPreApproved.setText((DataUtil.getPreApproved(data.getPrc_approved()) != null) ? DataUtil.getPreApproved(data.getPrc_approved()).getSp_title() : "");
         tvPropertyType.setText((DataUtil.getPropertyType(mContext, data.getProperty_type()) != null) ? DataUtil.getPropertyType(mContext, data.getProperty_type()).getProperty_value() : "");
         tvPurchageType.setText((DataUtil.getPurchaseType(mContext, data.getPurchase_type()) != null) ? DataUtil.getPurchaseType(mContext, data.getPurchase_type()).getPurchase_value() : "");

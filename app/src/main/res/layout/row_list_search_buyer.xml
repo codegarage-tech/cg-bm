@@ -9,15 +9,12 @@
     app:cardUseCompatPadding="false"
     app:layout_collapseMode="parallax">
 
-
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/dp_7"
-
         android:background="@color/colorWhite"
         android:orientation="vertical">
-
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -63,18 +60,87 @@
                 android:textStyle="bold" />
         </LinearLayout>
 
-
         <View
             android:layout_width="match_parent"
             android:layout_height="1dp"
-            android:background="@color/blue_grey_100"
-            android:layout_marginTop="@dimen/dp_7"/>
+            android:layout_marginTop="@dimen/dp_7"
+            android:layout_marginBottom="@dimen/dp_7"
+            android:background="@color/blue_grey_100" />
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="@dimen/dp_5"
-            android:layout_marginTop="@dimen/dp_5"
+            android:layout_weight="4.2"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="2"
+                android:text="@string/Phone"
+                android:textColor="@color/color_grey_800" />
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight=".2"
+                android:text=":"
+                android:textColor="@color/color_grey_500" />
+
+            <TextView
+                android:id="@+id/row_txt_email"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="2"
+                android:text=""
+                android:textColor="@color/color_grey_600"
+                android:textSize="@dimen/sp_15" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="4.2"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="2"
+                android:text="@string/EmailSingup"
+                android:textColor="@color/color_grey_800" />
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight=".2"
+                android:text=":"
+                android:textColor="@color/color_grey_500" />
+
+            <TextView
+                android:id="@+id/row_txt_phone"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="2"
+                android:text=""
+                android:textColor="@color/color_grey_600"
+                android:textSize="@dimen/sp_15" />
+
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginTop="@dimen/dp_7"
+            android:layout_marginBottom="@dimen/dp_7"
+            android:background="@color/blue_grey_100" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/dp_5"
             android:layout_weight="4.2"
             android:orientation="horizontal">
 
@@ -101,8 +167,7 @@
                 android:layout_weight="2"
                 android:text=""
                 android:textColor="@color/color_grey_600"
-                android:textSize="@dimen/sp_15"
-               />
+                android:textSize="@dimen/sp_15" />
 
         </LinearLayout>
 
@@ -110,8 +175,8 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="@dimen/dp_5"
             android:layout_marginTop="@dimen/dp_5"
+            android:layout_marginBottom="@dimen/dp_5"
             android:layout_weight="4.2"
             android:orientation="horizontal">
 
@@ -135,18 +200,16 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="2"
                 android:text=""
-                android:textColor="@color/color_grey_500"
-                android:textSize="@dimen/sp_15"
-
-                />
+                android:textColor="@color/color_grey_600"
+                android:textSize="@dimen/sp_15" />
 
         </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="@dimen/dp_5"
             android:layout_marginTop="@dimen/dp_5"
+            android:layout_marginBottom="@dimen/dp_5"
             android:layout_weight="4.2"
             android:orientation="horizontal">
 
@@ -180,8 +243,8 @@
             android:id="@+id/lin_lay_khotiyan_mamla_no"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="@dimen/dp_5"
             android:layout_marginTop="@dimen/dp_5"
+            android:layout_marginBottom="@dimen/dp_5"
             android:layout_weight="4.2"
             android:orientation="horizontal">
 
@@ -215,8 +278,8 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="@dimen/dp_5"
             android:layout_marginTop="@dimen/dp_5"
+            android:layout_marginBottom="@dimen/dp_5"
             android:layout_weight="4.2"
             android:orientation="horizontal">
 
@@ -249,8 +312,8 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="@dimen/dp_5"
             android:layout_marginTop="@dimen/dp_5"
+            android:layout_marginBottom="@dimen/dp_5"
             android:layout_weight="4.2"
             android:orientation="horizontal">
 
@@ -283,8 +346,8 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="@dimen/dp_5"
             android:layout_marginTop="@dimen/dp_5"
+            android:layout_marginBottom="@dimen/dp_5"
             android:layout_weight="4.2"
             android:orientation="horizontal">
 
@@ -318,8 +381,8 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="@dimen/dp_5"
             android:layout_marginTop="@dimen/dp_5"
+            android:layout_marginBottom="@dimen/dp_5"
             android:layout_weight="4.2"
             android:orientation="horizontal">
 
@@ -352,8 +415,8 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="@dimen/dp_5"
             android:layout_marginTop="@dimen/dp_5"
+            android:layout_marginBottom="@dimen/dp_5"
             android:layout_weight="4.2"
             android:orientation="horizontal">
 
@@ -386,8 +449,8 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="@dimen/dp_5"
             android:layout_marginTop="@dimen/dp_5"
+            android:layout_marginBottom="@dimen/dp_5"
             android:layout_weight="4.2"
             android:orientation="horizontal">
 
